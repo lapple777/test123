@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>后台管理页面</title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    {include file="common/css"}
+    <style>
+        body.fixed-sidebar .navbar-static-side, body.canvas-menu .navbar-static-side {
+            width: 270px;
+        }
+        #page-wrapper {
+            margin: 0 0 0 270px;
+        }
+        .header_box{
+            color:white;
+            margin-top:60px;
+        }
+        .header_box table{
+            margin:0 auto;
+        }
+        .text_inde{
+            text-indent: 1em;
+        }
+        .padd_top{
+            padding-top:10px;
+        }
+    </style>
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side nav_left" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs" style="font-size:20px;">
+                                        <i class="fa fa-area-chart"></i>
+                                        <strong class="font-bold">客户管理</strong>
+                                    </span>
+                                </span>
+                        </a>
+                    </div>
+                    <div class="logo-element">
+                        TRADER
+                    </div>
+                </li>
+                <li class="header_box">
+                    <p class="text-center">
+                        <img src="__INDEX__/images/my_touxiang.png" alt="" width="65" height="65"><br/><br/>
+                        <?=session('traderUser')?>
+                    </p>
+                </li>
+                <li>
+                    <a class="J_menuItem" target="righe_con" href="{:url('trader/Account/account_info')}">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">账户信息</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-diamond"></i> <span class="nav-label">交易账户管理 </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="{:url('Trader/trader_list')}">交易账户列表</a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-diamond"></i> <span class="nav-label">出入金管理 </span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="{:url('Brm/inmoney_list')}">入金</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="{:url('Brm/outmoney_list')}">出金</a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user"></i><?=session('traderUser')?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="{:url('trader/Login/logout')}">
+                                    <div>
+                                       退出登录
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe id="J_iframe" name="righe_con" width="100%" height="100%" src="/trader/Index/welcome" frameborder="0" data-id="index_v1.html" seamless></iframe>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
+
+<!-- 全局js -->
+{include file="common/script"}
+
+<!-- 自定义js -->
+<script src="__ADMIN__/js/hAdmin.js?v=4.1.0"></script>
+<script type="text/javascript" src="__ADMIN__/js/index.js"></script>
+
+<!-- 第三方插件 -->
+<script src="__ADMIN__/js/plugins/pace/pace.min.js"></script>
+
+</body>
+
+</html>

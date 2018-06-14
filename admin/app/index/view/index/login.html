@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {include file="common/css"}
+    {include file="common/script"}
+    <link rel="stylesheet" href="__INDEX__/css/validate_from_style.css">
+	<style>
+		#bg_color{
+			position:absolute;
+            width:100%;
+            height:100%;
+            background:#716d6dcc;
+            z-index: 1;
+		}
+        .login {
+            z-index: 999;
+        }
+        .login h1{
+            color:black;
+        }
+        .user {
+            background: #868ec5;
+        }
+        .login_main_bottom button {
+            background: #868ec5;
+        }
+	</style>
+</head>
+<body>
+{include file="common/header"}
+<div id="bg_color"></div>
+<div class="container-fluid login_box" >
+
+	<div class="login">
+		<form action="{:url('Login/login')}" method="post" class="loginform" >
+	        <div class="login_main">
+	        	<!--<div class="login_main_top">-->
+	            	<!--<img class="img-circle" src="__INDEX__/images/touxiang.png">-->
+	            <!--</div>-->
+	            <div class="login_main_bottom">
+					<div class="form-group"><h1>登录</h1></div>
+	            	<div class="form-group ">
+	                    <div class="input-group">
+	                      <div class="input-group-addon user"><img src="__INDEX__/images/user.png"></div>
+	                      <input class="form-control user_input" type="text" name="account" datatype="*" nullmsg="请输入交易账号！" placeholder="交易账号">
+	                    </div>
+	              </div>
+	              <div class="form-group">
+	                    <div class="input-group">
+	                      <div class="input-group-addon user"><img src="__INDEX__/images/mima.png"></div>
+	                      <input class="form-control user_input" type="password" name="password" datatype="*" nullmsg="请输入密码！" placeholder="密码">
+	                    </div>
+	              </div>
+                  <button type="submit">提交</button>
+	            </div>
+	        </div>
+		</form>
+    </div>
+
+</div>
+
+</body>
+<script src="__INDEX__/js/Validform.min.js"></script>
+<script>
+    $(function(){
+        $(".loginform").Validform({
+            ajaxPost:true,
+            callback:function(data){
+                if(data.code == 1){
+                    $.Showmsg(data.msg)
+
+                    setTimeout(function(){
+                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+                        location.href=data.url
+                    },1000);
+
+                }else{
+                    $.Showmsg(data.msg)
+                }
+
+            }
+
+        });
+    })
+
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>账号信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {include file="common/css"}
+
+    {include file="common/script"}
+    <style>
+        .my_account_top{
+            background:#868ec5;
+        }
+    </style>
+</head>
+<body>
+{include file="common/header"}
+	<div class="container-fluid my_account_box">
+    	<div class="container">
+        	<div class="row my_account">
+              <div class="col-md-3"></div>
+
+              <div class="col-md-6 account_box">
+              		<div class="my_account_top">
+                        <!--<img class="img-circle" src="__INDEX__/images/my_touxiang.png">-->
+                        <h1>基本信息</h1>
+                    </div>
+
+                 <div class="my_account_bottom">
+                    <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Account ID:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['id']?></div>
+                    </div>
+                    <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Account:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['account']?></div>
+                    </div>
+                    <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Created:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=date('Y-m-d H:i:s',$user['add_time'])?></div>
+                    </div>
+                    <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Balance:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['wallet']?></div>
+                    </div>
+
+                    <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Account Status:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['ta_status']?></div>
+                    </div>
+              </div>
+              </div>
+               <div class="col-md-3"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
