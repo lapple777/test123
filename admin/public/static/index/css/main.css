@@ -1,0 +1,118 @@
+@charset "utf-8";
+*{ margin:0px; padding:0px; color:#333; font-family:"微软雅黑"}
+a{ text-decoration:none;}
+li{ list-style:none;}
+.h1, .h2, .h3, h1, h2, h3{ margin:0px; padding:0px;}
+/*导航*/
+.nav_big_box{ background:#333843; position:fixed; z-index:1000; width:100%;}
+.nav_box{ background:none; border:none; margin-bottom:0px;}
+.navbar-default .navbar-nav>li>a{ color:#fff;}
+.navbar-default .navbar-nav>li>a:hover{ color:#fff; background-color:#e81718;}
+.navbar-default .navbar-nav>li>a:visited{ color:#fff; }
+.nav_right li a{ padding-left:50px; line-height:40px;}
+
+.nav_right li .a1{ background:url(../images/logo1.png) no-repeat 15px center;}
+.nav_right li .a2{ background:url(../images/logo2.png) no-repeat 15px center;}
+.nav_right li .a3{ background:url(../images/logo3.png) no-repeat 15px center;}
+.nav_right li .a4{ adding-left:20px; padding-right:50px; }
+.nav_right li .a{ background-color:#e81718;}
+
+
+/*登录*/
+.login_box{ background:url(../images/login_bg.jpg) no-repeat; background-size:cover; height:100%; position:absolute; width:100%;}
+.login{ width:620px; height:580px; position:absolute; left:50%; top:50%; margin-left:-310px; margin-top:-260px;}
+.login h1{ color:#fff; font-size:30px; text-align:center;}
+.login_main{ background:#fff; width:360px; margin:0 auto; margin-top:50px;}
+.login_main_top{ background:url(../images/login_bg1.png) no-repeat; width:360px; margin:0 auto; padding-top:30px; padding-bottom:20px;}
+.login_main_top img{ display:block; margin:0 auto; width:60px; height:60px; }
+.login_main_top h2{ color:#fff; font-size:20px; text-align:center; margin-top:20px; margin-bottom:30px;}
+.login_main_bottom{ padding:25px;}
+.user_box{}
+.user{ background:#e81718; border:none;border-radius:0px;}
+.user_input{ border:none; background:#f0f0f0; height:46px; padding:10px 20px; border-radius:0px;}
+/*.login_main_bottom button{ border:none; background:#e81718; width:100%; margin-top:25px; margin-bottom:40px;}*/
+/*.login_main_bottom button a{ color:#fff; line-height:50px; text-align:center; font-size:16px; text-decoration:none;}*/
+.login_main_bottom button{ border:none;
+    background:#e81718;
+    width:100%;
+    margin-top:25px;
+    margin-bottom:40px;
+    color:#fff;
+    line-height:50px;
+    text-align:center;
+    font-size:16px;
+    text-decoration:none;
+}
+
+/*my account*/
+.my_account_box{ background:#f0f0f0; width:100%; height:100%; position:absolute; padding:0px; }
+.main_body{ background:#f0f0f0; width:100%; margin:0px; padding:0px;}
+.my_account{ margin-top:90px;}
+.account_box{ background:#fff; margin:0px; padding:0px;}
+.my_account_top{ background:url(../images/account_bg.png) no-repeat;  padding-top:35px; padding-bottom:50px;}
+.my_account_top img{ width:100px; height:100px; display:block; margin:0 auto; margin-bottom:30px;}
+.my_account_top h1{ font-size:20px; color:#fff; text-align:center; margin-top:30px;}
+.my_account_bottom{ padding:30px; padding-bottom:50px;}
+.account{ border-bottom:1px solid #e6e6e6; line-height:36px;}
+
+/*my_order*/
+
+.my_order_box h1{ width:100%; line-height:40px; font-size:16px; background:#d0e8f6; padding-left:20px; }
+.my_order_box span p{ color:#e81718; font-size:14px; margin-left:15px; margin-top: 10px}
+
+.my_order{ background:#fff; padding:0px;}
+.order_box{ margin-top:20px; margin-bottom:20px;}
+.order_left{ padding-left:30px; font-size:14px; line-height:30px;}
+.order_right{ line-height:30px;}
+.order_input{ width:50%; height:26px;}
+.order_radio{ line-height:20px;}
+
+/*
+.order_left button{ border:none; background:#e81718; margin-top:20px;}
+.order_left button a{ color:#fff; padding:15px 20px; text-decoration:none;}
+*/
+.order_left button{
+    border:none;
+    background:#e81718;
+    margin-top:20px;
+    color:#fff;
+    padding:0px 20px;
+    text-decoration:none;
+}
+
+/*
+.order_right button{ border:none; background:#3496ff; margin-top:20px;}
+.order_right button a{ color:#fff; padding:15px 30px;text-decoration:none;}
+*/
+.order_right button{
+    border:none;
+    background:#3496ff;
+    margin-top:20px;
+    color:#fff;
+    padding:0px 30px;
+    text-decoration:none;
+}
+
+.pending_orders h1{ background:#e6e6e6;}
+.pending_orders h1 span{ color:#e81718; font-size:14px; margin-left:20px;}
+
+
+
+.leibiao{ padding:15px;}
+.table tr{ text-align:center;}
+.table tr th{ text-align:center}
+
+/*Statement*/
+.statement_box{ margin-top:30px; margin-bottom:30px;}
+.statement_box .form-group{ margin-left:30px;}
+.statement_box .form-group select{ width:180px; border-radius:0px;}
+.statement_box .form-group input{ border-radius:0px;}
+.statement_btn{ border:none; background:#e81718; margin-left:30px; color:#fff; padding:7px 20px;}
+
+
+
+
+
+
+
+/* CSS Document */
