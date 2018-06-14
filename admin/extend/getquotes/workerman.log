@@ -1,0 +1,109 @@
+2018-06-09 16:27:44 Error: Class 'Workerman\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:59
+Stack trace:
+#0 [internal function]: Workerman\{closure}(Object(Workerman\Connection\AsyncTcpConnection), '915999999999997...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(89): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(111): Workerman\request(Object(Closure))
+#9 {main}
+2018-06-09 16:28:12 Error: Class 'app\index\controller\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:59
+Stack trace:
+#0 [internal function]: Workerman\{closure}(Object(Workerman\Connection\AsyncTcpConnection), '915999999999997...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(89): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(111): Workerman\request(Object(Closure))
+#9 {main}
+2018-06-09 16:29:17 Error: Class 'app\index\controller\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:59
+Stack trace:
+#0 [internal function]: app\{closure}(Object(Workerman\Connection\AsyncTcpConnection), '915999999999997...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(89): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(111): app\request(Object(Closure))
+#9 {main}
+2018-06-09 16:29:32 Error: Class 'app\index\controller\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:58
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\AsyncTcpConnection), ':"GBPNZD","ask"...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(88): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(110): request(Object(Closure))
+#9 {main}
+2018-06-09 16:30:59 Error: Class 'app\index\controller\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:59
+Stack trace:
+#0 [internal function]: app\index\controller\{closure}(Object(Workerman\Connection\AsyncTcpConnection), '915999999999997...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(89): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(111): app\index\controller\request(Object(Closure))
+#9 {main}
+2018-06-09 16:32:36 Error: Class 'app\index\controller\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:59
+Stack trace:
+#0 [internal function]: app\index\controller\{closure}(Object(Workerman\Connection\AsyncTcpConnection), ',"bid":73.55200...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(89): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(111): app\index\controller\request(Object(Closure))
+#9 {main}
+2018-06-09 17:01:11 Error: Class 'Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:60
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\AsyncTcpConnection), ':"GBPNZD","ask"...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(90): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(112): request(Object(Closure))
+#9 {main}
+2018-06-09 17:01:56 Error: Class 'app\index\controller\Pushapi' not found in D:\phpStudy\WWW\admin\extend\getquotes\request.php:60
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\AsyncTcpConnection), '915999999999997...')
+#1 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\request.php(90): Workerman\Worker::runAll()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(112): request(Object(Closure))
+#9 {main}
+2018-06-09 17:07:47 Error: Using $this when not in object context in D:\phpStudy\WWW\admin\extend\getquotes\request.php:119
+Stack trace:
+#0 D:\phpStudy\WWW\admin\extend\getquotes\request.php(62): push(Array)
+#1 [internal function]: {closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#2 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Connection\TcpConnection.php(655): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), '","ask":0.75971...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#4 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#5 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#6 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(473): Workerman\Worker->run()
+#7 D:\phpStudy\WWW\admin\extend\getquotes\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(93): Workerman\Worker::runAll()
+#9 D:\phpStudy\WWW\admin\extend\getquotes\request.php(131): request(Object(Closure))
+#10 {main}
