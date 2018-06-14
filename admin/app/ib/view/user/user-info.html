@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IB用户信息</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    {include file="common/css"}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+   <div class="col-sm-6">
+       <form class="form-horizontal m-t" method="post" id="userForm">
+           <table class="table">
+               <tr>
+                   <td class="text-right">用户名</td>
+                   <td><input id="username" name="username" type="text" class="form-control" value="<?=$user_info['username']?>"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">姓名</td>
+                   <td><input id="name" name="name" type="text" class="form-control" value="<?=$user_info['name']?>"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">手机号</td>
+                   <td> <input id="phone" name="phone" type="text" class="form-control" value="<?=$user_info['phone']?>"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">邮箱</td>
+                   <td><input id="email" name="email" type="text" class="form-control" value="<?=$user_info['email']?>"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">密码</td>
+                   <td><input id="password" name="password" type="text" class="form-control" placeholder="留空表示不修改密码"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">银行卡号</td>
+                   <td><input id="bank_card"  name="bank_card" type="text" class="form-control" value="<?=$user_info['bank_card']?>"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">身份证号</td>
+                   <td><input id="id_card" name="id_card" type="text" class="form-control" value="<?=$user_info['id_card']?>"></td>
+               </tr>
+               <tr>
+                   <td></td>
+                   <td></td>
+               </tr>
+           </table>
+           <div class="form-group">
+               <div class="col-sm-6 col-sm-offset-6">
+                   <button class="btn btn-primary" type="submit">提交</button>
+               </div>
+           </div>
+       </form>
+   </div>
+</div>
+
+<!-- 全局js -->
+{include file="common/script"}
+<!-- 自定义js -->
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__ADMIN__/js/from_validate/jquery.validate.min.js"></script>
+<script src="__ADMIN__/js/from_validate/messages_zh.min.js"></script>
+
+<script src="__ADMIN__/js/from_validate/validate-methods.js"></script>
+
+<script>
+    $().ready(function () {
+        $('#userForm').validate({
+            rules:{
+                username:{
+                    required:true,
+                },
+                name:{
+                    required:true
+                },
+                phone:{
+                    required:true,
+                    isMobile:true,
+                },
+                email:{
+                    required:true,
+                    email:true,
+                },
+                id_card:{
+                    required:true,
+                },
+                bank_card:{
+                    required:true,
+                }
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            submitHandler:function (form) {
+               layer.confirm('确定修改?',function () {
+                   $.ajax({
+                       url:'{:url("ib/User/ib_edit")}',
+                       type:"POST",
+                       data:$(form).serialize(),
+                       success:function (data) {
+                           console.log('修改ib信息')
+                           console.log(data);
+                           if(data.code==1){
+                               layer.msg(data.msg);
+                               return false;
+                           }else if(data.code==0){
+                               layer.msg(data.msg);
+                               return false;
+                           }
+                       },
+                       error:function () {
+                           layer.msg('网络错误,请稍后再试!');
+                           return false;
+                       }
+                   })
+               })
+            }
+        })
+    })
+</script>
+</body>
+</html>

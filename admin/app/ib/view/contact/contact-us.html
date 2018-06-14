@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联系我们</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    {include file="common/css"}
+</head>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <div class="col-sm-6">
+        <p>联系人:<?=$admin_info['username']?></p>
+        <p>联系方式:<?=$admin_info['email']?></p>
+        <p>电话号码:<?=$admin_info['phone']?></p>
+    </div>
+</div>
+</div>
+
+<!-- 全局js -->
+{include file="common/script"}
+<!-- 自定义js -->
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__ADMIN__/js/from_validate/jquery.validate.min.js"></script>
+<script src="__ADMIN__/js/from_validate/messages_zh.min.js"></script>
+
+<script src="__ADMIN__/js/from_validate/validate-methods.js"></script>
+</body>
+</html>
