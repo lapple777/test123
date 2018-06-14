@@ -31,11 +31,7 @@
                         <li class="active">
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">IB出金审核</a>
-                                </li>
-                                <li class="success-element">
-
-                                    <a data-toggle="tab" href="#tab-2" aria-expanded="false">客户出金审核</a>
+                                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">客户出金审核</a>
                                 </li>
                             </ul>
                         </li>
@@ -43,72 +39,6 @@
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
-                            <div class="panel-body">
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>账单号</th>
-                                        <th>出金人</th>
-                                        <th>出金账号</th>
-                                        <th>出金金额</th>
-                                        <th>出金人状态</th>
-                                        <th>出金时间</th>
-                                        <th>出金状态</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach($ib_outmoney_list as $value) {?>
-                                    <tr class="gradeX">
-                                        <td><?=$value['id']?></td>
-                                        <td><?=$value['order_id']?></td>
-                                        <td><?=$value['name']?></td>
-                                        <td><?=$value['id_card']?></td>
-                                        <td><?=$value['outmoney']?></td>
-                                        <td>
-                                            <?php
-                                               $statusIb = $value['ib_status'];
-                                               switch($statusIb){
-                                                  case '0':
-                                                     $statusTxt = '禁用';
-                                                      break;
-                                                   case '1':
-                                                      $statusTxt = '启用';
-                                                      break;
-                                                }
-                                                ?>
-                                                <?=$statusTxt?>
-                                        </td>
-
-                                        <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
-                                        <td>
-                                            <?php
-                                              $orderStatus = $value['order_status'];
-                                              switch($orderStatus){
-                                                 case '0':
-                                                    $statusText = '审核中';
-                                                    break;
-                                                  case '1':
-                                                    $statusText = '审核成功';
-                                                     break;
-                                                  case '2':
-                                                     $statusText = '审核失败';
-                                                     break;
-                                              }
-                                              ?>
-                                            <?=$statusText?>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <?php }?>
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tab-pane">
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
@@ -122,6 +52,7 @@
                                         <th>出金人状态</th>
                                         <th>出金时间</th>
                                         <th>出金状态</th>
+                                        <th>完成时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -139,10 +70,13 @@
                                                $statusIb = $value['user_status'];
                                                switch($statusIb){
                                                   case '0':
-                                                     $statusTxt = '禁用';
+                                                     $statusTxt = '审核';
                                                       break;
                                                    case '1':
                                                       $statusTxt = '启用';
+                                                      break;
+                                                   case '2':
+                                                      $statusTxt = '禁用';
                                                       break;
                                                 }
                                                 ?>
@@ -168,7 +102,27 @@
                                             <?=$statusText?>
                                         </td>
                                         <td>
-                                            <a href="javascript:void(0)" onclick="user_withdraw_success(this,'{:url('/admin/FundsManagement/userWithdraw_success',['user_id'=>$value['user_id']])}')">出金成功</a>
+                                            <?php
+                                                if($value['success_time']==0){
+                                                ?>
+                                            <span></span>
+                                            <?php }
+                                               else {
+                                               ?>
+                                            <span> <?=date('Y-m-d H:m:s',$value['success_time'])?></span>
+                                            <?php }?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if($value['order_status']==0){
+                                                ?>
+                                            <a href="javascript:void(0)" onclick="userWithdraw_success(this,'{:url('admin/FundsManagement/userWithdraw_success',['order_id'=>$value['order_id'],'user_id'=>$value['user_id']])}')">成功</a>
+                                            <a href="javascript:void(0)" onclick="userWithdraw_fail(this,'{:url('admin/FundsManagement/userWithdraw_fail',['order_id'=>$value['order_id'],'user_id'=>$value['user_id'],'outmoney'=>$value['outmoney']])}')">失败</a>
+                                               <?php }
+                                               else {
+                                               ?>
+                                            <span>已审核</span>
+                                            <?php }?>
                                         </td>
                                     </tr>
                                     <?php }?>
@@ -211,7 +165,7 @@
     });
 
     //客户出金成功
-    function user_withdraw_success(that,url) {
+    function userWithdraw_success(that,url) {
         layer.confirm('确认出金?',function () {
             $.ajax({
                 url:url,
@@ -224,7 +178,9 @@
                         layer.msg(data.msg);
                         return false;
                     }else if(data.code==1){
-                        layer.msg(data.msg);
+                        layer.msg(data.msg,{time:800},function () {
+                            location.reload();
+                        });
                         return false;
                     }
                 },
@@ -236,18 +192,28 @@
         })
     }
     //客户出金失败
-    function user_withdraw_fail() {
-        
+    function userWithdraw_fail(that,url) {
+        layer.confirm('出金失败?',function () {
+            $.ajax({
+                url:url,
+                timeout:5000,
+                type:'GET',
+                success:function (data) {
+                    if(data.code==0){
+                        layer.msg(data.msg)
+                    }else if(data.code==1){
+                        layer.msg(data.msg,{time:800},function () {
+                            parent.location.reload();
+                        });
+                    }
+                },
+                error:function () {
+                    layer.msg('网络超时,请稍后再试!');
+                }
+            })
+        })
     }
-    
-    //IB出金成功
-    function IB_withdraw_success() {
-        
-    }
-    //IB出金失败
-    function IB_withdraw_fail() {
-        
-    }
+
 </script>
 
 </body>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/admin\view\index\index.html";i:1528943849;s:67:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\css.html";i:1528943849;s:70:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\script.html";i:1528943849;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/admin\view\index\index.html";i:1528970377;s:67:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\css.html";i:1528943849;s:70:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\script.html";i:1528943849;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -71,7 +71,7 @@
                         <span class="nav-label">账户信息</span>
                     </a>
                 </li>
-                <li class="line dk"></li>
+                <!--<li class="line dk"></li>-->
                 <li>
                     <a href="mailbox.html"><i class="fa fa-diamond"></i> <span class="nav-label">账户盈利 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -119,17 +119,25 @@
 
                 </li>
                 <li>
-                    <a href="mailbox.html"><i class="fa fa-file-text"></i> <span class="nav-label">出入金管理</span><span class="fa arrow"></span></a>
+                    <a href="mailbox.html"><i class="fa fa-file-text"></i> <span class="nav-label">IB资金管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="<?php echo url('admin/FundsManagement/funds_list'); ?>">出金列表</a>
+                        <li><a class="J_menuItem" href="<?php echo url('admin/FundsManagement/fundsIB_list'); ?>">IB出金</a>
                         </li>
-                        <li><a class="J_menuItem" href="<?php echo url('admin/FundsManagement/funds_list'); ?>">入金列表</a>
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-file-text"></i> <span class="nav-label">客户资金管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="<?php echo url('admin/FundsManagement/funds_list'); ?>">客户出金</a>
+                        </li>
+                        <li><a class="J_menuItem" href="<?php echo url('admin/FundsManagement/deposit_list'); ?>">客户入金</a>
                         </li>
 
                     </ul>
 
                 </li>
-                <li class="line dk"></li>
+                <!--<li class="line dk"></li>-->
 
                 <li>
                     <a href="#"><i class="fa fa-align-justify"></i> <span class="nav-label">权限控制</span><span class="fa arrow"></span></a>
@@ -147,7 +155,7 @@
                 </li>
 
 
-                <li class="line dk"></li>
+                <!--<li class="line dk"></li>-->
 
                 <li>
                     <a href="#"><i class="fa fa-gear"></i> <span class="nav-label">全局配置</span><span class="fa arrow"></span></a>

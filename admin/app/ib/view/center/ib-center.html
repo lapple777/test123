@@ -2,10 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>IB中心</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    {include file="common/css"}
 </head>
-<body>
-我是IB中心页面
-我是IB中心页面
+<body class="gray-bg">
+<div class="wrapper    wrapper-content animated fadeInRight">
+    <table class="table table-striped table-bordered table-hover dataTables-example">
+        <thead>
+        <tr>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.dataTables-example').dataTable({
+
+        });
+
+    });
+</script>
+<!-- 全局js -->
+{include file="common/script"}
+<!-- 自定义js -->
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__ADMIN__/js/from_validate/jquery.validate.min.js"></script>
+<script src="__ADMIN__/js/from_validate/messages_zh.min.js"></script>
+
+<script src="__ADMIN__/js/from_validate/validate-methods.js"></script>
 </body>
 </html>

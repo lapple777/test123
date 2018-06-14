@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:75:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/ib\view\login\login.html";i:1528948391;s:67:"D:\PHP\PHPTutorial\WWW\test123\admin\app\ib\view\common\script.html";i:1527327149;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:75:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/ib\view\login\login.html";i:1528854428;s:67:"D:\PHP\PHPTutorial\WWW\test123\admin\app\ib\view\common\script.html";i:1527327149;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +24,7 @@
         </script>
         <style>
             .code{
-                width: 55%;
+                width: 60%;
                 display: inline-block !important;
             }
         </style>
@@ -37,7 +37,7 @@
                 <h4 class="no-margins">IB登录</h4>
                 <input type="text" class="form-control uname" name="phone" value="" placeholder="手机号" />
                 <input type="password" class="form-control pword m-b" name="password" placeholder="密码" />
-                <input type="text" class="form-control pword m-b code" name="code" placeholder="验证码" /><img src="<?php echo captcha_src(); ?>" onclick="changeCode(this)" alt="">
+                <input type="text" class="form-control pword m-b code" name="code" placeholder="验证码" /><img src="<?php echo captcha_src(); ?>" onclick="changeCode(this)" alt="" style="margin-left: 3px">
                 <span class="btn btn-success btn-block login_btn">登录</span>
             </form>
         </div>
