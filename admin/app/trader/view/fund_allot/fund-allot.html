@@ -77,7 +77,9 @@
                                             <tr>
                                                 <td class="text-right">划入金额</td>
                                                 <td><input id="inmoney" name="inmoney" type="text" class="form-control"></td>
+                                                <td><input id="account" name="account" type="hidden" class="form-control" value="<?=$fund_TranderId?>"></td>
                                             </tr>
+
                                             <tr>
                                                 <td></td>
                                                 <td>
@@ -95,6 +97,8 @@
                                             <tr>
                                                 <td class="text-right">划出金额</td>
                                                 <td><input id="outmoney" name="outmoney" type="text" class="form-control"></td>
+                                                <td><input  name="account" type="hidden" class="form-control" value="<?=$fund_TranderId?>"></td>
+
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -135,11 +139,25 @@
 <script>
 
     $().ready(function() {
+        $.validator.addMethod("positiveinteger", function(value, element) {
+            var aint=parseInt(value);
+            return aint>0&& (aint+"")==value;
+        }, "Please enter a valid number.");
         //划入金额
         $("#inForm").validate({
             rules:{
                 inmoney:{
                     required:true,
+                    digits:true,
+                    positiveinteger:true
+
+                }
+            },
+            messages:{
+                inmoney:{
+                    required:'请填写金额',
+                    digits:'* 请填写正确的金额(应为数字)',
+                    positiveinteger:'请输入大于0的金额'
                 }
             },
             onkeyup:false,
@@ -147,7 +165,7 @@
             submitHandler: function(form)
             {
                 $.ajax({
-                    url:'{:url('FundAllot/fund_in')}',
+                    url:'{:url("FundAllot/fund_in")}',
                     type:'POST',
                     data:$(form).serialize(),
                     success:function(data){
@@ -175,8 +193,17 @@
         //划出金额
         $("#outForm").validate({
             rules:{
-                inmoney:{
+                outmoney:{
                     required:true,
+                    positiveinteger:true,
+                    digits:true
+                }
+            },
+            messages:{
+                outmoney:{
+                    required:'请填写金额',
+                    digits:'* 请输入正确的金额(应为数字)',
+                    positiveinteger:'请输入大于0的金额'
                 }
             },
             onkeyup:false,
@@ -184,7 +211,7 @@
             submitHandler: function(form)
             {
                 $.ajax({
-                    url:'{:url('FundAllot/fund_out')}',
+                    url:'{:url("FundAllot/fund_out")}',
                     type:'POST',
                     data:$(form).serialize(),
                     success:function(data){

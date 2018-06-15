@@ -1,4 +1,3 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/admin\view\funds_management\fundsIB-list.html";i:1528970253;s:67:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\css.html";i:1528943849;s:70:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\script.html";i:1528943849;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -8,25 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>出入金管理</title>
+    <title>资金划出审核</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    
-<link rel="shortcut icon" href="favicon.ico">
-<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-<link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
-<link href="/static/admin/css/animate.css" rel="stylesheet">
-<link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
-<style>
-    .dataTables_paginate{
-        text-align:right;
-    }
-    .dataTables_filter{
-        text-align:right;
-    }
-</style>
+    {include file="common/css"}
     <style>
 
 
@@ -46,7 +31,7 @@
                     <li class="active">
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" href="#tab-1" aria-expanded="true">IB出金审核</a>
+                                <a data-toggle="tab" href="#tab-1" aria-expanded="true">划出审核</a>
                             </li>
                         </ul>
                     </li>
@@ -60,57 +45,45 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>账单号</th>
-                                    <th>出金人</th>
-                                    <th>出金账号</th>
-                                    <th>出金金额</th>
-                                    <th>出金人状态</th>
-                                    <th>出金时间</th>
-                                    <th>出金状态</th>
+                                    <th>划出账号</th>
+                                    <th>划入账户</th>
+                                    <th>划入账户名</th>
+                                    <th>划出金额</th>
+                                    <th>划出时间</th>
+                                    <th>划出状态</th>
                                     <th>完成时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($ib_outmoney_list as $value) {?>
+                                <?php foreach($trader_fundOut_list as $value) {?>
                                 <tr class="gradeX">
                                     <td><?=$value['id']?></td>
                                     <td><?=$value['order_id']?></td>
+                                    <td><?=$value['trader_user']?></td>
+                                    <td><?=$value['user_id']?></td>
                                     <td><?=$value['name']?></td>
-                                    <td><?=$value['id_card']?></td>
-                                    <td><?=$value['outmoney']?></td>
+                                    <td><?=$value['transfer_price']?></td>
+                                    <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
                                     <td>
                                         <?php
-                                               $statusIb = $value['ib_status'];
+                                               $statusIb = $value['transfer_status'];
                                                switch($statusIb){
                                                   case '0':
-                                                     $statusTxt = '禁用';
+                                                     $statusTxt = '审核中';
                                                       break;
                                                    case '1':
-                                                      $statusTxt = '启用';
+                                                      $statusTxt = '划入成功';
+                                                      break;
+                                                   case '2':
+                                                      $statusTxt = '划入失败';
                                                       break;
                                                 }
                                                 ?>
                                         <?=$statusTxt?>
                                     </td>
 
-                                    <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
-                                    <td>
-                                        <?php
-                                              $orderStatus = $value['order_status'];
-                                              switch($orderStatus){
-                                                 case '0':
-                                                    $statusText = '审核中';
-                                                    break;
-                                                  case '1':
-                                                    $statusText = '审核成功';
-                                                     break;
-                                                  case '2':
-                                                     $statusText = '审核失败';
-                                                     break;
-                                              }
-                                              ?>
-                                        <?=$statusText?>
-                                    </td>
+
                                     <td>
                                         <?php
                                                 if($value['success_time']==0){
@@ -124,16 +97,15 @@
                                     </td>
                                     <td>
                                         <?php
-                                                if($value['order_status']==0){
+                                                if($value['transfer_status']==0){
                                                 ?>
-                                        <a href="javascript:void(0)" onclick="IBWithdraw_success(this,'<?php echo url('admin/FundsManagement/IBWithdraw_success',['order_id'=>$value['order_id'],'ib_id'=>$value['user_id']]); ?>')">成功</a>
-                                        <a href="javascript:void(0)" onclick="IBWithdraw_fail(this,'<?php echo url('admin/FundsManagement/IBWithdraw_fail',['order_id'=>$value['order_id'],'ib_id'=>$value['user_id'],'outmoney'=>$value['outmoney']]); ?>')">失败</a>
+                                        <a href="javascript:void(0)" onclick="fund_out_success(this,'{:url('admin/TraderFundVerify/fund_out_success',['order_id'=>$value['order_id'],'user_id'=>$value['user_id'],'transfer_price'=>$value['transfer_price']])}')">成功</a>
+                                        <a href="javascript:void(0)" onclick="fund_out_fail(this,'{:url('admin/TraderFundVerify/fund_out_fail',['order_id'=>$value['order_id'],'trader_user'=>$value['trader_user'],'transfer_price'=>$value['transfer_price']])}')">失败</a>
                                         <?php }
                                                else {
                                                ?>
                                         <span>已审核</span>
                                         <?php }?>
-
                                     </td>
                                 </tr>
                                 <?php }?>
@@ -156,19 +128,14 @@
 </div>
 
 <!-- 全局js -->
-<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
-<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/static/admin/js/plugins/layer3.1/layer.js"></script>
-<script src="/static/admin/js/demo/layer-demo.js"></script>
+{include file="common/script"}
 <!-- 自定义js -->
-<script src="/static/admin/js/content.js?v=1.0.0"></script>
-<script src="/static/admin/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+<script src="__ADMIN__/js/plugins/jeditable/jquery.jeditable.js"></script>
 
 <!-- Data Tables -->
-<script src="/static/admin/js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="/static/admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 
 <script>
@@ -180,9 +147,9 @@
 
     });
 
-    //IB出金成功
-    function IBWithdraw_success(that,url) {
-        layer.confirm('确认出金?',function () {
+    //划出成功
+    function fund_out_success(that,url) {
+        layer.confirm('确认划出?',function () {
             $.ajax({
                 url:url,
                 timeout:5000,
@@ -207,9 +174,9 @@
             })
         })
     }
-    //IB出金失败
-    function IBWithdraw_fail(that,url) {
-        layer.confirm('出金失败?',function () {
+    //划出失败
+    function fund_out_fail(that,url) {
+        layer.confirm('划出失败?',function () {
             $.ajax({
                 url:url,
                 timeout:5000,
@@ -229,6 +196,7 @@
             })
         })
     }
+
 </script>
 
 </body>

@@ -27,5 +27,18 @@ class Common extends Controller{
         }else{
             return false;
         }
+    } //检查交易者的状态
+    static public function checkTraderStatus($table,$where){
+        $result = Db::name($table)->where($where)->find();
+        if($result){
+            if($result['ta_status']!=1){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
     }
+
 }

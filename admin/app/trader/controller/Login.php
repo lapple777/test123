@@ -17,7 +17,7 @@ class Login extends Controller{
                 'phone'=>$input['phone']
             ];
             $fields = [
-                'phone','password','user_status','username','id'
+                'phone','password','user_status','username','id','wallet'
             ];
             $result = Db::name('user')->field($fields)->where($where)->find();
             if(!$result){
