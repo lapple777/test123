@@ -5,7 +5,7 @@ require_once __DIR__ . '/workerman/Autoloader.php';
 
 //本地
 define('IP_URL','http://127.0.0.1:2121/');//推送地址
-define('HOST_NAME','http://test.admin.com');
+define('HOST_NAME','http://www.gitcrm.com');
 
 //线上环境
 //define('IP_URL','http://210.209.85.65:2120');

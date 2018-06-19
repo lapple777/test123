@@ -27,7 +27,7 @@ class FundsManagement extends Common{
             ->alias('out')
             ->join('user','out.user_id=user.id')
             ->where(['user_type'=>'1'])
-            ->paginate(10);
+            ->paginate(10000);
         $data = [
             'user_outmoney_list'=>$res
         ];
@@ -41,7 +41,7 @@ class FundsManagement extends Common{
             ->alias('out')
             ->join('ib','out.user_id=ib.id')
             ->where(['user_type'=>'2'])
-            ->paginate(10);
+            ->paginate(10000);
         $data = [
             'ib_outmoney_list'=>$result,
 
@@ -55,7 +55,7 @@ class FundsManagement extends Common{
             ->alias('in')
             ->join('user','in.user_id=user.id')
             ->where(['user_type'=>'1'])
-            ->paginate(10);
+            ->paginate(10000);
         $data = [
             'deposit_list'=>$result
         ];

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> 编辑交易账号</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    {include file="common/css"}
+    <style>
+
+        .content_box{
+            width:80%;
+            height:900px;
+            margin:0 auto;
+            border:1px solid #ccc;
+        }
+        .box_left{
+            border-right:1px solid #ccc;
+            height:100%;
+            width:20%;
+            float:left;
+        }
+        .box_right{
+            width:60%;
+            height:100%;
+            float:left;
+        }
+        .box_title{
+            margin: 30px 0 0 0;
+            height:45px;
+            line-height:40px;
+        }
+        .id_card{
+            width: 250px;
+            height: 150px;
+            background:#ccc;
+            display:inline-block;
+            margin-right:10px;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            border-radius:10px;
+        }
+        .card_box{
+            width:660px;
+            padding-left: 15px;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+                <form class="form-horizontal m-t" method="post" id="commentForm">
+                    <table class="table">
+                        <tr>
+                            <td class="text-right">交易账号</td>
+                            <td><input id="username"  type="text" class="form-control" value="<?=$account['account']?>" readonly></td>
+                            <td class="text-right">账户余额</td>
+                            <td><input id="wallet" type="text" class="form-control" name="wallet" value="<?=$account['wallet']?>" > </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">密码</td>
+                            <td> <input id="password" type="password" class="form-control" name="password" placeholder="留空表示不修改密码"></td>
+                            <td class="text-right">用户状态</td>
+                            <td>
+                                <select name="user_status" id="" class="form-control">
+                                    <option <?=$account['ta_status'] == 0?'selected':''?> value="0">审核中...</option>
+                                    <option <?=$account['ta_status'] == 1?'selected':''?> value="1">正常</option>
+                                    <option <?=$account['ta_status'] == 3?'selected':''?> value="3">审核不通过</option>
+                                    <option <?=$account['ta_status'] == 2?'selected':''?> value="2">禁用</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<!-- 全局js -->
+{include file="common/script"}
+<!-- 自定义js -->
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__ADMIN__/js/from_validate/jquery.validate.min.js"></script>
+<script src="__ADMIN__/js/from_validate/messages_zh.min.js"></script>
+
+<script src="__ADMIN__/js/from_validate/validate-methods.js"></script>
+
+
+
+
+<script>
+
+    $().ready(function() {
+        $("#commentForm").validate({
+            rules:{
+
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            submitHandler: function(form)
+            {
+                $.ajax({
+                    url:'',
+                    type:'POST',
+                    data:$(form).serialize(),
+                    success:function(data){
+                        if(data.code == 1){
+//                            var index = parent.layer.getFrameIndex(window.name);
+//                            parent.layer.close(index);
+                            layer.msg(data.msg,function(){
+                                parent.location.reload();
+                            });
+                            return false;
+                        }else if(data.code == 0){
+                            layer.msg(data.msg);
+                            return false;
+                        }
+                    },
+                    error:function(){
+                        layer.msg('网络错误，请稍后再试');
+                        return false;
+                    }
+                })
+
+            }
+        });
+
+});
+
+
+</script>
+
+</body>
+
+</html>

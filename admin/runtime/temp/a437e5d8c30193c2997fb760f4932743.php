@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\gitcrm\admin\public/../app/trader\view\account\account-info.html";i:1529055401;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,21 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    {include file="common/css"}
+    
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+<link href="/static/admin/css/animate.css" rel="stylesheet">
+<link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+<style>
+    .dataTables_paginate{
+        text-align:right;
+    }
+    .dataTables_filter{
+        text-align:right;
+    }
+</style>
     <style>
 
         .content_box{
@@ -187,18 +202,23 @@
 </div>
 </div>
 <!-- 全局js -->
-{include file="common/script"}
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/admin/js/plugins/layer3.1/layer.js"></script>
+<script src="/static/admin/js/demo/layer-demo.js"></script>
 <!-- 自定义js -->
-<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+<script src="/static/admin/js/content.js?v=1.0.0"></script>
 
 
 <!-- jQuery Validation plugin javascript-->
-<script src="__ADMIN__/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="__ADMIN__/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/static/admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/static/admin/js/plugins/validate/messages_zh.min.js"></script>
 
-<script src="__ADMIN__/js/demo/form-validate-demo.js"></script>
+<script src="/static/admin/js/demo/form-validate-demo.js"></script>
 
-<script src="__ADMIN__/js/plugins/layer/laydate/laydate.js"></script>
+<script src="/static/admin/js/plugins/layer/laydate/laydate.js"></script>
 <script>
     //外部js调用
     laydate({
