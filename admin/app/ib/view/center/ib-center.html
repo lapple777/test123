@@ -12,8 +12,8 @@
 <body class="gray-bg">
 <div class="wrapper    wrapper-content animated fadeInRight">
     <div class="ibox-content">
-
-        <div id="using_json"></div>
+        <!--<div id="using_json"></div>-->
+        <div id="Ib_json"></div>
     </div>
 
 
@@ -32,6 +32,31 @@
 <script>
 
     $(document).ready(function () {
+        $.ajax({
+            type:'GET',
+            url:'{:url("ib/Center/get_IbSubList")}',
+            success:function (data) {
+                console.log('获得参数')
+                console.log(data)
+                var ib_subList = [];
+                if(data.msg.length>0){
+                    for(var i=0;i<data.msg.length;i++){
+                        ib_subList.push(data.msg[i].name)
+                    }
+                }
+                console.log('ib_subList')
+                console.log(ib_subList)
+                $('#Ib_json').jstree({
+                    'core': {
+                        'data': ib_subList
+                    }
+                })
+            },
+            error:function (data) {
+
+            }
+        });
+
 
         $('#using_json').jstree({
             'core': {
