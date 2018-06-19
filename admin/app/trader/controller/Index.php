@@ -1,7 +1,10 @@
 <?php 
 namespace app\trader\controller;
-
-class Index extends Common{
+use think\Controller;
+class Index extends Controller{
+//	public function index(){
+//		return $this->fetch('index2');
+//	}
 	public function index(){
 		return $this->fetch();
 	}

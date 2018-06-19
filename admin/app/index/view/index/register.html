@@ -45,10 +45,13 @@
         .login_main_bottom button {
             background: #868ec5;
         }
+        .no_color{
+            color:black !important;
+            margin-bottom:20px;
+        }
     </style>
 </head>
 <body>
-{include file="common/header"}
 <div id="bg_color"></div>
 <div class="container-fluid login_box" >
 	<div class="login">
@@ -56,7 +59,7 @@
 		<form action="{:url('index/Register/register')}" method="post" class="registerform">
 	        <div class="login_main">
 	            <div class="login_main_bottom">
-
+                    <h1 class="no_color">注册</h1>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon user">用户名</div>
@@ -128,7 +131,6 @@
 
 
                   <button type="submit">提交注册</button>
-                    <a href="{:url('index/Login/login')}">登录</a>
 	            </div>
 	        </div>
 		</form>

@@ -6,17 +6,20 @@ use app\trader\model\OutMoneyLog;
 use app\trader\model\User;
 use Mockery\CountValidator\Exception;
 use think\Db;
+use app\trader\model\Config;
 //资金管理
 class Brm extends Common{
     private $inmoney;
     private $outmoney;
     private $user;
+    private $config;
     public function __construct()
     {
         parent::__construct();
         $this->inmoney = new InMoneyLog();
         $this->outmoney = new OutMoneyLog();
         $this->user = new User();
+        $this->config = new Config();
     }
 
     //客户入金列表
@@ -49,24 +52,40 @@ class Brm extends Common{
             $where = [
                 'id'=>session('traderId')
             ];
+            $fields = ['name','phone'];
+            $userRes = $this->user->field($fields)->where($where)->find();
             $res = Common::checkUserStatus('user',$where);
             if(!$res){
                 $this->error('账户暂时不能入金');
             }
+            //读取配置信息
+            $configRes = $this->config->field('rate')->where(['id'=>1])->find();
+            $money = $input['inmoney']*$configRes['rate'];//人民币
             $data = [
                 'order_id'=>$orderId,
-                'inmoney'=>$input['inmoney'],
+                'inmoney'=>$input['inmoney'],//美元
                 'user_id'=>session('traderId'),
                 'user_type'=>'1',
                 'add_time'=>time(),
+                'rate'=>$configRes['rate'],//汇率
+                'money'=>$money,
             ];
             $result = $this->inmoney->insert($data);
             if($result){
+                $msg = '用户ID为：'.session('traderId').' 姓名：'.$userRes['name'].'，入金：'.$money.'人民币，对应美元为：'.$input['inmoney'];
+                $mail = new \app\api\controller\SendMail();
+                $mail->send($msg,0);
+
                 $this->success('入金申请已提交');
             }else{
                 $this->error('入金申请提交失败');
             }
         }
+        $res = $this->config->field('rate')->where(['id'=>1])->find();
+        $data = [
+            'rate'=>$res['rate']
+        ];
+        $this->assign($data);
         return $this->fetch('inmoney');
     }
     //客户出金列表
@@ -133,6 +152,12 @@ class Brm extends Common{
             $this->success('出金申请已提交');
 
         }
+        $fields = ['wallet'];
+        $res = $this->user->field($fields)->where(['id'=>session('traderId')])->find();
+        $data = [
+            'blance'=>$res['wallet']
+        ];
+        $this->assign($data);
         return $this->fetch('outmoney');
     }
 }

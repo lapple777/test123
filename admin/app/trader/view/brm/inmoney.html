@@ -64,8 +64,16 @@
                 <form class="form-horizontal m-t" method="post" id="commentForm">
                     <table class="table">
                         <tr>
-                            <td class="text-right">入金金额</td>
-                            <td><input id="inmoney" name="inmoney" type="text" class="form-control"></td>
+                            <td class="text-right">入金金额(美元)</td>
+                            <td><input id="inmoney" name="inmoney" type="text" class="form-control" value=""></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">汇率</td>
+                            <td><input  id="rate" type="text" class="form-control" readonly value="<?=$rate?>"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">人民币</td>
+                            <td><input id="money"  type="text" name="money" class="form-control" readonly value=""></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -97,7 +105,12 @@
 
 
 <script>
-
+    $('#inmoney').blur(function(){
+        var inmony = $('#inmoney').val();
+        var rate = $('#rate').val();
+        var money = inmony*rate
+        $('#money').val(money)
+    })
     $().ready(function() {
         $("#commentForm").validate({
             rules:{

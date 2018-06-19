@@ -12,7 +12,7 @@ class Statements extends Common{
         $fields = [
             'order_id','order_type','order_price','add_time',
             'stop_profit','stop_loss','lot_num','order_status',
-            'order_close_time','profit'
+            'order_close_time','profit','hand_price'
         ];
         $result = $traderOrder->field($fields)->order('order_close_time desc')->where($where)->paginate(15);
         $data = [

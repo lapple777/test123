@@ -73,6 +73,7 @@ function request($callback, $req_str="") {
 ////                                $info['low'],//低价
 //                            ];
                             $params = $info['ticktime'].'|'.$info['bid'].'|'.$info['ask'];
+                            var_dump($params);
                             $datas = [date('Y-m-d H:i:s',$info['ticktime']),$info['bid'],$info['ask']];
                             //推送数据到前端
                             $data = [

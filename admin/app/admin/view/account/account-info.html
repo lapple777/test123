@@ -88,72 +88,41 @@
                                     <div class="">
                                         <form class="form-horizontal m-t" id="signupForm">
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label">工号：</label>
+                                                <label class="col-sm-3 control-label">ID：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="firstname" name="firstname" class="form-control" type="text">
+                                                    <input id="firstname"  class="form-control" type="text" value="<?=$adminUser['id']?>" readonly>
 
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label">名字：</label>
+                                                <label class="col-sm-3 control-label">用户名：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="lastname" name="lastname" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                                                    <input id="lastname"  class="form-control" type="text" value="<?=$adminUser['username']?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">联系电话：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="phone" name="phone" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                                                    <input id="phone" class="form-control" type="text" value="<?=$adminUser['phone']?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">邮件地址：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="email" name="email" class="form-control" aria-required="true" type="email">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">身份证号：</label>
-                                                <div class="col-sm-8">
-                                                    <input id="id_card" name="id_card" class="form-control" aria-required="true" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="card_box col-sm-offset-3">
-                                                    <div class="id_card"></div>
-                                                    <div class="id_card"></div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">银行卡号：</label>
-                                                <div class="col-sm-8">
-                                                    <input id="bank_id" name="bank_id" class="form-control" aria-required="true" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="card_box col-sm-offset-3">
-                                                    <div class="id_card"></div>
-                                                    <div class="id_card"></div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">创建时间：</label>
-                                                <div class="col-sm-8">
-                                                    <input id="create_time" name="create_time" class="laydate-icon form-control layer-date">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">登录密码：</label>
-                                                <div class="col-sm-8">
-                                                    <input id="password" name="password" class="form-control" aria-required="true" type="password">
+                                                    <input id="email" class="form-control" type="email" value="<?=$adminUser['email']?>" readonly>
                                                 </div>
                                             </div>
 
+
                                             <div class="form-group">
-                                                <div class="col-sm-8 col-sm-offset-3">
-                                                    <button class="btn btn-primary" type="submit">提交</button>
+                                                <label class="col-sm-3 control-label">创建时间：</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control"  readonly value="<?=date('Y-m-d H:i:s',$adminUser['add_time'])?>">
                                                 </div>
                                             </div>
+
+
+
                                         </form>
                                     </div>
                                 </div>
