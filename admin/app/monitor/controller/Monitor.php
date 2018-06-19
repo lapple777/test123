@@ -104,7 +104,7 @@ class Monitor extends Controller{
                 //止损
                 //账户余额
                 $account_price = $price - $commission;
-                $order_data['profit'] = $commission;
+                $order_data['profit'] = 0;
                 break;
         }
 

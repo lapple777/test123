@@ -126,4 +126,27 @@ class FundAllot extends Common{
             $this->success('划出资金提交成功');
         }
     }
+    //一键登录交易账号
+//    public function login(){
+//        $input = input();
+//        $accountId = $input['accountId'];
+//        $fields = [
+//            'id','ta_status','account'
+//        ];
+//        $res = $this->tradeAccount->field($fields)->where(['id'=>$accountId])->find();
+//        if($res){
+//            if($res['ta_status'] == 0){
+//                $this->error('账号正在审核中...');
+//            }else if($res['ta_status'] == 2){
+//                $this->error('当前用户禁止登陆');
+//            }else {
+//                session('username', $res['account']);
+//                session('userid', $res['id']);
+//                $url = url('index/Index/index');
+//                $this->success('登陆成功', $url);
+//            }
+//        }else{
+//            $this->error('账号不存在');
+//        }
+//    }
 }

@@ -114,10 +114,11 @@ class Order extends Common{
                             'lot_num'=>$input['lot'],//下单手数
                             'order_type'=>$type,//下单类型
                             'add_time'=>time(),//添加时间
+                            'hand_price'=>$input['lot']*$configRes['commission']
                         ];
 
                         $oid = $traderOrder->insertGetId($data);
-                        $price = $input['lot']*$handPrice;
+                        $price = $input['lot']*$handPrice;//手续费
                         $sql = 'UPDATE crm_trading_account SET wallet=wallet-'.$price.' WHERE account="'.session('username').'"';
 
                         Db::execute($sql);

@@ -36,6 +36,10 @@
                                 </li>
                                 <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">手续费设置</a>
                                 </li>
+                                <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">奖励设置</a>
+                                </li>
+                                <li class=""><a data-toggle="tab" href="#tab-5" aria-expanded="false">汇率设置</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
@@ -44,13 +48,14 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">止盈：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="stop_profit" name="stop_profit" minlength="2" type="text" class="form-control" required="" aria-required="true">
+                                                    <input id="stop_profit" name="stop_profit" minlength="2" type="text" class="form-control" required="" aria-required="true" value="<?=$config['stop_profit']?>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">止损：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="stop_loss" type="text" class="form-control" name="stop_loss" required="" aria-required="true">
+                                                    <input id="stop_loss" type="text" class="form-control" name="stop_loss" required="" aria-required="true" value="<?=$config['stop_loss']?>">
+                                                    <input type="hidden" name="type" value="changePrice">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -67,7 +72,8 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">每手对应多少美元：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="dollar" type="text" class="form-control" name="dollar" required="" aria-required="true">
+                                                    <input id="hand_price" type="text" class="form-control" name="handPrice" required="" aria-required="true" value="<?=$config['hand_price']?>">
+                                                    <input type="hidden" name="type" value="handPrice">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -82,9 +88,47 @@
                                     <div class="panel-body">
                                         <form class="form-horizontal m-t" method="post" id="commission-form">
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label">手续费：</label>
+                                                <label class="col-sm-3 control-label">手续费(美元)：</label>
                                                 <div class="col-sm-8">
-                                                    <input id="commission" type="text" class="form-control" name="dollar" required="" aria-required="true">
+                                                    <input id="commission" type="text" class="form-control" name="commission" required="" aria-required="true" value="<?=$config['commission']?>">
+                                                    <input type="hidden" name="type" value="commission">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-3">
+                                                    <button class="btn btn-primary" type="submit">提交</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div id="tab-4" class="tab-pane">
+                                    <div class="panel-body">
+                                        <form class="form-horizontal m-t" method="post" id="award-form">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">每手奖励(美元)：</label>
+                                                <div class="col-sm-8">
+                                                    <input id="award" type="text" class="form-control" name="award" required="" aria-required="true" value="<?=$config['award']?>">
+                                                    <input type="hidden" name="type" value="award">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-3">
+                                                    <button class="btn btn-primary" type="submit">提交</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="tab-5" class="tab-pane">
+                                    <div class="panel-body">
+                                        <form class="form-horizontal m-t" method="post" id="rate-form">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">汇率：</label>
+                                                <div class="col-sm-8">
+                                                    <input id="rate" type="text" class="form-control" name="rate" required="" aria-required="true" value="<?=$config['rate']?>">
+                                                    <input type="hidden" name="type" value="rate">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -132,26 +176,53 @@
             focusCleanup:true,
             submitHandler: function(form)
             {
-//                alert('表单提交')
-                group_add('表单提交','url',111,'300','400')
+                ajaxFrom('commentForm')
 
             }
         });
         $("#shoushu").validate({
             submitHandler: function(form)
             {
-                alert('表单提交')
+                ajaxFrom('shoushu')
 
             }
         });
         $('#commission-form').validate({
             submitHandler: function(form)
             {
-                alert('表单提交')
+                ajaxFrom('commission-form')
+
+            }
+        })
+        $('#award-form').validate({
+            submitHandler: function(form)
+            {
+                ajaxFrom('award-form')
+
+            }
+        })
+        $('#rate-form').validate({
+            submitHandler: function(form)
+            {
+                ajaxFrom('rate-form')
 
             }
         })
     });
+    function ajaxFrom(from){
+        $.ajax({
+            type:'POST',
+            url:'{:url("admin/Config/config_info")}',
+            data:$('#'+from).serialize(),
+            success:function(data){
+                layer.msg(data.msg)
+            },
+            error:function(){
+                layer.msg('网络错误请重试...');
+                return false;
+            }
+        })
+    }
     // 添加组
     function group_add(title,url,id,w,h){
         layer_show(title,url,w,h);
