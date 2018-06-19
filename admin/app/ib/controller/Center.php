@@ -12,7 +12,6 @@ namespace app\ib\controller;
 class Center extends Common{
      public function ib_center(){
 
-
          return $this->fetch('ib-center');
      }
 }

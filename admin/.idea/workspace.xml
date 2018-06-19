@@ -81,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ib-center.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ib-center.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/ib/view/center/ib-center.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
               <folding>
                 <element signature="e#1301#5015#0" expanded="false" />
               </folding>
@@ -93,31 +93,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Trader.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/trader/controller/Trader.php">
+      <file leaf-file-name="Center.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/ib/controller/Center.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/ib/model/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OutMoneyLog.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/ib/model/OutMoneyLog.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/trader/controller/Login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="33" column="37" lean-forward="false" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="trader-out-verify.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/admin/view/trader_fund_verify/trader-out-verify.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1620">
-              <caret line="54" column="47" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,7 +156,6 @@
         <option value="$PROJECT_DIR$/app/admin/controller/FundsManagement.php" />
         <option value="$PROJECT_DIR$/app/ib/view/common/css.html" />
         <option value="$PROJECT_DIR$/app/ib/view/contact/contact-us.html" />
-        <option value="$PROJECT_DIR$/app/ib/controller/Center.php" />
         <option value="$PROJECT_DIR$/app/ib/view/center/ib-center.html" />
         <option value="$PROJECT_DIR$/app/admin/view/trader_Verify/trader-in-verify.html" />
         <option value="$PROJECT_DIR$/app/admin/view/trader_Verify/trader-out-verify.html" />
@@ -187,6 +186,8 @@
         <option value="$PROJECT_DIR$/app/trader/controller/FundRecord.php" />
         <option value="$PROJECT_DIR$/app/trader/view/fund_record/fund-out-list.html" />
         <option value="$PROJECT_DIR$/app/trader/view/fund_record/fund-in-list.html" />
+        <option value="$PROJECT_DIR$/app/ib/controller/Center.php" />
+        <option value="$PROJECT_DIR$/app/ib/model/User.php" />
       </list>
     </option>
   </component>
@@ -321,6 +322,13 @@
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="ib" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="model" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="admin" type="b2602c69:ProjectViewProjectNode" />
@@ -553,12 +561,12 @@
       <updated>1528945595803</updated>
       <workItem from="1528945597529" duration="27258000" />
       <workItem from="1529024429106" duration="28111000" />
-      <workItem from="1529371807703" duration="1541000" />
+      <workItem from="1529371807703" duration="3670000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56910000" />
+    <option name="totallyTimeSpent" value="59039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -596,24 +604,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/ib/view/common/css.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ib/controller/Center.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding>
-            <element signature="e#6#93#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin/controller/TraderOutVerify.php" />
     <entry file="file://$PROJECT_DIR$/app/admin/controller/Rebate.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -725,7 +715,7 @@
         <state relative-caret-position="270">
           <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="57" />
           <folding>
-            <element signature="e#124#147#0#PHP" expanded="true" />
+            <element signature="e#124#147#0#PHP" expanded="false" />
             <marker date="1528871156233" expanded="true" signature="2369:2437" ph="UPDATE crm_i... " />
           </folding>
         </state>
@@ -856,7 +846,7 @@
         <state relative-caret-position="190">
           <caret line="104" column="10" lean-forward="true" selection-start-line="104" selection-start-column="10" selection-end-line="104" selection-end-column="10" />
           <folding>
-            <element signature="e#127#162#0#PHP" expanded="true" />
+            <element signature="e#127#162#0#PHP" expanded="false" />
             <marker date="1529051007321" expanded="true" signature="1733:1780" ph="UPDATE crm_t... " />
             <marker date="1529051007321" expanded="true" signature="1733:1807" ph="UPDATE crm_t... " />
             <marker date="1529051007321" expanded="true" signature="1733:1824" ph="UPDATE crm_t... " />
@@ -978,14 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/trader/controller/FundRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/trader/view/brm/outmoney-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1012,11 +994,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ib/view/center/ib-center.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
           <folding>
             <element signature="e#1301#5015#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/trader/controller/FundRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1230">
+          <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ib/controller/Center.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ib/model/OutMoneyLog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ib/model/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
