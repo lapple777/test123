@@ -27,7 +27,7 @@ class TraderFundVerify extends Common{
             ->alias('transfer')
             ->join('user','transfer.user_id=user.id')
             ->where(['order_type'=>'1'])
-            ->paginate(10);
+            ->paginate(10000);
         $data = [
             'trader_fundIn_list'=>$res
         ];
@@ -42,7 +42,7 @@ class TraderFundVerify extends Common{
             ->alias('transfer')
             ->join('user','transfer.user_id=user.id')
             ->where(['order_type'=>'2'])
-            ->paginate(10);
+            ->paginate(10000);
         $data = [
             'trader_fundOut_list'=>$res
         ];
