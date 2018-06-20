@@ -4,6 +4,7 @@ namespace app\trader\controller;
 use app\trader\model\User;
 
 class Account extends Common{
+    private $user;
     public function __construct()
     {
         parent::__construct();

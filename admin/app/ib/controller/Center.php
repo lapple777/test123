@@ -9,6 +9,7 @@
 namespace app\ib\controller;
 use app\ib\model\User;
 use app\ib\model\TradingAccount;
+use think\Db;
 //IB中心
 class Center extends Common{
     private $user;
@@ -25,37 +26,28 @@ class Center extends Common{
      }
      public function get_IbSubList(){
          $fields = [
-            'name','id'
+            'u.name','u.id','t.account','t.id tid'
         ];
         $where = [
-            'ib_id'=>session('IBId')
+            'u.ib_id'=>session('IBId')
         ];
-        $res = $this->user->field($fields)->where($where)->select();
-        if (!$res){
-            echo '数据集为空';
-        }else{
-            $fields = [
-                'account','id'
-            ];
-            $IBCenter = [];
-            foreach ($res as $value){
-//              echo '<pre>';
-//               dump($value->name);
-              $result = $this->trading->field($fields)->where('user_id',$value->id)->select();
-//              echo '<pre>';
-//              print_r($result);
-              $list = [
-                  'parentList'=>[
-                      'parentId'=>$value->id,
-                      'parentName'=>$value->name,
-                  ],
-                  'children'=>$result
-              ];
-                $IBCenter []=$list;
-            }
-//            echo '<pre>';
-//            dump($IBCenter);
-        }
-       $this->success($IBCenter);
+
+         $result = Db::name('user')
+             ->alias('u')
+             ->join('trading_account t','u.id=t.user_id')
+             ->field($fields)
+             ->where($where)
+             ->paginate(10000);
+//         $someKey = [];
+//         $total = '';
+//         foreach ($result as $item){
+//             $someKey[] = $item['id'];
+//             dump($total);
+//         }
+
+//         dump(array_flip($someKey));
+//         dump($total);
+//dump($result);
+       $this->success($result);
      }
 }
