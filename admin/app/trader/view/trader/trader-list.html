@@ -87,7 +87,7 @@
                                             <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="changePwd('{:url("Trader/changePwd",['account'=>$trader['account']])}')">修改密码</a>
                                             <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="fundAllot('资金分配','{:url("FundAllot/fundAllot",['account'=>$trader['account']])}','500','300')">分配资金</a>
 
-                                            <!--<a href="javascript:void(0)" class="btn btn-xs btn-success" onclick="account_login('{:url("FundAllot/login",['accountId'=>$trader['id']])}')">登录此交易账号</a>-->
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-success" onclick="account_login('{:url("FundAllot/login",['accountId'=>$trader['id']])}')">登录此交易账号</a>
                                         </td>
                                     </tr>
                                 <?php }?>
@@ -156,31 +156,31 @@ function changePwd(url){
     });
 }
 //
-//function account_login(url){
-//    var index = '';
-//    $.ajax({
-//        type:'GET',
-//        url:url,
-//        beforeSend:function(){
-//            index = layer.msg('正在登录...',{time:false});
-//        },
-//        success:function(data){
-//            layer.close(index);
-//            layer.msg(data.msg);
-//            var html = '';
-//            if(data.code == 1){
-//                window.open(data.url)
-////                html = '<a style="display:none" href="'+data.msg+'" id="href_open" target="_blank"></a>';
-//
-//            }
-//        },
-//        error:function(){
-//            layer.close(index);
-//            layer.msg('网络错误,请稍后重试...');
-//            return false;
-//        }
-//    })
-//}
+function account_login(url){
+    var index = '';
+    $.ajax({
+        type:'GET',
+        url:url,
+        beforeSend:function(){
+            index = layer.msg('正在登录...',{time:false});
+        },
+        success:function(data){
+            layer.close(index);
+            layer.msg(data.msg);
+            var html = '';
+            if(data.code == 1){
+                window.open(data.url)
+//                html = '<a style="display:none" href="'+data.msg+'" id="href_open" target="_blank"></a>';
+
+            }
+        },
+        error:function(){
+            layer.close(index);
+            layer.msg('网络错误,请稍后重试...');
+            return false;
+        }
+    })
+}
     //交易账户申请
 function traderuser_get(){
     var index = '';

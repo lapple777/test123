@@ -22,9 +22,16 @@ class FundsManagement extends Common{
     }
     //客户出金列表
     public function funds_list(){
+        $fields = [
+            'out.id','order_id','name',
+            'outmoney','out.add_time','id_card',
+            'out.success_time','order_status',
+            'out.user_id','user.user_status'
+        ];
         //客户出金记录
         $res = Db::name('outmoney_log')
             ->alias('out')
+            ->field($fields)
             ->join('user','out.user_id=user.id')
             ->where(['user_type'=>'1'])
             ->paginate(10000);
@@ -51,8 +58,15 @@ class FundsManagement extends Common{
     }
     //入金列表
     public function deposit_list(){
+        $fields = [
+            'in.id','order_id','name',
+            'inmoney','money','in.add_time',
+            'in.success_time','order_status',
+            'in.user_id','rate'
+        ];
         $result = Db::name('inmoney_log')
             ->alias('in')
+            ->field($fields)
             ->join('user','in.user_id=user.id')
             ->where(['user_type'=>'1'])
             ->paginate(10000);
@@ -85,6 +99,22 @@ class FundsManagement extends Common{
             Db::rollback();
             $this->error('客户入金审核失败');
         }
+        //客户入金通过发送邮件通知客户
+//        $fields = ['name','email'];
+//        $res = $this->user->field($fields)->where(['id'=>$input['user_id']])->find();
+//
+//        $orderRes = $this->inmoney->field('add_time')->where($where)->find();
+//
+//        $title = '账户入金申请';
+//        $time = date('Y-m-d H:i:s',$orderRes['add_time']);
+//        $name = $res['name'];
+//        $email = $res['email'];
+//        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+//                    &nbsp; &nbsp; &nbsp; 您于'.$time.'的入金申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+//                   此为系统邮件请勿回复';
+//        $mail = new \app\api\controller\SendMail();
+//        $mail->send($title,$msg,1,$email,$name);
+
         $this->success('客户入金审核成功');
     }
     //客户入金失败
@@ -102,6 +132,23 @@ class FundsManagement extends Common{
 
         $result = $this->inmoney->where($where)->update($data);
         if($result){
+            //客户入金失败发送邮件通知客户
+//            $orderRes = $this->inmoney->field('user_id,add_time')->where($where)->find();
+//            $fields = ['name','email'];
+//            $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+//
+//
+//
+//            $title = '账户入金申请';
+//            $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+//            $name = $res['name'];
+//            $email = $res['email'];
+//            $msg = '尊敬的'.$name.'，您好！<br/><br/>
+//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的入金申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+//                   此为系统邮件请勿回复';
+//            $mail = new \app\api\controller\SendMail();
+//            $mail->send($title,$msg,1,$email,$name);
+
             $this->success('客户入金审核成功!');
         }else{
             $this->error('客户入金审核失败!');
@@ -122,6 +169,23 @@ class FundsManagement extends Common{
 
         $result = $this->outmoney->where($where)->update($data);
         if($result){
+            //客户出金成功发送邮件通知客户
+//            $orderRes = $this->outmoney->field('user_id,add_time')->where($where)->find();
+//            $fields = ['name','email'];
+//            $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+//
+//
+//
+//            $title = '账户出金申请';
+//            $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+//            $name = $res['name'];
+//            $email = $res['email'];
+//            $msg = '尊敬的'.$name.'，您好！<br/><br/>
+//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的出金申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+//                   此为系统邮件请勿回复';
+//            $mail = new \app\api\controller\SendMail();
+//            $mail->send($title,$msg,1,$email,$name);
+
             $this->success('客户出金审核成功!');
         }else{
             $this->error('客户出金审核失败!');
@@ -149,6 +213,22 @@ class FundsManagement extends Common{
            Db::rollback();
            $this->error('客户出金审核失败');
        }
+       //客户出金失败发送邮件通知客户
+//       $orderRes = $this->outmoney->field('user_id,add_time')->where($where)->find();
+//       $fields = ['name','email'];
+//       $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+//
+//
+//
+//       $title = '账户出金申请';
+//       $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+//       $name = $res['name'];
+//       $email = $res['email'];
+//       $msg = '尊敬的'.$name.'，您好！<br/><br/>
+//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的出金申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+//                   此为系统邮件请勿回复';
+//       $mail = new \app\api\controller\SendMail();
+//       $mail->send($title,$msg,1,$email,$name);
        $this->success('客户出金审核成功');
 
     }
@@ -167,6 +247,23 @@ class FundsManagement extends Common{
 
         $result = $this->outmoney->where($where)->update($data);
         if($result){
+            //ib出金成功发送邮件通知客户
+//            $orderRes = $this->outmoney->field('user_id,add_time')->where($where)->find();
+//            $fields = ['name','email'];
+//            $res = $this->ib->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+//
+//
+//
+//            $title = '账户出金申请';
+//            $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+//            $name = $res['name'];
+//            $email = $res['email'];
+//            $msg = '尊敬的'.$name.'，您好！<br/><br/>
+//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的出金申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+//                   此为系统邮件请勿回复';
+//            $mail = new \app\api\controller\SendMail();
+//            $mail->send($title,$msg,1,$email,$name);
+
             $this->success('IB出金审核成功!');
         }else{
             $this->error('IB出金审核失败!');
@@ -195,6 +292,20 @@ class FundsManagement extends Common{
             Db::rollback();
             $this->error('IB出金审核失败');
         }
+        //ib出金失败发送邮件通知客户
+//        $orderRes = $this->outmoney->field('user_id,add_time')->where($where)->find();
+//        $fields = ['name','email'];
+//        $res = $this->ib->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+//
+//        $title = '账户出金申请';
+//        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+//        $name = $res['name'];
+//        $email = $res['email'];
+//        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的出金申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+//                   此为系统邮件请勿回复';
+//        $mail = new \app\api\controller\SendMail();
+//        $mail->send($title,$msg,1,$email,$name);
         $this->success('IB出金审核成功');
     }
 }

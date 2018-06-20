@@ -58,7 +58,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>账单号</th>
-                                    <th>入金金额</th>
+                                    <th>入金金额(美元)</th>
+                                    <th>人民币</th>
                                     <th>入金时间</th>
                                     <th>状态</th>
                                 </tr>
@@ -69,6 +70,7 @@
                                         <td><?=$value['id']?></td>
                                         <td><?=$value['order_id']?></td>
                                         <td><?=$value['inmoney']?></td>
+                                        <td><?=$value['money']?></td>
                                         <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
                                         <td>
                                             <?php

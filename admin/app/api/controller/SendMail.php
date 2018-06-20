@@ -12,7 +12,7 @@ class SendMail{
      * @param  string $type   [发送邮件类型0文字邮件，1HTML格式内容]
      *
      */
-    public function send($msg,$type = 0,$email = 'service@morris-cloud.com',$name = 'admin'){
+    public function send($title,$msg,$type = 0,$email = 'service@morris-cloud.com',$name = 'admin'){
         Loader::import('phpmail.Phpmailer', EXTEND_PATH);
         Loader::import('phpmail.Smtp', EXTEND_PATH);
         $mail  = new \PHPMailer();
@@ -26,7 +26,7 @@ class SendMail{
         $mail->Password   = "Myfx1213";        // SMTP服务器密码(授权码)
         $mail->SetFrom('service@morris-cloud.com', 'service@morris-cloud.com');    // 设置发件人地址和名称
         $mail->AddReplyTo($email,$name);// 设置邮件回复人地址和名称
-        $mail->Subject    = '标题';                     // 设置邮件标题
+        $mail->Subject    = $title;                     // 设置邮件标题
 
         $mail->AltBody    = "为了查看该邮件，请切换到支持 HTML 的邮件客户端";
         //发送HTML模板邮件

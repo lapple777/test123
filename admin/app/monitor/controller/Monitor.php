@@ -123,6 +123,7 @@ class Monitor extends Controller{
             //添加返佣记录
             $rebate_data = [
                 'uid'=>$data['uid'],
+                'ta_id'=>$data['ta_id'],
                 'IB_id'=>$data['ib_id'],
                 'rebate_price'=>$commission,
                 'add_time'=>time(),

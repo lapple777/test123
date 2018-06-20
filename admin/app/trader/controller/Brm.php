@@ -29,7 +29,7 @@ class Brm extends Common{
             'user_type'=>'1',
         ];
         $fields = [
-            'id','order_id','inmoney',
+            'id','order_id','inmoney','money',
             'add_time','success_time','order_status'
         ];
         $res = $this->inmoney->field($fields)->where($where)->select();
@@ -42,6 +42,7 @@ class Brm extends Common{
     //客户入金申请
     public function inmoney(){
         if(request()->isPost()){
+
             $input = input();
             if(empty($input['inmoney'])){
                 $this->error('入金金额不能为空');
@@ -72,9 +73,11 @@ class Brm extends Common{
             ];
             $result = $this->inmoney->insert($data);
             if($result){
-                $msg = '用户ID为：'.session('traderId').' 姓名：'.$userRes['name'].'，入金：'.$money.'人民币，对应美元为：'.$input['inmoney'];
-                $mail = new \app\api\controller\SendMail();
-                $mail->send($msg,0);
+                //向admin发送入金通知邮件
+//                $title = '客户申请入金';
+//                $msg = '【用户入金】用户ID为：'.session('traderId').' 姓名：'.$userRes['name'].'，入金：'.$money.'人民币，对应美元为：'.$input['inmoney'];
+//                $mail = new \app\api\controller\SendMail();
+//                $mail->send($title,$msg,0);
 
                 $this->success('入金申请已提交');
             }else{
@@ -123,7 +126,7 @@ class Brm extends Common{
                 $this->error('账户暂时不能入金');
             }
             //检查账户余额
-            $fields = ['wallet'];
+            $fields = ['wallet','name'];
             $result = $this->user->field($fields)->where($where)->find();
             if($result){
                 if($result['wallet'] < $input['outmoney']){
@@ -149,6 +152,11 @@ class Brm extends Common{
                 Db::rollback();
                 $this->error('出金申请提交失败');
             }
+            //向admin发送出金通知邮件
+//            $msg = '【用户出金】用户ID为：'.session('traderId').' 姓名：'.$result['name'].'，出金金额为(美元)：'.$input['outmoney'];
+//            $mail = new \app\api\controller\SendMail();
+//            $mail->send($msg,0);
+
             $this->success('出金申请已提交');
 
         }

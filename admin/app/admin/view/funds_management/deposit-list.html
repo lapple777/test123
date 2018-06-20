@@ -32,9 +32,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>账单号</th>
-                                    <th>入金ID</th>
                                     <th>入金人</th>
-                                    <th>入金金额</th>
+                                    <th>入金金额(美元)</th>
+                                    <th>人民币</th>
+                                    <th>入金汇率</th>
                                     <th>入金时间</th>
                                     <th>入金状态</th>
                                     <th>完成时间</th>
@@ -46,9 +47,10 @@
                                 <tr class="gradeX">
                                     <td><?=$value['id']?></td>
                                     <td><?=$value['order_id']?></td>
-                                    <td><?=$value['user_id']?></td>
                                     <td><?=$value['name']?></td>
                                     <td><?=$value['inmoney']?></td>
+                                    <td><?=$value['money']?></td>
+                                    <td><?=$value['rate']?></td>
                                     <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
                                     <td>
                                         <?php

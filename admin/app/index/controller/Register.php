@@ -95,10 +95,15 @@ class Register extends Controller{
                 'ib_id'=>$this->ib_id,
                 'add_time'=>time(),
             ];
-            $result = $this->user->insert($data);
+            $result = $this->user->insertGetId($data);
             if($result){
+                //向admin发送注册审核通知邮件
+//                $msg = '【用户注册】用户ID为：'.$result.' 姓名为：'.$data['username'].'，请尽快审核！';
+//                $mail = new \app\api\controller\SendMail();
+//                $mail->send($msg,0);
+
                 $url = url('trader/login/index');
-                $this->success('注册成功，请登录',$url);
+                $this->success('注册成功，请等待审核通过',$url);
             }else{
                 $this->error('注册失败');
             }
