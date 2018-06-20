@@ -24,11 +24,16 @@ class Commission extends Common{
     }
     public function commision_statistics(){
         $where = [
-            'IB_id'=>session('IBId')
+            'r.IB_id'=>session('IBId')
+        ];
+        $fields = [
+            'r.id','user.name','r.add_time','r.rebate_price'
         ];
         $result = Db::name('rebate')
-            ->alias('rebate')
-            ->join('trading_account trading','rebate.uid=trading.id')
+            ->alias('r')
+            //->join('trading_account trading','r.uid=trading.id')
+            ->join('user','r.uid=user.id')
+            ->field($fields)
             ->where($where)
             ->paginate(10000);
 

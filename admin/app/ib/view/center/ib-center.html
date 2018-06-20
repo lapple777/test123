@@ -12,7 +12,6 @@
 <body class="gray-bg">
 <div class="wrapper    wrapper-content animated fadeInRight">
     <div class="ibox-content">
-        <!--<div id="using_json"></div>-->
         <div id="Ib_json"></div>
     </div>
 
@@ -30,25 +29,65 @@
 <script src="__ADMIN__/js/from_validate/validate-methods.js"></script>
 <script src="__ADMIN__/js/plugins/jsTree/jstree.min.js"></script>
 <script>
-
+    Array.prototype.distinct = function (){
+        var arr = this,
+            i,
+            j,
+            len = arr.length;
+        for(i = 0; i < len; i++){
+            for(j = i + 1; j < len; j++){
+                if(arr[i].userId == arr[j].userId){
+                    arr.splice(j,1);
+                    len--;
+                    j--;
+                }
+            }
+        }
+        return arr;
+    };
     $(document).ready(function () {
         $.ajax({
             type:'GET',
             url:'{:url("ib/Center/get_IbSubList")}',
             success:function (data) {
-                console.log('获得参数')
-                console.log(data)
-                var ib_subList = [];
-                if(data.msg.length>0){
-                    for(var i=0;i<data.msg.length;i++){
-                        ib_subList.push(data.msg[i].name)
+//                console.log('获得参数')
+//                console.log(data)
+                var someKey = [];
+                $.each(data.msg.data,function(i,data){
+                    var part = {
+                        userId:data.id,
+                        userName:data.name
+                    };
+                    someKey.push(part);
+                });
+                var disSomkey  = someKey.distinct();
+                var hahah = [];
+                if(data.msg.data.length>0){
+//                    console.log(data.msg.data)
+                    for(var j = 0;j<disSomkey.length;j++){
+                        var hh = [];
+                        var childKey = [];
+                        for(var i=0;i<data.msg.data.length;i++){
+                            if(data.msg.data[i].id==disSomkey[j].userId){
+                                var temp  = {
+                                    childId:data.msg.data[i].tid,
+                                    text:data.msg.data[i].account
+                                };
+                                hh.push(temp);
+                                childKey.push(data.msg.data[i].account)
+                            }
+                        }
+                        var getParent  ={
+                            parentId:someKey[j].userId,
+                            text:someKey[j].userName,
+                            children:hh
+                        };
+                        hahah.push(getParent);
                     }
                 }
-                console.log('ib_subList')
-                console.log(ib_subList)
                 $('#Ib_json').jstree({
                     'core': {
-                        'data': ib_subList
+                        'data':hahah
                     }
                 })
             },
@@ -56,108 +95,6 @@
 
             }
         });
-
-
-        $('#using_json').jstree({
-            'core': {
-                'data': [
-                    'Empty Folder',
-                    {
-                        'text': 'Resources',
-                        'state': {
-                            'opened': true
-                        },
-                        'children': [
-                            {
-                                'text': 'css',
-                                'children': [
-                                    {
-                                        'text': 'animate.css',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'bootstrap.css',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'main.css',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'style.css',
-                                        'icon': 'none'
-                                    }
-                                ],
-                                'state': {
-                                    'opened': true
-                                }
-                            },
-                            {
-                                'text': 'js',
-                                'children': [
-                                    {
-                                        'text': 'bootstrap.js',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'hplus.min.js',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'jquery.min.js',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'jsTree.min.js',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'custom.min.js',
-                                        'icon': 'none'
-                                    }
-                                ],
-                                'state': {
-                                    'opened': true
-                                }
-                            },
-                            {
-                                'text': 'html',
-                                'children': [
-                                    {
-                                        'text': 'layout.html',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'navigation.html',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'navbar.html',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'footer.html',
-                                        'icon': 'none'
-                                    },
-                                    {
-                                        'text': 'sidebar.html',
-                                        'icon': 'none'
-                                    }
-                                ],
-                                'state': {
-                                    'opened': true
-                                }
-                            }
-                        ]
-                    },
-                    'Fonts',
-                    'Images',
-                    'Scripts',
-                    'Templates',
-                ]
-            }
-        });
-
     });
 </script>
 
