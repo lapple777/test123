@@ -43,7 +43,7 @@ class FundAllot extends Common{
                 $this->error('该交易账户暂不能划入金额');
             }
             //检查用户余额
-            $fields = ['wallet'];
+            $fields = ['wallet','name'];
             $where = [
                 'id'=>session('traderId')
             ];
@@ -73,6 +73,10 @@ class FundAllot extends Common{
                 Db::rollback();
                 $this->error('划入资金提交失败');
             }
+            $title = '提示管理员审核';
+            $msg = $result['name'].'提交交易账号权利金划入申请，请及时审核。';
+            $mail = new \app\api\controller\SendMail();
+            $mail->send($title,$msg,0);
             $this->success('划入资金提交成功');
         }
     }
@@ -123,30 +127,36 @@ class FundAllot extends Common{
                 Db::rollback();
                 $this->error('划出资金提交失败');
             }
+            $userResult = $this->user->field('name')->where(['id'=>session('traderId')])->find();
+            $title = '提示管理员审核';
+            $msg = $userResult['name'].'提交交易账号权利金划出申请，请及时审核。';
+            $mail = new \app\api\controller\SendMail();
+            $mail->send($title,$msg,0);
+
             $this->success('划出资金提交成功');
         }
     }
     //一键登录交易账号
-    public function login(){
-        $input = input();
-        $accountId = $input['accountId'];
-        $fields = [
-            'id','ta_status','account'
-        ];
-        $res = $this->tradeAccount->field($fields)->where(['id'=>$accountId])->find();
-        if($res){
-            if($res['ta_status'] == 0){
-                $this->error('账号正在审核中...');
-            }else if($res['ta_status'] == 2){
-                $this->error('当前用户禁止登陆');
-            }else {
-                session('username', $res['account']);
-                session('userid', $res['id']);
-                $url = url('index/Index/index');
-                $this->success('登陆成功', $url);
-            }
-        }else{
-            $this->error('账号不存在');
-        }
-    }
+//    public function login(){
+//        $input = input();
+//        $accountId = $input['accountId'];
+//        $fields = [
+//            'id','ta_status','account'
+//        ];
+//        $res = $this->tradeAccount->field($fields)->where(['id'=>$accountId])->find();
+//        if($res){
+//            if($res['ta_status'] == 0){
+//                $this->error('账号正在审核中...');
+//            }else if($res['ta_status'] == 2){
+//                $this->error('当前用户禁止登陆');
+//            }else {
+//                session('username', $res['account']);
+//                session('userid', $res['id']);
+//                $url = url('index/Index/index');
+//                $this->success('登陆成功', $url);
+//            }
+//        }else{
+//            $this->error('账号不存在');
+//        }
+//    }
 }

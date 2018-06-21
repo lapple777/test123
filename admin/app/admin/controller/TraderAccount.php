@@ -4,6 +4,7 @@ use app\admin\model\User;
 use app\common\validate\AdminTraderAccount;
 //交易者账号管理
 class TraderAccount extends Common{
+    private $user;
     public function __construct()
     {
         parent::__construct();
@@ -17,7 +18,7 @@ class TraderAccount extends Common{
             'user_status'
         ];
 
-        $result = $this->user->field($fields)->where('user_status = 1')->whereOr('user_status = 2')->paginate(10);
+        $result = $this->user->field($fields)->where('user_status = 1')->whereOr('user_status = 2')->paginate(100000);
         $data = [
             'account_list'=>$result
         ];
@@ -48,6 +49,46 @@ class TraderAccount extends Common{
             ];
             $res = $this->user->where($where)->update($data);
             if($res){
+                switch($type){
+                    case 0:
+                        //交易者账号申请失败发送邮件通知客户
+                        $fields = ['name','email','add_time'];
+                        $res = $this->user->field($fields)->where(['id'=>$uid])->find();
+
+                        $title = '账户申请开户';
+                        $emailTime = date('Y-m-d H:i:s',$res['add_time']);
+                        $name = $res['name'];
+                        $email = $res['email'];
+                        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                                    &nbsp; &nbsp; &nbsp; 欢迎使用莫里云对冲系统
+                                    <br/>
+                                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的申请后台管理账户审核未通过。请您登录会员中心查看详情。<br/>
+
+                                    <br/><br/><br/><br/>
+                                   此为系统邮件请勿回复';
+
+
+                        break;
+                    case 1:
+                        //交易者账号申请成功发送邮件通知客户
+                        $fields = ['name','email','add_time'];
+                        $res = $this->user->field($fields)->where(['id'=>$uid])->find();
+                        $title = '账户申请开户';
+                        $emailTime = date('Y-m-d H:i:s',$res['add_time']);
+                        $name = $res['name'];
+                        $email = $res['email'];
+                        $url = 'http://'.$_SERVER['SERVER_NAME'].url('trader/Login/index');
+                        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                                    &nbsp; &nbsp; &nbsp; 欢迎使用莫里云对冲系统
+                                    <br/>
+                                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的申请后台管理账户已经开设成功。请登录网址：'.$url.' 查看详情。<br/>
+                                     &nbsp; &nbsp; &nbsp 我们提供的所有服务仅基于执行交易指令和系统服务。信息不包含个人金融或投资意见或其他推荐或我们交易价位的纪录，交易仅属于个人行为，请结合自身特定投资目的、财政状况进行投资。
+                                    <br/><br/><br/><br/>
+                                   此为系统邮件请勿回复';
+                        break;
+                }
+                $mail = new \app\api\controller\SendMail();
+                $mail->send($title,$msg,1,$email,$name);
                 $this->success('处理成功');
             }else{
                 $this->error('处理失败');

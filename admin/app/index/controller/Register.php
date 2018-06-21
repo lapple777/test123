@@ -97,10 +97,11 @@ class Register extends Controller{
             ];
             $result = $this->user->insertGetId($data);
             if($result){
-                //向admin发送注册审核通知邮件
-//                $msg = '【用户注册】用户ID为：'.$result.' 姓名为：'.$data['username'].'，请尽快审核！';
-//                $mail = new \app\api\controller\SendMail();
-//                $mail->send($msg,0);
+
+                $title = '提示管理员审核';
+                $msg = $data['name'].'提交客户后台管理账户申请，请及时审核。';
+                $mail = new \app\api\controller\SendMail();
+                $mail->send($title,$msg,0);
 
                 $url = url('trader/login/index');
                 $this->success('注册成功，请等待审核通过',$url);

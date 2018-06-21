@@ -56,6 +56,12 @@ class Trader extends Common{
         ];
         $res = $this->TraderUser->insert($data);
         if($res){
+            $userResult = $this->user->field('name')->where(['id'=>session('traderId')])->find();
+            $title = '提示管理员审核';
+            $msg = $userResult['name'].'提交交易账号申请，请及时审核。';
+            $mail = new \app\api\controller\SendMail();
+            $mail->send($title,$msg,0);
+
             $this->success('申请已提交成功');
         }else{
             $this->success('申请提交失败');
