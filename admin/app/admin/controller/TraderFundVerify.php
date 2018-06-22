@@ -77,19 +77,19 @@ class TraderFundVerify extends Common{
             $this->error('审核失败');
         }
         //交易账号划入成功发送邮件通知客户
-//        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
-//        $fields = ['name','email'];
-//        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
-//
-//        $title = '账户资金划转申请';
-//        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
-//        $name = $res['name'];
-//        $email = $res['email'];
-//        $msg = '尊敬的'.$name.'，您好！<br/><br/>
-//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的资金划入申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
-//                   此为系统邮件请勿回复';
-//        $mail = new \app\api\controller\SendMail();
-//        $mail->send($title,$msg,1,$email,$name);
+        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
+        $fields = ['name','email'];
+        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+
+        $title = '账户权利金转入申请';
+        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+        $name = $res['name'];
+        $email = $res['email'];
+        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的权利金转入申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                   此为系统邮件请勿回复';
+        $mail = new \app\api\controller\SendMail();
+        $mail->send($title,$msg,1,$email,$name);
 
 
         $this->success('审核成功');
@@ -118,19 +118,19 @@ class TraderFundVerify extends Common{
         }
 
         //交易账号划入失败发送邮件通知客户
-//        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
-//        $fields = ['name','email'];
-//        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
-//
-//        $title = '账户资金划转申请';
-//        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
-//        $name = $res['name'];
-//        $email = $res['email'];
-//        $msg = '尊敬的'.$name.'，您好！<br/><br/>
-//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的资金划入申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
-//                   此为系统邮件请勿回复';
-//        $mail = new \app\api\controller\SendMail();
-//        $mail->send($title,$msg,1,$email,$name);
+        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
+        $fields = ['name','email'];
+        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+
+        $title = '账户权利金转入申请';
+        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+        $name = $res['name'];
+        $email = $res['email'];
+        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的权利金转入申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                   此为系统邮件请勿回复';
+        $mail = new \app\api\controller\SendMail();
+        $mail->send($title,$msg,1,$email,$name);
 
         $this->success('审核成功');
     }
@@ -157,19 +157,19 @@ class TraderFundVerify extends Common{
         }
 
         //交易账号划出成功发送邮件通知客户
-//        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
-//        $fields = ['name','email'];
-//        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
-//
-//        $title = '账户资金划转申请';
-//        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
-//        $name = $res['name'];
-//        $email = $res['email'];
-//        $msg = '尊敬的'.$name.'，您好！<br/><br/>
-//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的资金划出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
-//                   此为系统邮件请勿回复';
-//        $mail = new \app\api\controller\SendMail();
-//        $mail->send($title,$msg,1,$email,$name);
+        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
+        $fields = ['name','email'];
+        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+
+        $title = '账户权利金转出申请';
+        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+        $name = $res['name'];
+        $email = $res['email'];
+        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的账户权利金转出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                   此为系统邮件请勿回复';
+        $mail = new \app\api\controller\SendMail();
+        $mail->send($title,$msg,1,$email,$name);
 
 
         $this->success('审核成功');
@@ -196,19 +196,19 @@ class TraderFundVerify extends Common{
             $this->error('审核失败');
         }
         //交易账号划出失败发送邮件通知客户
-//        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
-//        $fields = ['name','email'];
-//        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
-//
-//        $title = '账户资金划转申请';
-//        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
-//        $name = $res['name'];
-//        $email = $res['email'];
-//        $msg = '尊敬的'.$name.'，您好！<br/><br/>
-//                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的资金划出申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
-//                   此为系统邮件请勿回复';
-//        $mail = new \app\api\controller\SendMail();
-//        $mail->send($title,$msg,1,$email,$name);
+        $orderRes = $this->transfer->field('user_id,add_time')->where($where)->find();
+        $fields = ['name','email'];
+        $res = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+
+        $title = '账户权利金转出申请';
+        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
+        $name = $res['name'];
+        $email = $res['email'];
+        $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的账户权利金转出申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                   此为系统邮件请勿回复';
+        $mail = new \app\api\controller\SendMail();
+        $mail->send($title,$msg,1,$email,$name);
 
 
         $this->success('审核成功');

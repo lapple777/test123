@@ -8,14 +8,14 @@ define('IP_URL','http://127.0.0.1:2121/');//推送地址
 define('HOST_NAME','http://www.gitcrm.com');
 
 //线上环境
-//define('IP_URL','http://210.209.85.65:2120');
+//define('IP_URL','http://210.209.85.65:2121');
 //define('HOST_NAME','http://crmdemo.cdnfx88.com');
 
 function request($callback, $req_str="") {
     $worker = new Worker();
     $worker->onWorkerStart = function($worker) {
         // ssl需要访问443端口
-        $con = new AsyncTcpConnection('tcp://westtest.finproxy.com:9100');
+        $con = new AsyncTcpConnection('tcp://13.70.6.140:9100');
 
         // 设置以ssl加密方式访问，使之成为wss
         // $con->transport = 'ssl';
@@ -28,10 +28,10 @@ function request($callback, $req_str="") {
                     'CstPwd'=>'RXXpXOq9l+ZfNg+H4AM8ZLJDr8d8//CquPwe7dvv5e45tatllMJjC6O5Jj7jcwAu4FXsc6ufyhSgwx2OL31o1YVY4yPvpDhekhXS3G/TGR3wy0nOCLuEAaIwjF8GNBui1HVVTNIGoO1sAyqM0i85YYP1ukJLZRr8wjTed6CLJ58='
                 ],
                 'MT4Server'=>[
-                    'Addr' => 'westtest.finproxy.com',
+                    'Addr' => '13.70.6.140',
                     'Port' => 443,
-                    'ManagerUser' => 999,
-                    'ManagerPassword' => 'udea123',
+                    'ManagerUser' => 1,
+                    'ManagerPassword' => 'manager',
                 ],
                 'Request_Serial' => $Request_Serial,
                 'Request_Time' => time(),

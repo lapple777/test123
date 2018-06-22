@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:79:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/trader\view\index\index.html";i:1529663099;s:68:"D:\PHP\PHPTutorial\WWW\test123\admin\app\trader\view\common\css.html";i:1528943849;s:71:"D:\PHP\PHPTutorial\WWW\test123\admin\app\trader\view\common\script.html";i:1528943849;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +16,21 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    {include file="common/css"}
+    
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+<link href="/static/admin/css/animate.css" rel="stylesheet">
+<link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+<style>
+    .dataTables_paginate{
+        text-align:right;
+    }
+    .dataTables_filter{
+        text-align:right;
+    }
+</style>
     <style>
         body.fixed-sidebar .navbar-static-side, body.canvas-menu .navbar-static-side {
             width: 270px;
@@ -68,12 +83,12 @@
                 </li>
                 <li class="header_box">
                     <p class="text-center">
-                        <img src="__INDEX__/images/my_touxiang.png" alt="" width="65" height="65"><br/><br/>
+                        <img src="/static/index/images/my_touxiang.png" alt="" width="65" height="65"><br/><br/>
                         <?=session('traderUser')?>
                     </p>
                 </li>
                 <li>
-                    <a class="J_menuItem" target="righe_con" href="{:url('trader/Index/welcome')}">
+                    <a class="J_menuItem" target="righe_con" href="<?php echo url('trader/Index/welcome'); ?>">
                         <i class="fa  fa-user"></i>
                         <span class="nav-label">账户信息</span>
                     </a>
@@ -82,14 +97,14 @@
                     <a href="mailbox.html"><i class="fa fa-diamond"></i> <span class="nav-label">交易账户管理 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="{:url('Trader/trader_list')}" >交易账户列表</a>
+                            <a class="J_menuItem" href="<?php echo url('Trader/trader_list'); ?>" >交易账户列表</a>
                         </li>
                     </ul>
 
                 </li>
                 <li>
 
-                    <a class="" target="_blank" href="{:url('index/Login/login')}">
+                    <a class="" target="_blank" href="<?php echo url('index/Login/login'); ?>">
                         <i class="fa fa-object-ungroup"></i>
                         <span class="nav-label">交易账号登录</span>
                     </a>
@@ -98,10 +113,10 @@
                     <a href="mailbox.html"><i class="fa fa-diamond"></i> <span class="nav-label">资金分配记录 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="{:url('FundRecord/fund_in_record')}">划入记录</a>
+                            <a class="J_menuItem" href="<?php echo url('FundRecord/fund_in_record'); ?>">划入记录</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="{:url('FundRecord/fund_out_record')}">划出记录</a>
+                            <a class="J_menuItem" href="<?php echo url('FundRecord/fund_out_record'); ?>">划出记录</a>
                         </li>
 
                     </ul>
@@ -111,17 +126,17 @@
                     <a href="mailbox.html"><i class="fa  fa-credit-card"></i> <span class="nav-label">出入金管理 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="{:url('Brm/inmoney_list')}">入金</a>
+                            <a class="J_menuItem" href="<?php echo url('Brm/inmoney_list'); ?>">入金</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="{:url('Brm/outmoney_list')}">出金</a>
+                            <a class="J_menuItem" href="<?php echo url('Brm/outmoney_list'); ?>">出金</a>
                         </li>
 
                     </ul>
 
                 </li>
                 <li>
-                    <a class="J_menuItem" target="righe_con" href="{:url('trader/LeaveMessage/leave_message')}">
+                    <a class="J_menuItem" target="righe_con" href="<?php echo url('trader/LeaveMessage/leave_message'); ?>">
                         <i class="fa  fa-commenting"></i>
                         <span class="nav-label">留言</span>
                     </a>
@@ -154,7 +169,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
-                                <a href="{:url('trader/Login/logout')}">
+                                <a href="<?php echo url('trader/Login/logout'); ?>">
                                     <div>
                                        退出登录
                                     </div>
@@ -174,14 +189,19 @@
 </div>
 
 <!-- 全局js -->
-{include file="common/script"}
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/admin/js/plugins/layer3.1/layer.js"></script>
+<script src="/static/admin/js/demo/layer-demo.js"></script>
 
 <!-- 自定义js -->
-<script src="__ADMIN__/js/hAdmin.js?v=4.1.0"></script>
-<script type="text/javascript" src="__ADMIN__/js/index.js"></script>
+<script src="/static/admin/js/hAdmin.js?v=4.1.0"></script>
+<script type="text/javascript" src="/static/admin/js/index.js"></script>
 
 <!-- 第三方插件 -->
-<script src="__ADMIN__/js/plugins/pace/pace.min.js"></script>
+<script src="/static/admin/js/plugins/pace/pace.min.js"></script>
 
 </body>
 <script>

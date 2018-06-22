@@ -62,22 +62,37 @@ class Brm extends Common{
             //读取配置信息
             $configRes = $this->config->field('rate')->where(['id'=>1])->find();
             $money = $input['inmoney']*$configRes['rate'];//人民币
+            $time = time();
             $data = [
                 'order_id'=>$orderId,
                 'inmoney'=>$input['inmoney'],//美元
                 'user_id'=>session('traderId'),
                 'user_type'=>'1',
-                'add_time'=>time(),
+                'add_time'=>$time,
                 'rate'=>$configRes['rate'],//汇率
                 'money'=>$money,
             ];
             $result = $this->inmoney->insert($data);
             if($result){
-                //向admin发送入金通知邮件
-//                $title = '客户申请入金';
-//                $msg = '【用户入金】用户ID为：'.session('traderId').' 姓名：'.$userRes['name'].'，入金：'.$money.'人民币，对应美元为：'.$input['inmoney'];
-//                $mail = new \app\api\controller\SendMail();
-//                $mail->send($title,$msg,0);
+                $userResult = $this->user->field('name,email')->where(['id'=>session('traderId')])->find();
+                $mail = new \app\api\controller\SendMail();
+
+                //向客户发送邮件入金通知
+                $title = '账户权利金转入申请';
+                $email = $userResult['email'];
+                $emailTime = date('Y-m-d H:i:s',$time);
+                $name = $userResult['name'];
+                $msg = '尊敬的'.$userResult['name'].'，您好！<br/><br/>
+                    您于'.$emailTime.'提交入金申请，入金金额为'.$input['inmoney'].'（美金），人民币'.$money.'元，请及时将资金汇入银行卡账号：4402006909100024969。成都莫里斯网络科技有限公司；开户行：中国工商银行股份有限公司成都万年场支行。<br/><br/><br/><br/>
+
+
+                    此为系统邮件请勿回复';
+                $mail->send($title,$msg,1,$email,$name);
+                //向管理员发送邮件提示尽快审核
+                $title = '提示管理员审核';
+                $msg = $userResult['name'].'提交提交权利金转入申请，请及时审核。';
+
+                $mail->send($title,$msg,0);
 
                 $this->success('入金申请已提交');
             }else{
@@ -153,9 +168,10 @@ class Brm extends Common{
                 $this->error('出金申请提交失败');
             }
             //向admin发送出金通知邮件
-//            $msg = '【用户出金】用户ID为：'.session('traderId').' 姓名：'.$result['name'].'，出金金额为(美元)：'.$input['outmoney'];
-//            $mail = new \app\api\controller\SendMail();
-//            $mail->send($msg,0);
+            $title = '提示管理员审核';
+            $msg = $result['name'].'提交提交权利金转出申请，请及时审核。';
+            $mail = new \app\api\controller\SendMail();
+            $mail->send($title,$msg,0);
 
             $this->success('出金申请已提交');
 

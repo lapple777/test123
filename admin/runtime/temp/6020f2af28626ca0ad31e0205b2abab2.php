@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:86:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/trader\view\trader\trader-list.html";i:1529662564;s:68:"D:\PHP\PHPTutorial\WWW\test123\admin\app\trader\view\common\css.html";i:1528943849;s:71:"D:\PHP\PHPTutorial\WWW\test123\admin\app\trader\view\common\script.html";i:1528943849;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,21 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    {include file="common/css"}
+    
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+<link href="/static/admin/css/animate.css" rel="stylesheet">
+<link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+<style>
+    .dataTables_paginate{
+        text-align:right;
+    }
+    .dataTables_filter{
+        text-align:right;
+    }
+</style>
     <style>
         .dataTables_paginate{
             text-align:right;
@@ -84,10 +99,10 @@
                                             ?>
                                         </td>
                                         <td class="center">
-                                            <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="changePwd('{:url("Trader/changePwd",['account'=>$trader['account']])}')">修改密码</a>
-                                            <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="fundAllot('资金分配','{:url("FundAllot/fundAllot",['account'=>$trader['account']])}','500','300')">分配资金</a>
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="changePwd('<?php echo url("Trader/changePwd",['account'=>$trader['account']]); ?>')">修改密码</a>
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="fundAllot('资金分配','<?php echo url("FundAllot/fundAllot",['account'=>$trader['account']]); ?>','500','300')">分配资金</a>
 
-                                            <!--<a href="javascript:void(0)" class="btn btn-xs btn-success" onclick="account_login('{:url("FundAllot/login",['accountId'=>$trader['id']])}')">登录此交易账号</a>-->
+                                            <!--<a href="javascript:void(0)" class="btn btn-xs btn-success" onclick="account_login('<?php echo url("FundAllot/login",['accountId'=>$trader['id']]); ?>')">登录此交易账号</a>-->
                                         </td>
                                     </tr>
                                 <?php }?>
@@ -114,14 +129,19 @@
 </div>
 
 <!-- 全局js -->
-{include file="common/script"}
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/admin/js/plugins/layer3.1/layer.js"></script>
+<script src="/static/admin/js/demo/layer-demo.js"></script>
 <!-- 自定义js -->
-<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
-<script src="__ADMIN__/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="/static/admin/js/content.js?v=1.0.0"></script>
+<script src="/static/admin/js/plugins/jeditable/jquery.jeditable.js"></script>
 
 <!-- Data Tables -->
-<script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="/static/admin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/static/admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 
 <script>
@@ -186,7 +206,7 @@ function traderuser_get(){
     var index = '';
     $.ajax({
         type:'GET',
-        url:'{:url("trader/Trader/traderUserGet")}',
+        url:'<?php echo url("trader/Trader/traderUserGet"); ?>',
         data:'',
         beforeSend:function(){
             index = layer.msg('正在提交申请...',{time:false});

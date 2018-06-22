@@ -64,7 +64,7 @@ class Withdraw extends Common {
                 $this->error('IB暂不能出金');
             }
             //检查用户余额
-            $fields = ['wallet'];
+            $fields = ['wallet','name'];
             $result = $this->ib->field($fields)->where($where)->find();
             if($result){
                 if($result['wallet']<$input['outmoney']){
@@ -92,6 +92,12 @@ class Withdraw extends Common {
                 $this->error('出金申请提交失败');
             }
             session('IBWallet',$result['wallet']-$input['outmoney']);
+
+            $title = '提示管理员审核';
+            $msg = $result['name'].'提交权利金转出申请，请及时审核。';
+            $mail = new \app\api\controller\SendMail();
+            $mail->send($title,$msg,1);
+
             $this->success('出金申请已提交');
         }
         return $this->fetch('withdraw-manage');
