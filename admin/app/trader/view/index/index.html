@@ -36,6 +36,10 @@
         .padd_top{
             padding-top:10px;
         }
+        .workday{
+            font-size: 15px;
+            color: red;
+        }
     </style>
 </head>
 
@@ -69,8 +73,8 @@
                     </p>
                 </li>
                 <li>
-                    <a class="J_menuItem" target="righe_con" href="{:url('trader/Account/account_info')}">
-                        <i class="fa fa-home"></i>
+                    <a class="J_menuItem" target="righe_con" href="{:url('trader/Index/welcome')}">
+                        <i class="fa  fa-user"></i>
                         <span class="nav-label">账户信息</span>
                     </a>
                 </li>
@@ -80,11 +84,11 @@
                         <li>
                             <a class="J_menuItem" href="{:url('Trader/trader_list')}" >交易账户列表</a>
                         </li>
-
                     </ul>
 
                 </li>
                 <li>
+
                     <a class="" target="_blank" href="{:url('index/Login/login')}">
                         <i class="fa fa-object-ungroup"></i>
                         <span class="nav-label">交易账号登录</span>
@@ -104,7 +108,7 @@
 
                 </li>
                 <li>
-                    <a href="mailbox.html"><i class="fa fa-diamond"></i> <span class="nav-label">出入金管理 </span><span class="fa arrow"></span></a>
+                    <a href="mailbox.html"><i class="fa  fa-credit-card"></i> <span class="nav-label">出入金管理 </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a class="J_menuItem" href="{:url('Brm/inmoney_list')}">入金</a>
@@ -125,7 +129,17 @@
                         <?php }?>
                     </a>
                 </li>
-
+                <li class="line dk"></li>
+                <li class="line dk"></li>
+                <li class="line dk"></li>
+                <li class="line dk"></li>
+                <li class="line dk"></li>
+                <li class="line dk"></li>
+                <li>
+                  <p class="workday">  工作时间：周一至周五 9：00-17：00<br/>
+                    法定节假日除外
+                  </p>
+                </li>
             </ul>
         </div>
 
@@ -177,5 +191,6 @@
     }
 </script>
 </body>
-
+<script>
+</script>
 </html>
