@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:61:"F:\gitcrm\admin\public/../app/trader\view\index\index_v1.html";i:1529663760;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:61:"F:\gitcrm\admin\public/../app/trader\view\index\index_v1.html";i:1529664792;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -248,7 +248,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tab-2" class="tab-pane active">
+                    <div id="tab-2" class="tab-pane">
                         <div class="panel-body">
                             <div class="content_box">
                                 <div class="box_left text-center">
