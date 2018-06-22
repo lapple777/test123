@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/admin\view\funds_management\deposit-list.html";i:1529664375;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    {include file="common/css"}
+    
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+<link href="/static/admin/css/animate.css" rel="stylesheet">
+<link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+<style>
+    .dataTables_paginate{
+        text-align:right;
+    }
+    .dataTables_filter{
+        text-align:right;
+    }
+</style>
 </head>
 <body class="gray-bg">
 <div class="wrapper    wrapper-content animated fadeInRight">
@@ -84,9 +99,9 @@
                                         <?php
                                                 if($value['order_status']==0){
                                                 ?>
-                                        <a href="javascript:void(0)" onclick="userDeposit_success(this,'{:url('admin/FundsManagement/userDeposit_success',['order_id'=>$value['order_id'],'user_id'=>$value['user_id'],'inmoney'=>$value['inmoney']])}')">成功</a>
+                                        <a href="javascript:void(0)" onclick="userDeposit_success(this,'<?php echo url('admin/FundsManagement/userDeposit_success',['order_id'=>$value['order_id'],'user_id'=>$value['user_id'],'inmoney'=>$value['inmoney']]); ?>')">成功</a>
 
-                                        <a href="javascript:void(0)" onclick="userDeposit_fail(this,'{:url('admin/FundsManagement/userDeposit_fail',['order_id'=>$value['order_id'],'user_id'=>$value['user_id']])}')">失败</a>
+                                        <a href="javascript:void(0)" onclick="userDeposit_fail(this,'<?php echo url('admin/FundsManagement/userDeposit_fail',['order_id'=>$value['order_id'],'user_id'=>$value['user_id']]); ?>')">失败</a>
                                         <?php }
                                                else {
                                                ?>
@@ -110,14 +125,19 @@
     </div>
 </div>
 <!-- 全局js -->
-{include file="common/script"}
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/admin/js/plugins/layer3.1/layer.js"></script>
+<script src="/static/admin/js/demo/layer-demo.js"></script>
 <!-- 自定义js -->
-<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
-<script src="__ADMIN__/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="/static/admin/js/content.js?v=1.0.0"></script>
+<script src="/static/admin/js/plugins/jeditable/jquery.jeditable.js"></script>
 
 <!-- Data Tables -->
-<script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="/static/admin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/static/admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 
 <script>
