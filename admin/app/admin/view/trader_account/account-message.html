@@ -28,32 +28,35 @@
             display:block;
         }
         .h_left{
-            margin-left:15px;
-            float: left;
-        }
-        .h_right{
             margin-right:15px;
             float: right;
+        }
+        .h_right{
+            margin-left:15px;
+            float: left;
         }
         .message-author{
             margin-bottom: 5px;
             display: inline-block;
+        }
+        #no_message{
+            display:none;
+        }
+        .wrapper-content {
+             padding: 0;
+        }
+        .wrapper {
+             padding: 0 ;
         }
     </style>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content  animated fadeInRight">
 
-    <div class="row">
+    <div class="row" id="no_message">
         <div class="col-sm-12">
 
             <div class="ibox chat-view">
-
-                <div class="ibox-title">
-                    留言记录
-                </div>
-
-
                 <div class="ibox-content">
 
                     <div class="row">
@@ -62,7 +65,7 @@
 
                             <div class="chat-discussion message_con" id="scrolldIV">
 
-
+                                <div class="more"></div>
 
 
 
@@ -79,7 +82,7 @@
 
                                 <div class="form-group">
                                     <form action="" id="message-form">
-                                        <textarea class="form-control message-input" name="message" placeholder="留言内容"></textarea>
+                                        <textarea class="form-control message-input" name="message" placeholder="回复信息"></textarea>
                                         <span class="btn btn-success btn-lg btn-block sub_btn" onclick="sub_form()">发送 </span>
                                     </form>
                                 </div>
@@ -118,7 +121,7 @@
     function sub_form(){
         var message = $('textarea').val();
         if(message == ''){
-            layer.msg('请填写留言');
+            layer.msg('请填写回复');
             return false;
         }
         $.ajax({
@@ -132,11 +135,9 @@
                 $('.sub_btn').text('发送');
 
                 if(data.code == 1){
-                    layer.msg(data.msg,function(){
-                        $('.message_con').html('');
-                        $('textarea').val('')
-                        getMessage(1)
-                    })
+                    $('.message_con').html('');
+                    $('textarea').val('');
+                    getMessage(1,0)
 
                 }
             },
@@ -149,7 +150,7 @@
     }
     var page = 0;
     //获取聊天记录
-    function getMessage(currpage){
+    function getMessage(currpage,type){
         page ++;
         var pa = '';
         if(currpage == 1){
@@ -162,38 +163,50 @@
             url:'',
             data:{'type':'message','page':pa},
             success:function(data){
+                //没有留言，隐藏输入框
+                if(data.msg.data != ''){
+                    $('#no_message').show();
+                }else{
+                    $('.fadeInRight').html('<p class="text-center">暂无留言</pclass>');
+                }
                 if(data.code == 1){
+                    //<p class="text-center"><a  onclick="load_more()">加载更多</a></p>
                     var html = '';
                     $.each(data.msg,function(i,item){
 
                         if(item.from_userid == 0){
                             //管理员回复
                             html +='<div class="chat-message ">' +
-                                        '<div class="pull-left displsy_bl">' +
-                                            '<div class="pull-left img_header "><img class="message-avatar " src="/static/index/images/my_touxiang.png" alt=""></div>' +
-                                                '<div class="message text-left h_left">' +
-                                                    '<a class="message-author" href="#"> 管理员 </a>' +
-                                                    '<span class="message-date pull-right">  '+formatDate(item.add_time)+' </span>' +
-                                                    '<span class="message-content">'+item.message+'</span>' +
-                                            '</div>' +
-                                        '</div>' +
+                                    '<div class="pull-left displsy_bl">' +
+                                    '<div class="pull-left img_header "><img class="message-avatar " src="/static/index/images/my_touxiang.png" alt=""></div>' +
+                                    '<div class="message text-left h_right">' +
+                                    '<a class="message-author" href="#"> 管理员 </a>' +
+                                    '<span class="message-date pull-right">  '+formatDate(item.add_time)+' </span>' +
+                                    '<span class="message-content">'+item.message+'</span>' +
+                                    '</div>' +
+                                    '</div>' +
                                     '</div>';
                         }else{
                             //客户留言
                             html += '<div class="chat-message">' +
-                                        '<div class="pull-right displsy_bl">' +
-                                            '<div class="pull-right img_header"><img class="message-avatar pull-right" src="/static/index/images/my_touxiang.png" alt=""></div>' +
-                                            '<div class="message text-right h_right">' +
-                                                '<a class="message-author" href="#"> <?=session("traderUser")?> </a>' +
-                                                '<span class="message-date pull-left">  '+formatDate(item.add_time)+' </span>' +
-                                                '<span class="message-content"> '+item.message+'</span>' +
-                                            '</div>' +
-                                        '</div>' +
+                                    '<div class="pull-right displsy_bl">' +
+                                    '<div class="pull-right img_header"><img class="message-avatar pull-right" src="/static/index/images/my_touxiang.png" alt=""></div>' +
+                                    '<div class="message text-right h_left">' +
+                                    '<a class="message-author" href="#"> <?=session("traderUser")?> </a>' +
+                                    '<span class="message-date pull-left">  '+formatDate(item.add_time)+' </span>' +
+                                    '<span class="message-content"> '+item.message+'</span>' +
+                                    '</div>' +
+                                    '</div>' +
                                     '</div>';
                         }
 
                     })
-                    $('.message_con').html(html);
+                    if(type == 0){
+                        $('.more').after(html);
+                    }else{
+                        $('.more').before(html);
+                    }
+
                     div_bottom();
                 }
             },
@@ -203,7 +216,10 @@
             }
         })
     }
-    getMessage();
+    getMessage('',0);
+    function load_more(){
+        getMessage('',1);
+    }
     //格式化时间戳
     function formatDate(now) {
         var time = new Date(now*1000);

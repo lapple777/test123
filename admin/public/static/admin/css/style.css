@@ -5483,52 +5483,52 @@ dd.project-people {
     margin-top: 1px;
 }
 
-.chat-discussion .chat-message:nth-child(2n+1) .message-avatar {
-    float: left;
-    margin-right: 10px;
-}
+/*.chat-discussion .chat-message:nth-child(2n+1) .message-avatar {*/
+    /*float: left;*/
+    /*margin-right: 10px;*/
+/*}*/
 
-.chat-discussion .chat-message:nth-child(2n) .message-avatar {
-    float: right;
-    margin-left: 10px;
-}
+/*.chat-discussion .chat-message:nth-child(2n) .message-avatar {*/
+    /*float: right;*/
+    /*margin-left: 10px;*/
+/*}*/
 
-.message {
-    background-color: #fff;
-    border: 1px solid #e7eaec;
-    text-align: left;
-    display: block;
-    padding: 10px 20px;
-    position: relative;
-    border-radius: 4px;
-}
+/*.message {*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #e7eaec;*/
+    /*text-align: left;*/
+    /*display: block;*/
+    /*padding: 10px 20px;*/
+    /*position: relative;*/
+    /*border-radius: 4px;*/
+/*}*/
 
-.chat-discussion .chat-message:nth-child(2n+1) .message-date {
-    float: right;
-}
+/*.chat-discussion .chat-message:nth-child(2n+1) .message-date {*/
+    /*float: right;*/
+/*}*/
 
-.chat-discussion .chat-message:nth-child(2n) .message-date {
-    float: left;
-}
+/*.chat-discussion .chat-message:nth-child(2n) .message-date {*/
+    /*float: left;*/
+/*}*/
 
-.chat-discussion .chat-message:nth-child(2n+1) .message {
-    text-align: left;
-    margin-left: 55px;
-}
+/*.chat-discussion .chat-message:nth-child(2n+1) .message {*/
+    /*text-align: left;*/
+    /*margin-left: 55px;*/
+/*}*/
 
-.chat-discussion .chat-message:nth-child(2n) .message {
-    text-align: right;
-    margin-right: 55px;
-}
+/*.chat-discussion .chat-message:nth-child(2n) .message {*/
+    /*text-align: right;*/
+    /*margin-right: 55px;*/
+/*}*/
 
 .message-date {
     font-size: 10px;
     color: #888888;
 }
 
-.message-content {
-    display: block;
-}
+/*.message-content {*/
+    /*display: block;*/
+/*}*/
 
 .chat-discussion {
     background: #eee;

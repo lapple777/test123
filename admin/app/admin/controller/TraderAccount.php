@@ -2,13 +2,16 @@
 namespace app\admin\controller;
 use app\admin\model\User;
 use app\common\validate\AdminTraderAccount;
+use app\admin\model\LeaveMessage;
 //交易者账号管理
 class TraderAccount extends Common{
     private $user;
+    private $message;
     public function __construct()
     {
         parent::__construct();
         $this->user = new User();
+        $this->message = new LeaveMessage();
     }
     //交易者账号列表
     public function accounts_list(){
@@ -18,10 +21,29 @@ class TraderAccount extends Common{
             'user_status'
         ];
 
-        $result = $this->user->field($fields)->where('user_status = 1')->whereOr('user_status = 2')->paginate(100000);
+        $result = $this->user
+            ->field($fields)
+            ->where('user_status = 1')
+            ->whereOr('user_status = 2')
+            ->select();
+
+        foreach($result as $key => $value){
+            $where = [
+                'from_userid'=>$value['id'],
+                'status'=>0
+            ];
+            $count[$value['id']] = $this->message->field('id')->where($where)->count();
+
+        }
+//        print_r($count);
+//        die;
+//        echo '<pre>';
+//        dump($result);die;
         $data = [
-            'account_list'=>$result
+            'account_list'=>$result,
+            'count_list'=>$count
         ];
+
         $this->assign($data);
         return $this->fetch('accounts-list');
     }
@@ -176,4 +198,57 @@ class TraderAccount extends Common{
         $this->assign($data);
         return $this->fetch('account-edit');
     }
+    //留言管理
+    public function account_message(){
+        if(request()->isPost()){
+            //留言回复
+            $input = input();
+            $id = $input['id'];//用户id
+            $message = $input['message'];//回复内容
+            $data = [
+                'from_userid' => 0,
+                'to_userid' => $id,
+                'message' => $message,
+                'add_time' => time(),
+            ];
+            $res = $this->message->insert($data);
+            if($res){
+                $this->success('回复成功');
+            }else{
+                $this->success('回复失败，请重试');
+            }
+        }
+        $input = input();
+        $id = $input['id'];
+        if(isset($input['type']) && $input['type'] == 'message'){
+
+
+
+            $fields = ['id','message','from_userid','to_userid','add_time','status'];
+            $ress = $this->message->field($fields)
+                ->where(['to_userid'=>$id])
+                ->whereOr(['from_userid'=>$id])
+                ->order('id desc')
+                ->select();
+//            $array = json_decode(json_encode($ress),true);
+//            $new_array = $array['data'];
+
+            $data =  array_reverse($ress);
+
+            if($ress){
+                $this->success($data);
+            }
+
+
+        }
+        $data = [
+            'status'=>1
+        ];
+        $where = [
+            'from_userid'=>$id
+        ];
+        $this->message->where($where)->update($data);
+        return $this->fetch('account-message');
+    }
+
 }

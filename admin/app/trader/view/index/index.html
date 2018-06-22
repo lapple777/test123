@@ -117,9 +117,12 @@
 
                 </li>
                 <li>
-                    <a class="J_menuItem" target="righe_con" href="{:url('trader/LeaveMessage/leave_message')}">
+                    <a class="J_menuItem" target="righe_con" href="{:url('trader/LeaveMessage/leave_message')}" onclick="change_num()">
                         <i class="fa  fa-commenting"></i>
                         <span class="nav-label">留言</span>
+                        <?php if($count > 0){ ?>
+                            <span class="badge badge-danger"><?=$count?></span>
+                        <?php }?>
                     </a>
                 </li>
 
@@ -168,7 +171,11 @@
 
 <!-- 第三方插件 -->
 <script src="__ADMIN__/js/plugins/pace/pace.min.js"></script>
-
+<script>
+    function change_num(){
+        $('.badge-danger').hide();
+    }
+</script>
 </body>
 
 </html>

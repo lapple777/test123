@@ -12,13 +12,13 @@ class Monitor extends Controller{
             $ask = $input['ask'];//买价
             $bid = $input['bid'];//卖价
         }
-        echo '<pre>';
+        //echo '<pre>';
         $redis = new Redis();
         $handler = $redis->handler();
         //做多订单
         $longOrderList = $handler->lRange('longOrderList',0,-1);
         if($longOrderList){
-            echo 111;
+            //echo 111;
             foreach($longOrderList as $key=>$order){
                 $lists = json_decode($order,true);
                 if(is_array($lists)){
@@ -41,7 +41,7 @@ class Monitor extends Controller{
         //做空订单
         $shortOrderList = $handler->lRange('shortOrderList',0,-1);
         if($shortOrderList){
-            echo 222;
+            //echo 222;
             foreach($shortOrderList as $key=>$order){
                 $lists = json_decode($order,true);
                 if(is_array($lists)){
@@ -91,6 +91,7 @@ class Monitor extends Controller{
         $order_data = [
             'order_status'=>$type,
             'order_close_time'=>time(),
+            'hand_price'=> $commission
         ];
 
         switch($type){
@@ -99,6 +100,7 @@ class Monitor extends Controller{
                 //账户余额
                 $account_price = ($price + $data['lot_num'] * $data['award']) - $commission;
                 $order_data['profit'] = $data['lot_num'] * $data['award']- $commission;
+
                 break;
             case 2:
                 //止损

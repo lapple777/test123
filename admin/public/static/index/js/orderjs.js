@@ -255,7 +255,9 @@ function setNewData(date,data1,data2){
 }
 function getKData(name){
     // 连接服务端
-    var socket = io('http://127.0.0.1:2120');
+    var url ='http://127.0.0.1:2120';//本地环境
+    //var url ='http://210.209.85.65:2120';//线上环境
+    var socket = io(url);
     // 连接后登录
     socket.on('connect', function(){
         socket.emit('login', name);
