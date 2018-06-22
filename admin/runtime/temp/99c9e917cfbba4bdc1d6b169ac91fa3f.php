@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:76:"F:\gitcrm\admin\public/../app/admin\view\trader_account\account-message.html";i:1529663349;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:76:"F:\gitcrm\admin\public/../app/admin\view\trader_account\account-message.html";i:1529666399;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,7 +80,7 @@
 
                             <div class="chat-discussion message_con" id="scrolldIV">
 
-                                <div class="more"></div>
+
 
 
 
@@ -157,7 +157,7 @@
                 if(data.code == 1){
                     $('.message_con').html('');
                     $('textarea').val('');
-                    getMessage(1,0)
+                    getMessage(1)
 
                 }
             },
@@ -220,12 +220,9 @@
                                     '</div>';
                         }
 
-                    })
-                    if(type == 0){
-                        $('.more').after(html);
-                    }else{
-                        $('.more').before(html);
-                    }
+                    });
+                    $('.message_con').append(html);
+
 
                     div_bottom();
                 }

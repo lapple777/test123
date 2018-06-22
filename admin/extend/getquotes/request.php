@@ -9,7 +9,7 @@ define('HOST_NAME','http://www.gitcrm.com');
 
 //线上环境
 //define('IP_URL','http://210.209.85.65:2121');
-//define('HOST_NAME','http://crmdemo.cdnfx88.com');
+//define('HOST_NAME','http://www.morris-cloud.com');
 
 function request($callback, $req_str="") {
     $worker = new Worker();
