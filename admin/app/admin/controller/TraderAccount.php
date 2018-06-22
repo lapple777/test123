@@ -17,7 +17,7 @@ class TraderAccount extends Common{
             'user_status'
         ];
 
-        $result = $this->user->field($fields)->where('user_status = 1')->whereOr('user_status = 2')->paginate(10);
+        $result = $this->user->field($fields)->where('user_status = 1')->whereOr('user_status = 2')->paginate(100000);
         $data = [
             'account_list'=>$result
         ];
@@ -64,7 +64,7 @@ class TraderAccount extends Common{
         $whereor = [
             'user_status'=>3
         ];
-        $result = $this->user->field($fields)->where($where)->whereOr($whereor)->paginate(10);
+        $result = $this->user->field($fields)->where($where)->whereOr($whereor)->paginate(10000);
 
         $data = [
             'account_list'=>$result

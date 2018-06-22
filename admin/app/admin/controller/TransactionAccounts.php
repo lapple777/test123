@@ -124,4 +124,5 @@ class TransactionAccounts extends Common{
         $this->assign($data);
         return $this->fetch('account-edit');
     }
+
 }

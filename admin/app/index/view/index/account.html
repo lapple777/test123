@@ -29,12 +29,45 @@
                  <div class="my_account_bottom">
                     <div class="row account">
                          <div class="col-md-3 col-xs-3 account_left">Account ID:</div>
-                         <div class="col-md-9 col-xs-9 account_right"><?=$user['id']?></div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['tid']?></div>
                     </div>
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Account:</div>
+                         <div class="col-md-3 col-xs-3 account_left">Fullname:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['account']?></div>
                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Gender:</div>
+                         <div class="col-md-9 col-xs-9 account_right">
+                         <?php
+                         $sex = $user['male'];
+                            switch($sex){
+                             case '1':
+                            $maleTxt  = '男';
+                             break;
+                             case  '2':
+                             $maleTxt = '女';
+                             break;
+                             }
+                         ?>
+                             <?=$maleTxt?>
+                         </div>
+                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Date of birth:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['birthday']?></div>
+                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Address:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['address']?></div>
+                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Email:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['email']?></div>
+                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">IC:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['id_card']?></div>
+                     </div>
                     <div class="row account">
                          <div class="col-md-3 col-xs-3 account_left">Created:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=date('Y-m-d H:i:s',$user['add_time'])?></div>
@@ -43,6 +76,10 @@
                          <div class="col-md-3 col-xs-3 account_left">Balance:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['wallet']?></div>
                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">AgentID:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['user_id']?></div>
+                     </div>
 
                     <div class="row account">
                          <div class="col-md-3 col-xs-3 account_left">Account Status:</div>

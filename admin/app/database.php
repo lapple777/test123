@@ -13,13 +13,13 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '210.209.85.65',
+    'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 't_crm_demo',
+    'database'        => 't_crm',
     // 用户名
-    'username'        => 't_crm_demo',
+    'username'        => 'root',
     // 密码
-    'password'        => 'ihCANTjpEePEwZ44',
+    'password'        => 'root',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
