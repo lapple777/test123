@@ -102,7 +102,7 @@ class TransactionAccounts extends Common{
                         $msg = '尊敬的'.$name.'，您好！<br/><br/>
                                     &nbsp; &nbsp; &nbsp; 欢迎使用莫里云对冲系统
                                     <br/>
-                                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的申请交易账号已经开设成功。请登录网址：'.$url.'查看详情。<br/>
+                                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的申请交易账号已经开设成功。请登录网址：'.$url.' 查看详情。<br/>
                                      &nbsp; &nbsp; &nbsp 我们提供的所有服务仅基于执行交易指令和系统服务。信息不包含个人金融或投资意见或其他推荐或我们交易价位的纪录，交易仅属于个人行为，请结合自身特定投资目的、财政状况进行投资。
                                     <br/><br/><br/><br/>
                                    此为系统邮件请勿回复';

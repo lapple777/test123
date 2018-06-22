@@ -2,3 +2,7 @@
 [ 2018-06-22T19:10:30+08:00 ] 127.0.0.1 GET /admin/trader_account/account_edit/id/10.html
 [ info ] www.gitcrm.com/admin/trader_account/account_edit/id/10.html [运行时间：0.049052s][吞吐率：20.39req/s] [内存消耗：2,211.10kb] [文件加载：54]
 [ error ] [0]模板文件不存在:F:\gitcrm\admin\public/../app/admin\view\trader_account\account-edit.html[F:\gitcrm\admin\thinkphp\library\think\view\driver\Think.php:80]
+---------------------------------------------------------------
+[ 2018-06-22T19:24:36+08:00 ] 127.0.0.1 GET /trader/trader/traderuserget.html
+[ info ] www.gitcrm.com/trader/trader/traderuserget.html [运行时间：0.054842s][吞吐率：18.23req/s] [内存消耗：2,139.89kb] [文件加载：54]
+[ error ] [8]Undefined property: app\trader\controller\Trader::$user[F:\gitcrm\admin\app\trader\controller\Trader.php:59]

@@ -1,12 +1,15 @@
 <?php
 namespace app\trader\controller;
 use app\trader\model\TraderUser;
+use app\trader\model\User;
 class Trader extends Common{
     private $TraderUser;
+    private $user;
     public function __construct()
     {
         parent::__construct();
         $this->TraderUser = new TraderUser();
+        $this->user = new User();
     }
 
     //交易员列表
