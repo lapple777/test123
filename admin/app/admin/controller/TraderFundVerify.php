@@ -66,6 +66,14 @@ class TraderFundVerify extends Common{
             'order_id'=>$input['order_id'],
             'order_type'=>'1'
         ];
+        $res = $this->transfer->field('transfer_status')->where($where)->find();
+        if($res){
+            if($res['transfer_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         Db::startTrans();
         try{
             $sql = 'UPDATE crm_trading_account SET wallet = wallet+'.$input['transfer_price'].' WHERE account = "'.$input['trader_user'].'"';
@@ -106,6 +114,14 @@ class TraderFundVerify extends Common{
             'order_id'=>$input['order_id'],
             'order_type'=>'1'
         ];
+        $res = $this->transfer->field('transfer_status')->where($where)->find();
+        if($res){
+            if($res['transfer_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         Db::startTrans();
         try{
             $sql = 'UPDATE crm_user SET wallet = wallet+'.$input['transfer_price'].' WHERE id='.$input['user_id'];
@@ -145,6 +161,14 @@ class TraderFundVerify extends Common{
             'order_id'=>$input['order_id'],
             'order_type'=>'2'
         ];
+        $res = $this->transfer->field('transfer_status')->where($where)->find();
+        if($res){
+            if($res['transfer_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         Db::startTrans();
         try{
             $sql = 'UPDATE crm_user SET wallet = wallet+'.$input['transfer_price'].' WHERE id = '.$input['user_id'];
@@ -185,6 +209,14 @@ class TraderFundVerify extends Common{
             'order_id'=>$input['order_id'],
             'order_type'=>'2'
         ];
+        $res = $this->transfer->field('transfer_status')->where($where)->find();
+        if($res){
+            if($res['transfer_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         Db::startTrans();
         try{
             $sql = 'UPDATE crm_trading_account SET wallet = wallet+'.$input['transfer_price'].' WHERE account = "'.$input['trader_user'].'"';

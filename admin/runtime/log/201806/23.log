@@ -1,0 +1,4 @@
+---------------------------------------------------------------
+[ 2018-06-23T12:44:10+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.135954s][吞吐率：7.36req/s] [内存消耗：1,323.42kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180623EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]

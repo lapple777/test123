@@ -89,6 +89,14 @@ class FundsManagement extends Common{
             'order_id'=>$input['order_id'],
             'user_type'=>'1'
         ];
+        $res = $this->inmoney->field('order_status')->where($where)->find();
+        if($res){
+            if($res['order_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         Db::startTrans();
         try{
             $sql = 'UPDATE crm_user SET wallet = wallet+'.$input['inmoney'].' WHERE id = '.$input['user_id'];
@@ -129,7 +137,14 @@ class FundsManagement extends Common{
             'order_status'=>'2',
             'success_time'=>time()
         ];
-
+        $res = $this->inmoney->field('order_status')->where($where)->find();
+        if($res){
+            if($res['order_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         $result = $this->inmoney->where($where)->update($data);
         if($result){
             //客户入金失败发送邮件通知客户
@@ -166,7 +181,14 @@ class FundsManagement extends Common{
             'order_status'=>'1',
             'success_time'=>time()
         ];
-
+        $res = $this->outmoney->field('order_status')->where($where)->find();
+        if($res){
+            if($res['order_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         $result = $this->outmoney->where($where)->update($data);
         if($result){
             //客户出金成功发送邮件通知客户
@@ -203,6 +225,14 @@ class FundsManagement extends Common{
            'order_id'=>$input['order_id'],
             'user_type'=>'1'
        ];
+       $res = $this->outmoney->field('order_status')->where($where)->find();
+       if($res){
+           if($res['order_status'] > 0){
+               $this->error('订单已审核');
+           }
+       }else{
+           $this->error('订单不存在');
+       }
        Db::startTrans();
        try{
            $sql = 'UPDATE crm_user SET wallet = wallet+'.$input['outmoney'].' WHERE id = '.$input['user_id'];
@@ -244,7 +274,14 @@ class FundsManagement extends Common{
             'order_status'=>'1',
             'success_time'=>time()
         ];
-
+        $res = $this->outmoney->field('order_status')->where($where)->find();
+        if($res){
+            if($res['order_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         $result = $this->outmoney->where($where)->update($data);
         if($result){
             //ib出金成功发送邮件通知客户
@@ -282,6 +319,14 @@ class FundsManagement extends Common{
             'order_id'=>$input['order_id'],
             'user_type'=>'2'
         ];
+        $res = $this->outmoney->field('order_status')->where($where)->find();
+        if($res){
+            if($res['order_status'] > 0){
+                $this->error('订单已审核');
+            }
+        }else{
+            $this->error('订单不存在');
+        }
         Db::startTrans();
         try{
             $sql = 'UPDATE crm_ib SET wallet = wallet+'.$input['outmoney'].' WHERE id = '.$input['ib_id'];

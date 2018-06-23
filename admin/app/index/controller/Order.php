@@ -75,8 +75,8 @@ class Order extends Common{
                 if($traderRes['ta_status'] != 1){
                     $this->error('用户状态异常');
                 }else{
-                    $maxHand = floor($traderRes['wallet']/$handPrice);//能购买的最大手数
-                    if($input['lot'] > $maxHand){
+                    $orderPrice = $input['lot'] * $handPrice;//下单价格
+                    if($orderPrice > $traderRes['wallet']){
                         $this->error('账户余额不足');
                     }
                     switch($type){
