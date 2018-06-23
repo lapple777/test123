@@ -30,8 +30,8 @@ function initKline(jsonDate){
     var datas2 = rawData.map(function (item) {
         return item[2];
     });
-    currentPrice1 = datas[parseInt(datas.length)-1].toFixed(5);
-    currentPrice2 = datas2[parseInt(datas2.length)-1].toFixed(5);
+    currentPrice1 = formatnumber(datas[parseInt(datas.length)-1],5);
+    currentPrice2 = formatnumber(datas2[parseInt(datas2.length)-1],5);
     $('.current_price').text(currentPrice1);
     $('#current_price').val(currentPrice1);
     $('#current_price2').val(currentPrice2);
@@ -68,7 +68,7 @@ function initKline(jsonDate){
             position:'right',
             axisLabel: {
                 formatter: function (value, index) {
-                    return value.toFixed(5);
+                    return formatnumber(value,5);
                 }
             },
             max: function(value) {
@@ -185,9 +185,10 @@ function setNewData(date,data1,data2){
     $('.current_price').text(data1);
     $('#current_price').val(data1);
     $('#current_price2').val(data2);
-    da = data1
+    da = formatnumber(data1,5);
+
     dates.push(date);
-    datas.push(data1);
+    datas.push(da);
 
     myChart.setOption({
         xAxis: {
@@ -244,7 +245,7 @@ function setNewData(date,data1,data2){
 
                         {
                             name: '222',
-                            yAxis: data2
+                            yAxis: formatnumber(data2,5)
                         },
 
                     ]
@@ -297,10 +298,11 @@ function getActionOrder(){
                     }else if(item.order_type == 2){
                         type = '<span class="text-success">做空</span>';
                     }
+
                     html +='<td>'+type+'</td>';
-                    html +='<td>'+item.order_price+'</td>';
-                    html +='<td>'+item.stop_profit+'</td>';
-                    html +='<td>'+item.stop_loss+'</td>';
+                    html +='<td>'+formatnumber(item.order_price,5)+'</td>';
+                    html +='<td>'+formatnumber(item.stop_profit,5)+'</td>';
+                    html +='<td>'+formatnumber(item.stop_loss,5)+'</td>';
                     html +='<td>'+item.lot_num+'</td>';
                     html +='<td>'+formatDate(item.add_time)+'</td>';
                     var status = '';
@@ -398,6 +400,30 @@ function formatDate(now) {
         s= '0'+s;
     }
     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+}
+function formatnumber(value, num){
+    var a, b, c, i;
+    a = value.toString();
+    b = a.indexOf(".");
+    c = a.length;
+    if (num == 0) {
+        if (b != -1) {
+            a = a.substring(0, b);
+        }
+    } else {//如果没有小数点
+        if (b == -1) {
+            a = a + ".";
+            for (i = 1; i <= num; i++) {
+                a = a + "0";
+            }
+        } else {//有小数点，超出位数自动截取，否则补0
+            a = a.substring(0, b + num + 1);
+            for (i = c; i <= b + num; i++) {
+                a = a + "0";
+            }
+        }
+    }
+    return a;
 }
 //setInterval(function(){
 //    $('#data').html('');
