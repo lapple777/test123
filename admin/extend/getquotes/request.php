@@ -1,7 +1,9 @@
 <?php
+namespace getquotes;
 use Workerman\Worker;
 use Workerman\Connection\AsyncTcpConnection;
 require_once __DIR__ . '/workerman/Autoloader.php';
+use \app\monitor\controller\Monitor;
 
 //本地
 define('IP_URL','http://127.0.0.1:2121/');//推送地址
@@ -53,6 +55,9 @@ function request($callback, $req_str="") {
             //报价信息，需要存入数据库
             $filename = date('Ymd');
 
+
+
+
             $res = checkData($data);
             if($res){
                 $data = trim($res);
@@ -61,7 +66,7 @@ function request($callback, $req_str="") {
                 $pars = ['EURUSD'];
                 $datas = json_decode($json2,true);
 
-                if(is_array($datas['Rsp_Info']['Quote'])){
+                if(isset($datas['Rsp_Info']['Quote']) && is_array($datas['Rsp_Info']['Quote'])){
                     foreach($datas['Rsp_Info']['Quote'] as $key=>$value){
                         if(in_array($value['Symbol'],$pars)){
                             $info = $datas['Rsp_Info']['Quote'][$key];
@@ -82,10 +87,13 @@ function request($callback, $req_str="") {
 
                             pushGet($data);
                             $pushDada = [
+                                'type'=>'closeOrder',
                                 'ask'=>$info['ask'],//买价
                                 'bid'=>$info['bid'],//卖价
                             ];
+
                             //实时监控价格，进行平仓
+            
                             monitorGet($pushDada);
                             file_put_contents('../../public/static/quotes/'.$filename.$value['Symbol'].'.txt',json_encode($datas).'|',FILE_APPEND);
                         }
@@ -155,6 +163,7 @@ function monitorGet($params = [])
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
     $file_contents = curl_exec($ch);
     curl_close($ch);
+
     return $file_contents;
 
 }

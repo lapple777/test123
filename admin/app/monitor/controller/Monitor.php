@@ -6,8 +6,41 @@ use think\cache\driver\Redis;
 use think\Db;
 //实时监控模块
 class Monitor extends Controller{
-    public function index(){
-        $input = input();
+    private $connect;
+    public function __construct(){
+        parent::__construct();
+        $c = [
+            // 数据库类型
+            'type'        => 'mysql',
+            // 数据库连接DSN配置
+            'dsn'         => '',
+            // 服务器地址
+            'hostname'    => '127.0.0.1',
+            // 数据库名
+            'database'    => 't_crm_demo',
+            // 数据库用户名
+            'username'    => 'root',
+            // 数据库密码
+            'password'    => 'root',
+            // 数据库连接端口
+            'hostport'    => '3306',
+            // 数据库连接参数
+            'params'      => [],
+            // 数据库编码默认采用utf8
+            'charset'     => 'utf8',
+            // 数据库表前缀
+            'prefix'      => 'crm_',
+        ];
+
+        $this->connect = Db::connect($c);
+
+
+    }
+
+    public function index($input = []){
+        if(!$input){
+            $input = input();
+        }
         if($input['type'] == 'closeOrder'){
             $ask = $input['ask'];//买价
             $bid = $input['bid'];//卖价
@@ -17,6 +50,7 @@ class Monitor extends Controller{
         $handler = $redis->handler();
         //做多订单
         $longOrderList = $handler->lRange('longOrderList',0,-1);
+
         if($longOrderList){
             //echo 111;
             foreach($longOrderList as $key=>$order){
@@ -25,11 +59,11 @@ class Monitor extends Controller{
 
                     //做多止盈
                     if($ask >= $lists['stop_profit']){
-                        if(!self::closeOrder($lists,1,$key)){
+                        if(!$this->closeOrder($lists,1,$key)){
                             continue;
                         }
                     }else if($ask <= $lists['stop_loss']){
-                        if(!self::closeOrder($lists,2,$key)){
+                        if(!$this->closeOrder($lists,2,$key)){
                             continue;
                         }
                     }
@@ -47,11 +81,11 @@ class Monitor extends Controller{
                 if(is_array($lists)){
                     //做空止盈
                     if($bid <= $lists['stop_profit']){
-                        if(!self::closeOrder($lists,1,$key)){
+                        if(!$this->closeOrder($lists,1,$key)){
                             continue;
                         }
                     }else if($bid >= $lists['stop_loss']){
-                        if(!self::closeOrder($lists,2,$key)){
+                        if(!$this->closeOrder($lists,2,$key)){
                             continue;
                         }
                     }
@@ -64,10 +98,10 @@ class Monitor extends Controller{
 
     }
     //进行平仓，返佣操作
-    public static  function closeOrder($data = [],$type,$index){
+    public function closeOrder($data = [],$type,$index){
 
         //检查订单是否支付
-        if(!self::checkOrderStatus($data['oid'])){
+        if(!$this->checkOrderStatus($data['oid'])){
             return false;
         }
 
@@ -75,7 +109,6 @@ class Monitor extends Controller{
             [ib_id] => 3                ib的id
             [ta_id] => 1                交易账号的id
             [uid]=>3                    用户id
-
             [lot_num] => 10             手数
             [hang_price] => 1000        每手对应的美金
             [oid] => 42                 订单id
@@ -113,14 +146,14 @@ class Monitor extends Controller{
 
         $tarder_sql = 'UPDATE crm_trading_account SET wallet = wallet + '.$account_price.' WHERE id='.$data['ta_id'];
         $ib_sql = 'UPDATE crm_ib SET wallet = wallet + '.$commission.' WHERE id='.$data['ib_id'];
-        Db::startTrans();
+        $this->connect->startTrans();
         try{
             //修改订单状态
-            Db::name('order')->where(['id'=>$data['oid'],'order_status'=>0])->update($order_data);
+            $this->connect->name('order')->where(['id'=>$data['oid'],'order_status'=>0])->update($order_data);
             //修改交易账户余额
-            Db::execute($tarder_sql);
+            $this->connect->execute($tarder_sql);
             //修改ib账户余额
-            Db::execute($ib_sql);
+            $this->connect->execute($ib_sql);
 
             //添加返佣记录
             $rebate_data = [
@@ -130,11 +163,11 @@ class Monitor extends Controller{
                 'rebate_price'=>$commission,
                 'add_time'=>time(),
             ];
-            Db::name('rebate')->insert($rebate_data);
+            $this->connect->name('rebate')->insert($rebate_data);
 
-            Db::commit();
+            $this->connect->commit();
         }catch(\Exception $e){
-            Db::rollback();
+            $this->connect->rollback();
             return false;
         }
         //平仓成功删除redis中的这条订单
@@ -151,8 +184,8 @@ class Monitor extends Controller{
 
 
     }
-    public static function checkOrderStatus($id){
-        $res = Db::name('order')->where(['id'=>$id,'order_status'=>0])->find();
+    public function checkOrderStatus($id){
+        $res = $this->connect->name('order')->where(['id'=>$id,'order_status'=>0])->find();
         if($res){
             return true;
         }else{

@@ -107,3 +107,75 @@ Stack trace:
 #8 D:\phpStudy\WWW\admin\extend\getquotes\request.php(93): Workerman\Worker::runAll()
 #9 D:\phpStudy\WWW\admin\extend\getquotes\request.php(131): request(Object(Closure))
 #10 {main}
+2018-06-23 15:48:37 pid:1 Error: Class 'Monitor' not found in F:\gitcrm\admin\extend\getquotes\request.php:89
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#1 F:\gitcrm\admin\extend\getquotes\workerman\Connection\TcpConnection.php(668): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), 'CADCHF","ask":0...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #17)
+#3 F:\gitcrm\admin\extend\getquotes\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#4 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#5 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1221): Workerman\Worker->run()
+#6 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#7 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#8 F:\gitcrm\admin\extend\getquotes\request.php(105): Workerman\Worker::runAll()
+#9 F:\gitcrm\admin\extend\getquotes\request.php(185): request(Object(Closure))
+#10 {main}
+2018-06-23 15:48:38 pid:1 Worker process terminated
+2018-06-23 15:56:11 pid:1 Worker process terminated
+2018-06-23 16:02:12 pid:1 Error: Class 'think\Db' not found in F:\gitcrm\admin\app\monitor\controller\Monitor.php:10
+Stack trace:
+#0 F:\gitcrm\admin\extend\getquotes\request.php(71): app\monitor\controller\Monitor->index(Array)
+#1 [internal function]: getquotes\{closure}(Object(Workerman\Connection\AsyncTcpConnection), 'W{"Rsp_Data":{"...')
+#2 F:\gitcrm\admin\extend\getquotes\workerman\Connection\TcpConnection.php(668): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), 'W{"Rsp_Data":{"...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #17)
+#4 F:\gitcrm\admin\extend\getquotes\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#5 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#6 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1221): Workerman\Worker->run()
+#7 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#8 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#9 F:\gitcrm\admin\extend\getquotes\request.php(118): Workerman\Worker::runAll()
+#10 F:\gitcrm\admin\extend\getquotes\request.php(198): getquotes\request(Object(Closure))
+#11 {main}
+2018-06-23 16:02:12 pid:1 Worker process terminated
+2018-06-23 16:05:57 pid:1 Error: Class 'app\monitor\controller\Monitor' not found in F:\gitcrm\admin\extend\getquotes\request.php:93
+Stack trace:
+#0 [internal function]: getquotes\{closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#1 F:\gitcrm\admin\extend\getquotes\workerman\Connection\TcpConnection.php(668): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), 'CADCHF","ask":0...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 F:\gitcrm\admin\extend\getquotes\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#4 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#5 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1221): Workerman\Worker->run()
+#6 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#7 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#8 F:\gitcrm\admin\extend\getquotes\request.php(109): Workerman\Worker::runAll()
+#9 F:\gitcrm\admin\extend\getquotes\request.php(189): getquotes\request(Object(Closure))
+#10 {main}
+2018-06-23 16:05:57 pid:1 Worker process terminated
+2018-06-23 16:07:54 pid:1 Error: Class 'app\monitor\controller\Monitor' not found in F:\gitcrm\admin\extend\getquotes\request.php:93
+Stack trace:
+#0 [internal function]: getquotes\{closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#1 F:\gitcrm\admin\extend\getquotes\workerman\Connection\TcpConnection.php(668): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), 'W{"Rsp_Data":{"...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 F:\gitcrm\admin\extend\getquotes\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#4 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#5 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1221): Workerman\Worker->run()
+#6 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#7 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#8 F:\gitcrm\admin\extend\getquotes\request.php(109): Workerman\Worker::runAll()
+#9 F:\gitcrm\admin\extend\getquotes\request.php(189): getquotes\request(Object(Closure))
+#10 {main}
+2018-06-23 16:07:54 pid:1 Worker process terminated
+2018-06-23 19:23:35 pid:1 Error: Class 'app\monitor\controller\Monitor' not found in F:\gitcrm\admin\extend\getquotes\request.php:93
+Stack trace:
+#0 [internal function]: getquotes\{closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#1 F:\gitcrm\admin\extend\getquotes\workerman\Connection\TcpConnection.php(668): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), 'CADCHF","ask":0...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #16)
+#3 F:\gitcrm\admin\extend\getquotes\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#4 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#5 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1221): Workerman\Worker->run()
+#6 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#7 F:\gitcrm\admin\extend\getquotes\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#8 F:\gitcrm\admin\extend\getquotes\request.php(109): Workerman\Worker::runAll()
+#9 F:\gitcrm\admin\extend\getquotes\request.php(189): getquotes\request(Object(Closure))
+#10 {main}
+2018-06-23 19:23:35 pid:1 Worker process terminated

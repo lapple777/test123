@@ -2,3 +2,19 @@
 [ 2018-06-23T12:44:10+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
 [ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.135954s][吞吐率：7.36req/s] [内存消耗：1,323.42kb] [文件加载：45]
 [ error ] [2]file_get_contents(./static/quotes/20180623EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]
+---------------------------------------------------------------
+[ 2018-06-23T19:24:12+08:00 ] 127.0.0.1 GET /monitor/Monitor/index?type=closeOrder&ask=1.166&bid=1.1656
+[ info ] www.gitcrm.com/monitor/Monitor/index?type=closeOrder&ask=1.166&bid=1.1656 [运行时间：0.033685s][吞吐率：29.69req/s] [内存消耗：1,421.00kb] [文件加载：47]
+[ error ] [8]未定义数组索引: type[F:\gitcrm\admin\app\monitor\controller\Monitor.php:42]
+---------------------------------------------------------------
+[ 2018-06-23T19:24:55+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.066169s][吞吐率：15.11req/s] [内存消耗：1,324.73kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180623EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]
+---------------------------------------------------------------
+[ 2018-06-23T19:25:14+08:00 ] 127.0.0.1 GET /monitor/Monitor/index?type=closeOrder&ask=1.166&bid=1.1656
+[ info ] www.gitcrm.com/monitor/Monitor/index?type=closeOrder&ask=1.166&bid=1.1656 [运行时间：0.032405s][吞吐率：30.86req/s] [内存消耗：1,421.00kb] [文件加载：47]
+[ error ] [8]未定义数组索引: type[F:\gitcrm\admin\app\monitor\controller\Monitor.php:42]
+---------------------------------------------------------------
+[ 2018-06-23T19:25:39+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.029511s][吞吐率：33.89req/s] [内存消耗：1,324.73kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180623EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]
