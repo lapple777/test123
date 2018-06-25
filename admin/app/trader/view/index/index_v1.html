@@ -316,7 +316,16 @@
                                                     <div  class="id_card">
                                                         <input name="idZm" style="display: none" value="<?=$account['id_card_zm']?>"/>
                                                         <div id="id_card_zm">
-                                                            <img src="/uploads/<?=$account['id_card_zm']?>">
+                                                            <?php
+                                                             if($account['id_card_zm']==0){
+                                                                ?>
+                                                                 <span></span>
+                                                                <?php }
+                                                              else {
+                                                                ?>
+                                                              <img src="/uploads/<?=$account['id_card_zm']?>">
+                                                            <?php }?>
+
                                                         </div>
                                                         <input type="file" class="typeFile" onchange="id_card_zm(this)" name="IdCardZm"/>
                                                     </div>
@@ -324,7 +333,15 @@
                                                     <div class="id_card" >
                                                         <input name="idFm" style="display: none" value="<?=$account['id_card_fm']?>"/>
                                                         <div id="id_card_fm">
+                                                            <?php
+                                                             if($account['id_card_fm']==0){
+                                                                ?>
+                                                            <span></span>
+                                                            <?php }
+                                                              else {
+                                                                ?>
                                                             <img src="/uploads/<?=$account['id_card_fm']?>">
+                                                            <?php }?>
                                                         </div>
                                                         <input type="file" class="typeFile"  name="IdCardFm" onchange="id_card_fm(this)" />
                                                     </div>
@@ -341,14 +358,30 @@
                                                     <div class="id_card" >
                                                         <input name="barkZm" style="display: none" value="<?=$account['bank_card_zm']?>"/>
                                                         <div id="bank_card_zm">
+                                                            <?php
+                                                             if($account['bank_card_zm']==0){
+                                                                ?>
+                                                            <span></span>
+                                                            <?php }
+                                                              else {
+                                                                ?>
                                                             <img src="/uploads/<?=$account['bank_card_zm']?>">
+                                                            <?php }?>
                                                         </div>
                                                         <input type="file" class="typeFile" name="bankCardZm" id="file" onchange="bank_card_zm(this)" />
                                                     </div>
                                                     <div class="id_card">
                                                         <div id="bank_card_fm">
                                                             <input name="barkFm" style="display: none" value="<?=$account['bank_card_fm']?>"/>
+                                                            <?php
+                                                             if($account['bank_card_fm']==0){
+                                                                ?>
+                                                            <span></span>
+                                                            <?php }
+                                                              else {
+                                                                ?>
                                                             <img src="/uploads/<?=$account['bank_card_fm']?>">
+                                                            <?php }?>
                                                         </div>
                                                         <input type="file" class="typeFile" name="bankCardFm" onchange="bank_card_fm(this)" />
                                                     </div>

@@ -44,9 +44,15 @@ class TraderFundVerify extends Common{
     }
   //交易者资金划出
     public function trader_fundOut(){
+        $fields = [
+            'transfer.add_time','transfer.success_time',
+            'transfer.id','order_id','name','trader_user',
+            'transfer_price','transfer_status','user_id'
+        ];
         $res  = Db::name('transfer_log')
             ->alias('transfer')
             ->join('user','transfer.user_id=user.id')
+            ->field($fields)
             ->where(['order_type'=>'2'])
             ->paginate(10000);
         $data = [

@@ -57,7 +57,7 @@
                                 <tbody>
                                 <?php foreach($online_order as $value) {?>
                                 <tr class="gradeX">
-                                    <td><?=$value['id']?></td>
+                                    <td><?=$value['oid']?></td>
                                     <td><?=$value['order_id']?></td>
                                     <td>
                                         <?php
@@ -74,13 +74,13 @@
                                               ?>
                                         <?=$statusText?>
                                     </td>
-                                    <td><?=$value['ta_id']?></td>
+                                    <td><?=$value['account']?></td>
                                     <td><?=$value['lot_num']?></td>
                                     <td><?=$value['order_price']?></td>
                                     <td><?=$value['stop_profit']?></td>
                                     <td><?=$value['stop_loss']?></td>
                                     <td><?=$value['hand_price']?></td>
-                                    <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
+                                    <td><?=date('Y-m-d H:i:s',$value['oadd_time'])?></td>
                                 </tr>
                                 <?php }?>
                                 </tbody>

@@ -157,13 +157,19 @@
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
+                                <a onclick="modifyPwd('修改密码','{:url('trader/Login/modify_pwd')}','400','350')">
+                                    <div>
+                                        修改密码
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{:url('trader/Login/logout')}">
                                     <div>
                                        退出登录
                                     </div>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
                 </ul>
@@ -188,6 +194,9 @@
 <script>
     function change_num(){
         $('.badge-danger').hide();
+    }
+    function modifyPwd(title,url,w,h) {
+        layer_show(title,url,w,h);
     }
 </script>
 </body>
