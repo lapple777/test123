@@ -45,4 +45,39 @@ class Login extends Controller{
         $url = url('trader/Login/index');
         $this->redirect($url);
     }
+    //修改密码
+    public function modify_pwd(){
+        if(request()->isPost()) {
+            $input = input();
+            $where = [
+                'id'=>session('traderId')
+            ];
+            $fields = [
+                'password','id'
+            ];
+//            dump($input);
+            $res = Db::name('user')->field($fields)->where($where)->find();
+            if(!$res){
+                $this->error('用户不存在');
+            }else{
+                if(md5(trim($input['oldPwd']))!=$res['password']){
+                    $this->error('密码错误');
+                }else{
+                    $data = [
+                        'password'=>md5(trim($input['repeatPwd']))
+                    ];
+                    $res = Db::name('user')->where($where)->update($data);
+                    if(!$res){
+                        $this->error('修改密码失败');
+                    }else{
+                        session('traderUser',null);
+                        session('traderId',null);
+                        $url = url('trader/Login/index');
+                        $this->success('修改密码成功',$url);
+                    }
+                }
+            }
+        }
+        return $this->fetch('modify-pwd');
+    }
 }

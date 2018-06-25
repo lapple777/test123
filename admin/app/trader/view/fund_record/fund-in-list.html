@@ -59,7 +59,7 @@
                                     <td><?=$value['order_id']?></td>
                                     <td><?=$value['trader_user']?></td>
                                     <td><?=$value['transfer_price']?></td>
-                                    <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
+                                    <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
                                     <td>
                                         <?php
                                                $statusIb = $value['transfer_status'];
@@ -87,7 +87,7 @@
                                         <?php }
                                                else {
                                                ?>
-                                        <span> <?=date('Y-m-d H:m:s',$value['success_time'])?></span>
+                                        <span> <?=date('Y-m-d H:i:s',$value['success_time'])?></span>
                                         <?php }?>
                                     </td>
                                 </tr>

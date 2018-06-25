@@ -62,7 +62,7 @@
                                     <td><?=$value['name']?></td>
                                     <td><?=$value['trader_user']?></td>
                                     <td><?=$value['transfer_price']?></td>
-                                    <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
+                                    <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
                                     <td>
                                         <?php
                                                $statusIb = $value['transfer_status'];
@@ -90,7 +90,7 @@
                                         <?php }
                                                else {
                                                ?>
-                                        <span> <?=date('Y-m-d H:m:s',$value['success_time'])?></span>
+                                        <span> <?=date('Y-m-d H:i:s',$value['success_time'])?></span>
                                         <?php }?>
                                     </td>
                                     <td>
@@ -148,6 +148,8 @@
     //划入成功
     function fund_in_success(that,url) {
         layer.confirm('确认划入?',function () {
+            var index  = '';
+            index = layer.load();
             $.ajax({
                 url:url,
                 timeout:5000,
@@ -155,6 +157,7 @@
                 success:function (data) {
                     console.log('客户出金')
                     console.log(data);
+                    layer.close(index);
                     if(data.code==0){
                         layer.msg(data.msg);
                         return false;
@@ -166,6 +169,7 @@
                     }
                 },
                 error:function () {
+                    layer.close(index);
                     layer.msg('网络超时,请稍后再试!')
                     return false;
                 }
@@ -175,11 +179,14 @@
     //划入失败
     function fund_in_fail(that,url) {
         layer.confirm('划入失败?',function () {
+            var index  = '';
+            index = layer.load();
             $.ajax({
                 url:url,
                 timeout:5000,
                 type:'GET',
                 success:function (data) {
+                    layer.close(index);
                     if(data.code==0){
                         layer.msg(data.msg)
                     }else if(data.code==1){
@@ -189,6 +196,7 @@
                     }
                 },
                 error:function () {
+                    layer.close(index);
                     layer.msg('网络超时,请稍后再试!');
                 }
             })
