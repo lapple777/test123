@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:76:"F:\gitcrm\admin\public/../app/admin\view\trader_account\account-message.html";i:1529666399;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:76:"F:\gitcrm\admin\public/../app/admin\view\trader_account\account-message.html";i:1529905834;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,12 +184,9 @@
             data:{'type':'message','page':pa},
             success:function(data){
                 //没有留言，隐藏输入框
-                if(data.msg.data != ''){
-                    $('#no_message').show();
-                }else{
-                    $('.fadeInRight').html('<p class="text-center">暂无留言</pclass>');
-                }
+
                 if(data.code == 1){
+                    $('#no_message').show();
                     //<p class="text-center"><a  onclick="load_more()">加载更多</a></p>
                     var html = '';
                     $.each(data.msg,function(i,item){
@@ -197,11 +194,11 @@
                         if(item.from_userid == 0){
                             //管理员回复
                             html +='<div class="chat-message ">' +
-                                    '<div class="pull-left displsy_bl">' +
-                                    '<div class="pull-left img_header "><img class="message-avatar " src="/static/index/images/my_touxiang.png" alt=""></div>' +
-                                    '<div class="message text-left h_right">' +
+                                    '<div class="pull-right displsy_bl">' +
+                                    '<div class="pull-right img_header "><img class="message-avatar " src="/static/index/images/my_touxiang.png" alt=""></div>' +
+                                    '<div class="message text-right h_left">' +
                                     '<a class="message-author" href="#"> 管理员 </a>' +
-                                    '<span class="message-date pull-right">  '+formatDate(item.add_time)+' </span>' +
+                                    '<span class="message-date pull-left">  '+formatDate(item.add_time)+' </span>' +
                                     '<span class="message-content">'+item.message+'</span>' +
                                     '</div>' +
                                     '</div>' +
@@ -209,11 +206,11 @@
                         }else{
                             //客户留言
                             html += '<div class="chat-message">' +
-                                    '<div class="pull-right displsy_bl">' +
-                                    '<div class="pull-right img_header"><img class="message-avatar pull-right" src="/static/index/images/my_touxiang.png" alt=""></div>' +
-                                    '<div class="message text-right h_left">' +
-                                    '<a class="message-author" href="#"> <?=session("traderUser")?> </a>' +
-                                    '<span class="message-date pull-left">  '+formatDate(item.add_time)+' </span>' +
+                                    '<div class="pull-left displsy_bl">' +
+                                    '<div class="pull-left img_header"><img class="message-avatar" src="/static/index/images/my_touxiang.png" alt=""></div>' +
+                                    '<div class="message text-left h_right">' +
+                                    '<a class="message-author" href="#"> <?=input("username")?> </a>' +
+                                    '<span class="message-date pull-right">  '+formatDate(item.add_time)+' </span>' +
                                     '<span class="message-content"> '+item.message+'</span>' +
                                     '</div>' +
                                     '</div>' +
@@ -225,6 +222,8 @@
 
 
                     div_bottom();
+                }else{
+                    $('.fadeInRight').html('<p class="text-center">暂无留言</pclass>');
                 }
             },
             error:function(){

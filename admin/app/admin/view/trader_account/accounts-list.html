@@ -99,7 +99,7 @@
                                         <td class="center">
                                             <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="account_edit('编辑','{:url('admin/TraderAccount/account_edit',['id'=>$account['id']])}','','550')">编辑</a>
 
-                                            <a href="javascript:void(0)" class="btn btn-xs btn-primary mesage_numbox" onclick="account_message('留言管理','{:url('admin/TraderAccount/account_message',['id'=>$account['id']])}','','605')">留言管理
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-primary mesage_numbox" onclick="account_message('留言管理','{:url('admin/TraderAccount/account_message',['id'=>$account['id'],'username'=>$account['username']])}','','605')">留言管理
 
                                                 <?php  if($count_list[$account['id']] >  0){?>
                                                     <span class="badge badge-danger message_num"><?=$count_list[$account['id']]?></span>

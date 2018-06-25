@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"F:\gitcrm\admin\public/../app/trader\view\leave_message\leave-message.html";i:1529662105;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"F:\gitcrm\admin\public/../app/trader\view\leave_message\leave-message.html";i:1529666362;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -213,7 +213,7 @@
                         }
 
                     })
-                    $('.message_con').html(html);
+                    $('.message_con').append(html);
                     div_bottom();
                 }
             },

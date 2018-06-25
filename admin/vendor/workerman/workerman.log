@@ -516,3 +516,25 @@ Stack trace:
 2018-06-23 18:49:55 pid:1 Worker process terminated
 2018-06-23 18:50:14 pid:1 Worker process terminated
 2018-06-23 19:35:50 pid:1 Worker process terminated
+2018-06-25 10:03:02 pid:1 RedisException: Redis server went away in F:\gitcrm\admin\app\monitor\controller\Monitor.php:52
+Stack trace:
+#0 F:\gitcrm\admin\app\monitor\controller\Monitor.php(52): Redis->lrange('longOrderList', 0, -1)
+#1 F:\gitcrm\admin\app\monitor\controller\Getquotes.php(88): app\monitor\controller\Monitor->index(Array)
+#2 [internal function]: app\monitor\controller\Getquotes->app\monitor\controller\{closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 F:\gitcrm\admin\vendor\workerman\workerman\Connection\TcpConnection.php(668): call_user_func(Object(Closure), Object(Workerman\Connection\AsyncTcpConnection), 'W{"Rsp_Data":{"...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #42)
+#5 F:\gitcrm\admin\vendor\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#6 F:\gitcrm\admin\vendor\workerman\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#7 F:\gitcrm\admin\vendor\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#8 F:\gitcrm\admin\vendor\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#9 F:\gitcrm\admin\vendor\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#10 F:\gitcrm\admin\app\monitor\controller\Getquotes.php(102): Workerman\Worker::runAll()
+#11 [internal function]: app\monitor\controller\Getquotes->index()
+#12 F:\gitcrm\admin\thinkphp\library\think\App.php(343): ReflectionMethod->invokeArgs(Object(app\monitor\controller\Getquotes), Array)
+#13 F:\gitcrm\admin\thinkphp\library\think\App.php(595): think\App::invokeMethod(Array, Array)
+#14 F:\gitcrm\admin\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#15 F:\gitcrm\admin\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#16 F:\gitcrm\admin\thinkphp\start.php(19): think\App::run()
+#17 F:\gitcrm\admin\server.php(5): require('F:\\gitcrm\\admin...')
+#18 {main}
+2018-06-25 10:03:02 pid:1 Worker process terminated

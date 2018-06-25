@@ -220,12 +220,12 @@ class TraderAccount extends Common{
         }
         $input = input();
         $id = $input['id'];
+        $name = $input['username'];
         if(isset($input['type']) && $input['type'] == 'message'){
 
-
-
             $fields = ['id','message','from_userid','to_userid','add_time','status'];
-            $ress = $this->message->field($fields)
+            $ress = $this->message
+                ->field($fields)
                 ->where(['to_userid'=>$id])
                 ->whereOr(['from_userid'=>$id])
                 ->order('id desc')

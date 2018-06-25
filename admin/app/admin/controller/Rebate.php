@@ -4,6 +4,7 @@ namespace app\admin\controller;
 class Rebate extends Common{
     //返佣列表
     public function rebate_list(){
+
         return $this->fetch('rebate-list');
     }
 }

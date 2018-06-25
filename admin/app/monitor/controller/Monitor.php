@@ -162,6 +162,7 @@ class Monitor extends Controller{
                 'IB_id'=>$data['ib_id'],
                 'rebate_price'=>$commission,
                 'add_time'=>time(),
+                'oid'=>$data['oid']
             ];
             $this->connect->name('rebate')->insert($rebate_data);
 

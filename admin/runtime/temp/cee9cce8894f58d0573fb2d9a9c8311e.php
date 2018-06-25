@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"F:\gitcrm\admin\public/../app/admin\view\trader_account\accounts-list.html";i:1529663910;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"F:\gitcrm\admin\public/../app/admin\view\trader_account\accounts-list.html";i:1529905811;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -114,7 +114,7 @@
                                         <td class="center">
                                             <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="account_edit('编辑','<?php echo url('admin/TraderAccount/account_edit',['id'=>$account['id']]); ?>','','550')">编辑</a>
 
-                                            <a href="javascript:void(0)" class="btn btn-xs btn-primary mesage_numbox" onclick="account_message('留言管理','<?php echo url('admin/TraderAccount/account_message',['id'=>$account['id']]); ?>','','605')">留言管理
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-primary mesage_numbox" onclick="account_message('留言管理','<?php echo url('admin/TraderAccount/account_message',['id'=>$account['id'],'username'=>$account['username']]); ?>','','605')">留言管理
 
                                                 <?php  if($count_list[$account['id']] >  0){?>
                                                     <span class="badge badge-danger message_num"><?=$count_list[$account['id']]?></span>
