@@ -27,7 +27,7 @@ class Commission extends Common{
             'r.IB_id'=>session('IBId')
         ];
         $fields = [
-            'r.id','user.name','r.add_time','r.rebate_price'
+            'r.id','user.name','r.add_time','r.rebate_price','oid'
         ];
         $result = Db::name('rebate')
             ->alias('r')
@@ -36,9 +36,16 @@ class Commission extends Common{
             ->field($fields)
             ->where($where)
             ->paginate(10000);
-
+        $res = Db::name('rebate')
+            ->alias('r')
+            //->join('trading_account trading','r.uid=trading.id')
+            ->join('user','r.uid=user.id')
+            ->field($fields)
+            ->where($where)
+            ->sum('rebate_price');
         $data = [
-            'rebate_list'=>$result
+            'rebate_list'=>$result,
+            'sum_rebate'=>$res
         ];
         $this->assign($data);
         return $this->fetch('commission-statistics');

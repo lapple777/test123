@@ -25,6 +25,7 @@
                         <!--<img class="img-circle" src="__INDEX__/images/my_touxiang.png">-->
                         <h1>基本信息</h1>
                     </div>
+                  <?php //var_dump($user);die;?>
 
                  <div class="my_account_bottom">
                     <div class="row account">
@@ -32,9 +33,13 @@
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['tid']?></div>
                     </div>
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Fullname:</div>
+                         <div class="col-md-3 col-xs-3 account_left">Account:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['account']?></div>
                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Fullname:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['username']?></div>
+                     </div>
                      <div class="row account">
                          <div class="col-md-3 col-xs-3 account_left">Gender:</div>
                          <div class="col-md-9 col-xs-9 account_right">
@@ -47,6 +52,9 @@
                              case  '2':
                              $maleTxt = '女';
                              break;
+                             default:
+                              $maleTxt = '';
+                               break;
                              }
                          ?>
                              <?=$maleTxt?>
