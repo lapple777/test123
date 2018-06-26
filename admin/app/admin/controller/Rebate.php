@@ -27,4 +27,5 @@ class Rebate extends Common{
         $this->assign($data);
         return $this->fetch('rebate-list');
     }
+
 }

@@ -3,7 +3,6 @@ namespace getquotes;
 use Workerman\Worker;
 use Workerman\Connection\AsyncTcpConnection;
 require_once __DIR__ . '/workerman/Autoloader.php';
-use \app\monitor\controller\Monitor;
 
 //本地
 define('IP_URL','http://127.0.0.1:2121/');//推送地址
@@ -103,6 +102,26 @@ function request($callback, $req_str="") {
             }
 
         };
+         //断开重连
+            $con->onClose=function($con) {
+                //--------------logs----------------------------------
+                $error = "【连接断开】时间：".date('Y-m-d H:i:s').PHP_EOL;
+                logs($error);
+                //--------------logs----------------------------------
+                //重新连接
+                request(function($data) {});
+
+            };
+            //连接出错
+            $con->onError = function($con, $code, $msg)
+            {
+                //--------------logs----------------------------------
+                $error = "【连接出错】Error code:$code msg:$msg".PHP_EOL;
+                logs($error);
+                //--------------logs----------------------------------
+                //连接出错重新建立连接
+                request(function($data) {});
+            };
 
         $con->connect();
     };
@@ -187,5 +206,9 @@ function pushPost($params = [])
     curl_close($ch);
     return $data;
 
+}
+function logs($msg){
+    $filename = date('Ymd');
+    file_put_contents('./logs/workerman_logs/'.$filename.'log.txt',$msg,FILE_APPEND);
 }
 request(function($data) {});
