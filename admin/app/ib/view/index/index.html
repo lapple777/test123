@@ -107,6 +107,13 @@
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
+                                <a onclick="modifyPwd('修改密码','{:url('ib/Login/modify_pwd')}','400','350')">
+                                    <div>
+                                        修改密码
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{:url('ib/Login/logout')}">
                                     <div>
                                         退出登录
@@ -133,5 +140,10 @@
 
 <!-- 第三方插件 -->
 <script src="__ADMIN__/js/plugins/pace/pace.min.js"></script>
+<script>
+    function modifyPwd(title,url,w,h) {
+        layer_show(title,url,w,h);
+    }
+</script>
 </body>
  </html>

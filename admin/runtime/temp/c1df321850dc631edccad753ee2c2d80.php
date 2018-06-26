@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:85:"D:\PHP\PHPTutorial\WWW\test123\admin\public/../app/admin\view\rebate\rebate-list.html";i:1529999207;s:67:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\css.html";i:1528943849;s:70:"D:\PHP\PHPTutorial\WWW\test123\admin\app\admin\view\common\script.html";i:1528943849;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,21 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    {include file="common/css"}
+    
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+<link href="/static/admin/css/animate.css" rel="stylesheet">
+<link href="/static/admin/css/style.css?v=4.1.0" rel="stylesheet">
+<style>
+    .dataTables_paginate{
+        text-align:right;
+    }
+    .dataTables_filter{
+        text-align:right;
+    }
+</style>
 
 
 </head>
@@ -56,7 +71,7 @@
                                     <tbody>
                                     <?php foreach($rebate_list as $key => $value){?>
                                     <tr class="gradeX">
-                                        <td>{++$key}</td>
+                                        <td><?php echo ++$key; ?></td>
                                         <td><?=$value['oid']?></td>
                                         <td><?=$value['account']?></td>
                                         <td><?=$value['uusername']?></td>
@@ -86,14 +101,19 @@
     </div>
 
 <!-- 全局js -->
-{include file="common/script"}
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/admin/js/plugins/layer3.1/layer.js"></script>
+<script src="/static/admin/js/demo/layer-demo.js"></script>
 <!-- 自定义js -->
-<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
-<script src="__ADMIN__/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="/static/admin/js/content.js?v=1.0.0"></script>
+<script src="/static/admin/js/plugins/jeditable/jquery.jeditable.js"></script>
 
 <!-- Data Tables -->
-<script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="/static/admin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/static/admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 
 <script>

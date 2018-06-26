@@ -61,26 +61,14 @@ class User extends Common {
                 if($res){
                     $this->error('手机号已存在');
                 }
-                if($input['password']==''){
-                    $data = [
-                        'username'=>$input['username'],
-                        'name'=>$input['name'],
-                        'phone'=>$input['phone'],
-                        'email'=>$input['email'],
-                        'id_card'=>$input['id_card'],
-                        'bank_card'=>$input['bank_card'],
-                    ];
-                }else{
-                    $data = [
-                        'username'=>$input['username'],
-                        'name'=>$input['name'],
-                        'phone'=>$input['phone'],
-                        'email'=>$input['email'],
-                        'id_card'=>$input['id_card'],
-                        'bank_card'=>$input['bank_card'],
-                        'password'=>md5(trim($input['password'])),
-                    ];
-                }
+                $data = [
+                    'username'=>$input['username'],
+                    'name'=>$input['name'],
+                    'phone'=>$input['phone'],
+                    'email'=>$input['email'],
+                    'id_card'=>$input['id_card'],
+                    'bank_card'=>$input['bank_card'],
+                ];
                 $result = $this->ib->where(['id'=>session('IBId')])->update($data);
                 if($result){
                     session('IBUser',$input['username']);

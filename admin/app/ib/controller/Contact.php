@@ -19,14 +19,14 @@ class Contact extends Common{
         $this->admin = new Admin();
     }
     public function contact_us(){
-        $fields = [
-            'username','phone','email'
-        ];
-        $result = $this->admin->field($fields)->find();
-        $data = [
-            'admin_info'=>$result
-        ];
-        $this->assign($data);
+//        $fields = [
+//            'username','phone','email'
+//        ];
+//        $result = $this->admin->field($fields)->find();
+//        $data = [
+//            'admin_info'=>$result
+//        ];
+//        $this->assign($data);
         return $this->fetch('contact-us');
     }
 }
