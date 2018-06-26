@@ -1,0 +1,16 @@
+---------------------------------------------------------------
+[ 2018-06-26T14:47:32+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.119317s][吞吐率：8.38req/s] [内存消耗：1,324.63kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180626EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]
+---------------------------------------------------------------
+[ 2018-06-26T14:47:38+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.050750s][吞吐率：19.70req/s] [内存消耗：1,324.64kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180626EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]
+---------------------------------------------------------------
+[ 2018-06-26T15:02:04+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.031166s][吞吐率：32.09req/s] [内存消耗：1,324.64kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180626EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]
+---------------------------------------------------------------
+[ 2018-06-26T15:02:41+08:00 ] 127.0.0.1 GET /index/Order/getJsonData?Symbol=EURUSD
+[ info ] www.gitcrm.com/index/Order/getJsonData?Symbol=EURUSD [运行时间：0.070827s][吞吐率：14.12req/s] [内存消耗：1,324.64kb] [文件加载：45]
+[ error ] [2]file_get_contents(./static/quotes/20180626EURUSD.txt): failed to open stream: No such file or directory[F:\gitcrm\admin\app\index\controller\Order.php:171]

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/ib\view\commission\commission-statistics.html";i:1529486675;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/ib\view\commission\commission-statistics.html";i:1529922324;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +58,7 @@
                                     <td><?=$value['id']?></td>
                                     <td><?=$value['name']?></td>
                                     <td><?=$value['rebate_price']?></td>
-                                    <td><?=date('Y-m-d H:m:s',$value['add_time'])?></td>
+                                    <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
                                 </tr>
                                 <?php }?>
                                 </tbody>
