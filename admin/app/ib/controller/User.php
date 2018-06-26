@@ -21,7 +21,7 @@ class User extends Common {
     //获取当前IB的用户信息
     public function user_info(){
         $fields  = [
-            'phone','name','wallet','bank_card','id_card','email','username','password'
+            'phone','name','wallet','bank_card','id_card','email','username','password','orange_key'
         ];
         $where = [
             'id'=>session('IBId')
