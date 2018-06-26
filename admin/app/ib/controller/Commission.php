@@ -27,11 +27,11 @@ class Commission extends Common{
             'r.IB_id'=>session('IBId')
         ];
         $fields = [
-            'r.id','user.name','r.add_time','r.rebate_price','oid'
+            'r.id','user.name','r.add_time','r.rebate_price','oid','account','username'
         ];
         $result = Db::name('rebate')
             ->alias('r')
-            //->join('trading_account trading','r.uid=trading.id')
+            ->join('trading_account trading','r.uid=trading.id')
             ->join('user','r.uid=user.id')
             ->field($fields)
             ->where($where)
