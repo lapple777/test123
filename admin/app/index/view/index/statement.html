@@ -47,7 +47,7 @@
                            <td><?=date('Y-m-d H:i:s',$order['order_close_time'])?></td>
                            <?php  $status = $order['order_status'];?>
                            <td><?php echo '<span class="text-danger">'.$order['profit'].'</span>';?></td>
-                           <td><?=$order['hand_price']?></td>
+                           <td><?='-'.$order['hand_price']?></td>
                            <td>
                                <?php
                                     switch($status){

@@ -58,11 +58,11 @@ class Monitor extends Controller{
                 if(is_array($lists)){
 
                     //做多止盈
-                    if($ask >= $lists['stop_profit']){
+                    if($bid >= $lists['stop_profit']){
                         if(!$this->closeOrder($lists,1,$key)){
                             continue;
                         }
-                    }else if($ask <= $lists['stop_loss']){
+                    }else if($bid <= $lists['stop_loss']){
                         if(!$this->closeOrder($lists,2,$key)){
                             continue;
                         }
@@ -80,11 +80,11 @@ class Monitor extends Controller{
                 $lists = json_decode($order,true);
                 if(is_array($lists)){
                     //做空止盈
-                    if($bid <= $lists['stop_profit']){
+                    if($ask <= $lists['stop_profit']){
                         if(!$this->closeOrder($lists,1,$key)){
                             continue;
                         }
-                    }else if($bid >= $lists['stop_loss']){
+                    }else if($ask >= $lists['stop_loss']){
                         if(!$this->closeOrder($lists,2,$key)){
                             continue;
                         }
