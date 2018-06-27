@@ -65,11 +65,19 @@
                     <table class="table">
                         <tr>
                             <td class="text-right">账户余额</td>
-                            <td><input  n type="text" class="form-control" readonly value="<?=$blance?>"></td>
+                            <td><input  type="text" class="form-control" readonly value="<?=$blance?>"></td>
                         </tr>
                         <tr>
                             <td class="text-right">出金金额</td>
-                            <td><input id="inmoney" name="outmoney" type="text" class="form-control"></td>
+                            <td><input id="outmoney" name="outmoney" type="text" class="form-control" value=""></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">出金汇率</td>
+                            <td><input id="out_rate" name="out_rate" type="text" value="<?=$out_rate?>" class="form-control" readonly></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">人民币</td>
+                            <td><input id="money" name="money" type="text" class="form-control" value="" readonly></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -101,7 +109,12 @@
 
 
 <script>
-
+    $('#outmoney').blur(function(){
+        var outmoney = $('#outmoney').val();
+        var out_rate = $('#out_rate').val();
+        var money = outmoney*out_rate;
+        $('#money').val(money)
+    });
     $().ready(function() {
         $("#commentForm").validate({
             rules:{
