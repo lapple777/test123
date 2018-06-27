@@ -113,12 +113,12 @@ class FundsManagement extends Common{
 
         $orderRes = $this->inmoney->field('add_time')->where($where)->find();
 
-        $title = '账户权利金转入申请';
+        $title = '系统权利金转入申请';
         $time = date('Y-m-d H:i:s',$orderRes['add_time']);
         $name = $res['name'];
         $email = $res['email'];
         $msg = '尊敬的'.$name.'，您好！<br/><br/>
-                    &nbsp; &nbsp; &nbsp; 您于'.$time.'账户权利金转入申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$time.'提交权利金转出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
                    此为系统邮件请勿回复';
         $mail = new \app\api\controller\SendMail();
         $mail->send($title,$msg,1,$email,$name);
@@ -154,12 +154,12 @@ class FundsManagement extends Common{
 
 
 
-            $title = '账户权利金转入申请';
+            $title = '系统权利金转入申请';
             $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
             $name = $res['name'];
             $email = $res['email'];
             $msg = '尊敬的'.$name.'，您好！<br/><br/>
-                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'账户权利金转入申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
                    此为系统邮件请勿回复';
             $mail = new \app\api\controller\SendMail();
             $mail->send($title,$msg,1,$email,$name);
@@ -198,12 +198,12 @@ class FundsManagement extends Common{
 
 
 
-            $title = '账户权利金转出申请';
+            $title = '系统权利金转出申请';
             $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
             $name = $res['name'];
             $email = $res['email'];
             $msg = '尊敬的'.$name.'，您好！<br/><br/>
-                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'账户权利金转出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
                    此为系统邮件请勿回复';
             $mail = new \app\api\controller\SendMail();
             $mail->send($title,$msg,1,$email,$name);
@@ -250,12 +250,12 @@ class FundsManagement extends Common{
 
 
 
-       $title = '账户权利金转出申请';
+       $title = '系统权利金转出申请';
        $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
        $name = $res['name'];
        $email = $res['email'];
        $msg = '尊敬的'.$name.'，您好！<br/><br/>
-                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'账户权利金转出申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
                    此为系统邮件请勿回复';
        $mail = new \app\api\controller\SendMail();
        $mail->send($title,$msg,1,$email,$name);
@@ -291,12 +291,12 @@ class FundsManagement extends Common{
 
 
 
-            $title = '账户权利金转出申请';
+            $title = '系统权利金转出申请';
             $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
             $name = $res['name'];
             $email = $res['email'];
             $msg = '尊敬的'.$name.'，您好！<br/><br/>
-                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'账户权利金转出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请已通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
                    此为系统邮件请勿回复';
             $mail = new \app\api\controller\SendMail();
             $mail->send($title,$msg,1,$email,$name);
@@ -342,12 +342,12 @@ class FundsManagement extends Common{
         $fields = ['name','email'];
         $res = $this->ib->field($fields)->where(['id'=>$orderRes['user_id']])->find();
 
-        $title = '账户出金申请';
+        $title = '系统权利金转出申请';
         $emailTime = date('Y-m-d H:i:s',$orderRes['add_time']);
         $name = $res['name'];
         $email = $res['email'];
         $msg = '尊敬的'.$name.'，您好！<br/><br/>
-                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'的出金申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请未通过，请您登录会员中心查看详情。<br/><br/><br/><br/><br/>
                    此为系统邮件请勿回复';
         $mail = new \app\api\controller\SendMail();
         $mail->send($title,$msg,1,$email,$name);

@@ -4,7 +4,7 @@ use think\Validate;
 //后台-》交易者-》交易者账户
 class AdminTraderAccount extends Validate{
     protected $regex = ['phone'=>'/1[3|5|6|7|8|9]\d{9}/'];
-    protected $rules = [
+    protected $rule = [
         ['username','require','用户名必填'],
         ['name','require','姓名必填'],
         ['phone','require|regex:phone','手机号必填|手机号格式不正确'],
