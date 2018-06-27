@@ -81,7 +81,7 @@ class Withdraw extends Common {
             }
             //读取配置信息
             $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
-            $money = $input['outmoney']*$configRes['out_rate'];
+            $money = round($input['outmoney']*$configRes['out_rate'],2);
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],

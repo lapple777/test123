@@ -108,9 +108,9 @@
     $('#inmoney').blur(function(){
         var inmony = $('#inmoney').val();
         var rate = $('#rate').val();
-        var money = inmony*rate
+        var money = (inmony*rate).toFixed(2);
         $('#money').val(money)
-    })
+    });
     $().ready(function() {
         $("#commentForm").validate({
             rules:{

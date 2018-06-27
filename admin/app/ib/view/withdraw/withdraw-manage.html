@@ -136,7 +136,7 @@
     $('#outmoney').blur(function(){
         var outmoney = $('#outmoney').val();
         var out_rate = $('#out_rate').val();
-        var money = outmoney*out_rate
+        var money = (outmoney*out_rate).toFixed(2);
         $('#money').val(money)
     })
     $().ready(function() {

@@ -61,7 +61,7 @@ class Brm extends Common{
             }
             //读取配置信息
             $configRes = $this->config->field('rate')->where(['id'=>1])->find();
-            $money = $input['inmoney']*$configRes['rate'];//人民币
+            $money =round( $input['inmoney']*$configRes['rate'],2);//人民币
             $time = time();
             $data = [
                 'order_id'=>$orderId,
@@ -153,7 +153,7 @@ class Brm extends Common{
             }
             //读取配置信息
             $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
-            $money = $input['outmoney']*$configRes['out_rate'];//人民币
+            $money = round($input['outmoney']*$configRes['out_rate'],2);//人民币
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],
