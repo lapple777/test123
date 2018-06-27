@@ -46,7 +46,9 @@
                                     <th>账单号</th>
                                     <th>出金人</th>
                                     <th>出金账号</th>
-                                    <th>出金金额</th>
+                                    <th>出金金额(美元)</th>
+                                    <th>出金汇率</th>
+                                    <th>人民币</th>
                                     <th>出金人状态</th>
                                     <th>出金时间</th>
                                     <th>出金状态</th>
@@ -61,6 +63,8 @@
                                     <td><?=$value['name']?></td>
                                     <td><?=$value['id_card']?></td>
                                     <td><?=$value['outmoney']?></td>
+                                    <td><?=$value['rate']?></td>
+                                    <td><?=$value['money']?></td>
                                     <td>
                                         <?php
                                                $statusIb = $value['ib_status'];
