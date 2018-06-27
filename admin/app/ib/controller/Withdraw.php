@@ -92,12 +92,12 @@ class Withdraw extends Common {
                 $this->error('出金申请提交失败');
             }
             session('IBWallet',$result['wallet']-$input['outmoney']);
-
+            //==============给管理员发送出金申请=============
             $title = '提示管理员审核';
             $msg = $result['name'].'提交权利金转出申请，请及时审核。';
             $mail = new \app\api\controller\SendMail();
             $mail->send($title,$msg,1);
-
+            //==============给管理员发送出金申请=============
             $this->success('出金申请已提交');
         }
         return $this->fetch('withdraw-manage');

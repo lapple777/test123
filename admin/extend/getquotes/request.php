@@ -103,25 +103,25 @@ function request($callback, $req_str="") {
 
         };
          //断开重连
-            $con->onClose=function($con) {
-                //--------------logs----------------------------------
-                $error = "【连接断开】时间：".date('Y-m-d H:i:s').PHP_EOL;
-                logs($error);
-                //--------------logs----------------------------------
-                //重新连接
-                request(function($data) {});
-
-            };
-            //连接出错
-            $con->onError = function($con, $code, $msg)
-            {
-                //--------------logs----------------------------------
-                $error = "【连接出错】Error code:$code msg:$msg".PHP_EOL;
-                logs($error);
-                //--------------logs----------------------------------
-                //连接出错重新建立连接
-                request(function($data) {});
-            };
+//            $con->onClose=function($con) {
+//                //--------------logs----------------------------------
+//                $error = "【连接断开】时间：".date('Y-m-d H:i:s').PHP_EOL;
+//                logs($error);
+//                //--------------logs----------------------------------
+//                //重新连接
+//                request(function($data) {});
+//
+//            };
+//            //连接出错
+//            $con->onError = function($con, $code, $msg)
+//            {
+//                //--------------logs----------------------------------
+//                $error = "【连接出错】Error code:$code msg:$msg".PHP_EOL;
+//                logs($error);
+//                //--------------logs----------------------------------
+//                //连接出错重新建立连接
+//                request(function($data) {});
+//            };
 
         $con->connect();
     };
@@ -209,6 +209,6 @@ function pushPost($params = [])
 }
 function logs($msg){
     $filename = date('Ymd');
-    file_put_contents('./logs/workerman_logs/'.$filename.'log.txt',$msg,FILE_APPEND);
+    file_put_contents('../../logs/workerman_logs/'.$filename.'log.txt',$msg,FILE_APPEND);
 }
 request(function($data) {});

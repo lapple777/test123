@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"F:\gitcrm\admin\public/../app/trader\view\index\index.html";i:1529922324;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"F:\gitcrm\admin\public/../app/trader\view\index\index.html";i:1530005075;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>后台管理页面</title>
+    <title>客户管理页面</title>
 
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -53,7 +53,7 @@
         }
         .workday{
             font-size: 15px;
-            color: red;
+            color: #869fb1
         }
     </style>
 </head>

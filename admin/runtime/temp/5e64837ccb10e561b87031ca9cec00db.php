@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:54:"F:\gitcrm\admin\public/../app/ib\view\index\index.html";i:1529054880;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:54:"F:\gitcrm\admin\public/../app/ib\view\index\index.html";i:1530000739;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -123,6 +123,13 @@
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
+                                <a onclick="modifyPwd('修改密码','<?php echo url('ib/Login/modify_pwd'); ?>','400','350')">
+                                    <div>
+                                        修改密码
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="<?php echo url('ib/Login/logout'); ?>">
                                     <div>
                                         退出登录
@@ -154,5 +161,10 @@
 
 <!-- 第三方插件 -->
 <script src="/static/admin/js/plugins/pace/pace.min.js"></script>
+<script>
+    function modifyPwd(title,url,w,h) {
+        layer_show(title,url,w,h);
+    }
+</script>
 </body>
  </html>

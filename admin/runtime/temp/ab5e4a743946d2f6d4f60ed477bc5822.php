@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:59:"F:\gitcrm\admin\public/../app/index\view\index\account.html";i:1529663760;s:46:"F:\gitcrm\admin\app\index\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\index\view\common\script.html";i:1529054880;s:49:"F:\gitcrm\admin\app\index\view\common\header.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:59:"F:\gitcrm\admin\public/../app/index\view\index\account.html";i:1530000739;s:46:"F:\gitcrm\admin\app\index\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\index\view\common\script.html";i:1529054880;s:49:"F:\gitcrm\admin\app\index\view\common\header.html";i:1529054880;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -86,6 +86,7 @@
                         <!--<img class="img-circle" src="/static/index/images/my_touxiang.png">-->
                         <h1>基本信息</h1>
                     </div>
+                  <?php //var_dump($user);die;?>
 
                  <div class="my_account_bottom">
                     <div class="row account">
@@ -93,9 +94,13 @@
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['tid']?></div>
                     </div>
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Fullname:</div>
+                         <div class="col-md-3 col-xs-3 account_left">Account:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['account']?></div>
                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">Fullname:</div>
+                         <div class="col-md-9 col-xs-9 account_right"><?=$user['username']?></div>
+                     </div>
                      <div class="row account">
                          <div class="col-md-3 col-xs-3 account_left">Gender:</div>
                          <div class="col-md-9 col-xs-9 account_right">
@@ -108,6 +113,9 @@
                              case  '2':
                              $maleTxt = '女';
                              break;
+                             default:
+                              $maleTxt = '';
+                               break;
                              }
                          ?>
                              <?=$maleTxt?>

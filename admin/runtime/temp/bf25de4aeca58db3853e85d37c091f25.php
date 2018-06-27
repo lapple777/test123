@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/ib\view\commission\commission-statistics.html";i:1529922324;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/ib\view\commission\commission-statistics.html";i:1530000739;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,10 +34,11 @@
                     <li class="active">
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" href="#tab-1" aria-expanded="true">入金审核</a>
+                                <a data-toggle="tab" href="#tab-1" aria-expanded="true">返佣统计</a>
                             </li>
                         </ul>
                     </li>
+
 
                 </ul>
                 <div class="tab-content">
@@ -46,23 +47,26 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
+                                    <th>序号</th>
                                     <th>ID</th>
+                                    <th>订单号</th>
                                     <th>客户</th>
                                     <th>返佣金额</th>
                                     <th>返佣时间</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($rebate_list as $value) {?>
+                                <?php foreach($rebate_list as $key=>$value) {?>
                                 <tr class="gradeX">
+                                    <td><?php echo ++$key; ?></td>
                                     <td><?=$value['id']?></td>
+                                    <td><?=$value['oid']?></td>
                                     <td><?=$value['name']?></td>
                                     <td><?=$value['rebate_price']?></td>
                                     <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
                                 </tr>
                                 <?php }?>
                                 </tbody>
-
                             </table>
 
                         </div>

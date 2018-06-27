@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"F:\gitcrm\admin\public/../app/ib\view\user\user-info.html";i:1529054880;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"F:\gitcrm\admin\public/../app/ib\view\user\user-info.html";i:1530000739;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,10 +46,10 @@
                    <td class="text-right">邮箱</td>
                    <td><input id="email" name="email" type="text" class="form-control" value="<?=$user_info['email']?>"></td>
                </tr>
-               <tr>
-                   <td class="text-right">密码</td>
-                   <td><input id="password" name="password" type="text" class="form-control" placeholder="留空表示不修改密码"></td>
-               </tr>
+               <!--<tr>-->
+                   <!--<td class="text-right">密码</td>-->
+                   <!--<td><input id="password" name="password" type="text" class="form-control" placeholder="留空表示不修改密码"></td>-->
+               <!--</tr>-->
                <tr>
                    <td class="text-right">银行卡号</td>
                    <td><input id="bank_card"  name="bank_card" type="text" class="form-control" value="<?=$user_info['bank_card']?>"></td>

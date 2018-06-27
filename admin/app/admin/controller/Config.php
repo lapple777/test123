@@ -53,11 +53,15 @@ class Config extends Common{
                     break;
                 case 'rate':
                     if($input['rate'] == ''){
-                        $this->error('汇率不能为空');
+                        $this->error('入金汇率不能为空');
+                    }
+                    if($input['out_rate'] == ''){
+                        $this->error('出金汇率不能为空');
                     }
                     //汇率设置
                     $data = [
-                        'rate'=>$input['rate']
+                        'rate'=>$input['rate'],
+                        'out_rate'=>$input['out_rate']
                     ];
                     break;
             }
@@ -70,7 +74,7 @@ class Config extends Common{
         }
         $fields = [
             'stop_profit','stop_loss','hand_price',
-            'commission','award','rate'
+            'commission','award','rate','out_rate'
         ];
         $res = $this->config->field($fields)->find();
 
