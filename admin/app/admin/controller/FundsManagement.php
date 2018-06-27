@@ -26,7 +26,7 @@ class FundsManagement extends Common{
             'out.id','order_id','name',
             'outmoney','out.add_time','id_card',
             'out.success_time','order_status',
-            'out.user_id','user.user_status'
+            'out.user_id','user.user_status','rate','money'
         ];
         //客户出金记录
         $res = Db::name('outmoney_log')

@@ -114,11 +114,12 @@ class Brm extends Common{
         ];
         $fields = [
             'id','order_id','outmoney',
-            'add_time','success_time','order_status'
+            'add_time','success_time','order_status','money'
         ];
+
         $res = $this->outmoney->field($fields)->where($where)->select();
         $data = [
-            'outmoney_list'=>$res
+            'outmoney_list'=>$res,
         ];
         $this->assign($data);
         return $this->fetch('outmoney-list');
@@ -150,10 +151,15 @@ class Brm extends Common{
             }else{
                 $this->error('账户不存在');
             }
+            //读取配置信息
+            $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
+            $money = $input['outmoney']*$configRes['out_rate'];//人民币
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],
                 'user_id'=>session('traderId'),
+                'rate'=>$configRes['out_rate'],
+                'money'=>$money,
                 'user_type'=>'1',
                 'add_time'=>time(),
             ];
@@ -178,9 +184,13 @@ class Brm extends Common{
         }
         $fields = ['wallet'];
         $res = $this->user->field($fields)->where(['id'=>session('traderId')])->find();
+        //读取配置信息
+        $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
         $data = [
-            'blance'=>$res['wallet']
+            'blance'=>$res['wallet'],
+            'out_rate'=>$configRes['out_rate']
         ];
+
         $this->assign($data);
         return $this->fetch('outmoney');
     }

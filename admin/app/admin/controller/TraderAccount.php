@@ -18,7 +18,7 @@ class TraderAccount extends Common{
         $fields = [
             'username','name','bank_card','phone',
             'email','id_card','add_time','id',
-            'user_status'
+            'user_status','wallet'
         ];
 
         $result = $this->user

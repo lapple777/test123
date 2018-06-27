@@ -61,6 +61,7 @@
                                     <th>入金金额(美元)</th>
                                     <th>人民币</th>
                                     <th>入金时间</th>
+                                    <th>完成时间</th>
                                     <th>状态</th>
                                 </tr>
                                 </thead>
@@ -72,6 +73,19 @@
                                         <td><?=$value['inmoney']?></td>
                                         <td><?=$value['money']?></td>
                                         <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
+                                        <td>
+
+
+                                            <?php
+                                            if($value['success_time']==0){
+                                            ?>
+                                            <span></span>
+                                            <?php }
+                                            else{
+                                            ?>
+                                            <span><?=date('Y-m-d H:i:s',$value['success_time'])?></span>
+                                                <?php }?>
+                                        </td>
                                         <td>
                                             <?php
                                             $status = $value['order_status'];

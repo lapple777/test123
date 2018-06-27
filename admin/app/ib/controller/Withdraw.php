@@ -10,17 +10,20 @@ namespace app\ib\controller;
 use app\admin\model\IB;
 use \app\ib\common\Common;
 use app\ib\model\OutMoneyLog;
+use app\ib\model\Config;
 use think\Db;
 
 //出金管理
 class Withdraw extends Common {
     private $ib;
     private $outmoney;
+    private $config;
     public function __construct()
     {
         parent::__construct();
         $this->ib = new IB();
         $this->outmoney = new OutMoneyLog();
+        $this->config = new Config();
     }
     public function withdraw_manage(){
         $fields = [
@@ -31,16 +34,19 @@ class Withdraw extends Common {
         ];
         $result = $this->ib->field($fields)->where($where)->find();
         $fields = [
-            'id','order_id','outmoney','order_status','add_time','success_time','order_status'
+            'id','order_id','outmoney','order_status','add_time','success_time','order_status','money'
         ];
         $where = [
             'user_id'=>session('IBId'),
             'user_type'=>'2'
         ];
         $res = $this->outmoney->field($fields)->where($where)->select();
+        //读取配置信息
+        $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
         $data = [
             'user_config'=>$result,
-            'withdraw_list'=>$res
+            'withdraw_list'=>$res,
+            'out_rate'=>$configRes['out_rate']
         ];
         $this->assign($data);
         return $this->fetch('withdraw-manage');
@@ -73,12 +79,16 @@ class Withdraw extends Common {
             }else{
                 $this->error('账户不存在');
             }
-
+            //读取配置信息
+            $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
+            $money = $input['outmoney']*$configRes['out_rate'];
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],
                 'user_id'=>session('IBId'),
                 'user_type'=>'2',
+                'rate'=>$configRes['out_rate'],
+                'money'=>$money,
                 'add_time'=>time()
             ];
             Db::startTrans();
@@ -106,7 +116,7 @@ class Withdraw extends Common {
     //IB出金申请列表
     public function withdraw_list(){
         $fields = [
-            'id','order_id','outmoney','order_status','add_time','success_time','order_status'
+            'id','order_id','outmoney','order_status','add_time','success_time','order_status','money'
         ];
         $where = [
             'user_id'=>session('IBId'),
