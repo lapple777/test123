@@ -2,15 +2,18 @@
 namespace app\admin\controller;
 use app\admin\model\TraderUser;
 use app\admin\model\User;
+use app\admin\model\Order;
 //交易账号管理
 class TransactionAccounts extends Common{
     private $traderUser;
     private $user;
+    private $order;
     public function __construct()
     {
         parent::__construct();
         $this->traderUser = new TraderUser();
         $this->user = new User();
+        $this->order = new Order();
     }
 
     //交易账号列表
@@ -194,5 +197,30 @@ class TransactionAccounts extends Common{
         ];
         $this->assign($data);
         return $this->fetch('account-edit');
+    }
+    //删除交易账户
+    public function account_del(){
+        $input = input();
+        $where = [
+            'order_status'=>'0',
+            'ta_id'=>$input['id']
+        ];
+        $res = $this->order->field('ta_id')->where($where)->count();
+        if($res){
+            $this->error('该交易账户下还有未平仓订单,无法删除');
+        }
+        $where = [
+            'id'=>$input['id']
+        ];
+        $res = $this->traderUser->field('wallet')->where($where)->find();
+        if($res['wallet']>0){
+            $this->error('该交易账户还有余额,无法删除');
+        }
+        $res = $this->traderUser->where($where)->delete();
+        if ($res){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
     }
 }

@@ -35,8 +35,10 @@ class FundAllot extends Common
     {
         if (request()->isPost()) {
             $input = input();
-            if (empty($input['inmoney'])) {
-                $this->error('划入的金额不能为空');
+            $validate = new \app\common\validate\FundAllotVerify();
+            $result = $validate->scene('fundIn')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
             }
             //订单号
             $orderId = commons::getOrderId('transfer_log', 'order_id');
@@ -99,8 +101,10 @@ class FundAllot extends Common
     public function fund_out(){
         if(request()->isPost()){
             $input = input();
-            if (empty($input['outmoney'])){
-                $this->error('转出金额不能为空');
+            $validate = new \app\common\validate\FundAllotVerify();
+            $result = $validate->scene('fundOut')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
             }
             //订单号
             $orderId = commons::getOrderId('transfer_log','order_id');

@@ -42,10 +42,11 @@ class Brm extends Common{
     //客户入金申请
     public function inmoney(){
         if(request()->isPost()){
-
             $input = input();
-            if(empty($input['inmoney'])){
-                $this->error('入金金额不能为空');
+            $validate  = new \app\common\validate\BrmVerify();
+            $result = $validate->scene('inmoney')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
             }
             //账单号
             $orderId = Common::getOrderId('inmoney_log','order_id');
@@ -61,7 +62,7 @@ class Brm extends Common{
             }
             //读取配置信息
             $configRes = $this->config->field('rate')->where(['id'=>1])->find();
-            $money = $input['inmoney']*$configRes['rate'];//人民币
+            $money =round( $input['inmoney']*$configRes['rate'],2);//人民币
             $time = time();
             $data = [
                 'order_id'=>$orderId,
@@ -130,8 +131,10 @@ class Brm extends Common{
     public function outmoney(){
         if(request()->isPost()){
             $input = input();
-            if(empty($input['outmoney'])){
-                $this->error('入金金额不能为空');
+            $validate  = new \app\common\validate\BrmVerify();
+            $result  = $validate->scene('outmoney')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
             }
             //账单号
             $orderId = Common::getOrderId('outmoney_log','order_id');
@@ -155,8 +158,12 @@ class Brm extends Common{
             }
             //读取配置信息
             $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
+<<<<<<< HEAD
             $money = $input['outmoney']*$configRes['out_rate'];//人民币
             $time = time();
+=======
+            $money = round($input['outmoney']*$configRes['out_rate'],2);//人民币
+>>>>>>> e1760ee0ff37fda67ed55d49266c9ae2a17e380f
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],

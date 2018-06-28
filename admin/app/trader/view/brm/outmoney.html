@@ -64,7 +64,9 @@
                 <form class="form-horizontal m-t" method="post" id="commentForm">
                     <table class="table">
                         <tr>
-                            <td class="text-right">账户余额</td>
+                            <td class="text-right">账户余额
+                                <input type="hidden" name="__token__" value="{$Request.token}">
+                            </td>
                             <td><input  type="text" class="form-control" readonly value="<?=$blance?>"></td>
                         </tr>
                         <tr>
@@ -112,7 +114,7 @@
     $('#outmoney').blur(function(){
         var outmoney = $('#outmoney').val();
         var out_rate = $('#out_rate').val();
-        var money = outmoney*out_rate;
+        var money = (outmoney*out_rate).toFixed(2);
         $('#money').val(money)
     });
     $().ready(function() {
@@ -126,11 +128,14 @@
             focusCleanup:true,
             submitHandler: function(form)
             {
+                var index = '';
+                index = layer.load();
                 $.ajax({
                     url:'',
                     type:'POST',
                     data:$(form).serialize(),
                     success:function(data){
+                        layer.close(index);
                         console.log(data);
                         if(data.code == 1){
 //                            var index = parent.layer.getFrameIndex(window.name);
@@ -145,6 +150,7 @@
                         }
                     },
                     error:function(){
+                        layer.close(index);
                         layer.msg('网络错误，请稍后再试');
                         return false;
                     }

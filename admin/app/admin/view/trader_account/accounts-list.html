@@ -45,7 +45,7 @@
                                 <ul class="sortable-list connectList agile-list ui-sortable">
 
                                     <li class="success-element">
-                                        基本信息
+                                        交易者账户
                                     </li>
                                 </ul>
                             </a>
@@ -80,7 +80,7 @@
                                         <td class="center"><?=$account['wallet']?></td>
                                         <td class="center"><?=$account['id_card']?></td>
                                         <td class="center"><?=$account['bank_card']?></td>
-                                        <td class="center"><?=$account['add_time']?></td>
+                                        <td class="center"><?=date('Y-m-d H:i:s',$account['add_time'])?></td>
 
                                         <td class="center">
                                             <?php
@@ -105,7 +105,7 @@
                                                     <span class="badge badge-danger message_num"><?=$count_list[$account['id']]?></span>
                                                 <?php }?>
                                             </a>
-                                            <!--<a href="">删除</a>-->
+                                            <a href="javascript:void(0);" class="btn btn-xs btn-danger" onclick="accountTrader_del(this,'{:url('admin/TraderAccount/account_del',['id'=>$account['id']])}')">删除</a>
 
                                         </td>
                                     </tr>
@@ -151,14 +151,38 @@
             "paging":false
         });
     });
+    //交易者账户编辑
 function account_edit(title,url,w,h){
     layer_show(title,url,w,h);
 }
-    function account_message(title,url,w,h){
+//留言管理
+function account_message(title,url,w,h){
         $('.message_num').hide();
         layer_show(title,url,w,h);
     }
-
+function accountTrader_del(that,url) {
+    layer.confirm('确认删除该交易者账户?',function () {
+        $.ajax({
+            url:url,
+            type:'GET',
+            timeout:5000,
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    return false;
+                }else if(data.code==1){
+                    $(that).parents('tr').remove();
+                    layer.msg('已删除',{icon:1,time:1000});
+                    return false;
+                }
+            },
+            error:function () {
+                layer.msg('网络错误,请稍后重试!');
+                return false;
+            }
+        })
+    })
+}
 </script>
 
 </body>
