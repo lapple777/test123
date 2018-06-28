@@ -13,14 +13,12 @@ class Rebate extends Common{
             'i.id iid','i.username iusername','i.ib_status','i.wallet',
         ];
         $res = Db::name('rebate')
-            ->alias('r')
-            ->join('trading_account t','r.ta_id=t.id')
-            ->join('user u','t.user_id=u.id')
-            ->join('ib i','u.ib_id=i.id')
-            ->field($fields)
-            ->select();
-//        echo '<pre>';
-//        print_r($res);die;
+                ->alias('r')
+                ->join('trading_account t','r.ta_id=t.id')
+                ->join('user u','t.user_id=u.id')
+                ->join('ib i','u.ib_id=i.id')
+                ->field($fields)
+                ->paginate(10);
         $data = [
             'rebate_list'=>$res
         ];

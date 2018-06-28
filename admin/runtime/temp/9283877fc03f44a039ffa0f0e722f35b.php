@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"F:\gitcrm\admin\public/../app/admin\view\transaction_accounts\accounts-list.html";i:1529043579;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"F:\gitcrm\admin\public/../app/admin\view\transaction_accounts\accounts-list.html";i:1530166792;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -25,6 +25,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top: -65px;
     }
 </style>
     <style>
@@ -66,7 +69,7 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+
                                         <th>所属客户</th>
                                         <th>交易账号</th>
                                         <th>账户余额</th>
@@ -79,7 +82,6 @@
                                     <tbody>
                                     <?php foreach($account_list as $account){ ?>
                                         <tr class="gradeX">
-                                            <td><?=$account['id']?></td>
                                             <td><?=$account['name']?></td>
                                             <td><?=$account['account']?></td>
                                             <td class="center"><?=$account['wallet']?></td>
@@ -113,7 +115,9 @@
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    <?php echo $account_list->render(); ?>
+                                </div>
                             </div>
                         </div>
 
@@ -149,7 +153,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "paging":false
         });
     });
     function account_edit(title,url,w,h){

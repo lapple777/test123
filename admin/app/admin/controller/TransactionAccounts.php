@@ -26,7 +26,13 @@ class TransactionAccounts extends Common{
         $whereor = [
             'ta_status'=>2
         ];
-        $result = $this->traderUser->alias('tu')->field($fields)->join('crm_user u','tu.user_id = u.id','left')->where($where)->whereOr($whereor)->paginate(100000);
+        $result = $this->traderUser
+                    ->alias('tu')
+                    ->field($fields)
+                    ->join('crm_user u','tu.user_id = u.id','left')
+                    ->where($where)
+                    ->whereOr($whereor)
+                    ->paginate(10);
 
         $data = [
             'account_list'=>$result
@@ -61,11 +67,17 @@ class TransactionAccounts extends Common{
                 'id','user_id','add_time','account'
             ];
 
-            $orderRes = $this->traderUser->field($fields)->where(['id'=>$tid])->find();
+            $orderRes = $this->traderUser
+                        ->field($fields)
+                        ->where(['id'=>$tid])
+                        ->find();
 
             $fields = ['name','email'];
 
-            $userres = $this->user->field($fields)->where(['id'=>$orderRes['user_id']])->find();
+            $userres = $this->user
+                        ->field($fields)
+                        ->where(['id'=>$orderRes['user_id']])
+                        ->find();
             if($res){
                 switch($type){
                     case 0:
@@ -122,7 +134,13 @@ class TransactionAccounts extends Common{
         $whereor = [
             'ta_status'=>3
         ];
-        $result = $this->traderUser->alias('tu')->field($fields)->join('crm_user u','tu.user_id = u.id','left')->where($where)->whereOr($whereor)->paginate(10);
+        $result = $this->traderUser
+                    ->alias('tu')
+                    ->field($fields)
+                    ->join('crm_user u','tu.user_id = u.id','left')
+                    ->where($where)
+                    ->whereOr($whereor)
+                    ->paginate(10);
 
         $data = [
             'account_list'=>$result
@@ -164,7 +182,10 @@ class TransactionAccounts extends Common{
         $fields = [
             'id','account','wallet','ta_status'
         ];
-        $result = $this->traderUser->field($fields)->where($where)->find();
+        $result = $this->traderUser
+                    ->field($fields)
+                    ->where($where)
+                    ->find();
         if(!$result){
             $this->error('账号异常');
         }

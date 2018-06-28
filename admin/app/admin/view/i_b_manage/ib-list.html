@@ -94,7 +94,9 @@
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    {$ib_list->render()}
+                                </div>
                             </div>
                         </div>
 
@@ -125,7 +127,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "paging":false
         });
     });
     function ib_del(that,url){

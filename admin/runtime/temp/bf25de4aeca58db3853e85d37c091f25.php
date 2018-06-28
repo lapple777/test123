@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/ib\view\commission\commission-statistics.html";i:1530000739;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"F:\gitcrm\admin\public/../app/ib\view\commission\commission-statistics.html";i:1530170095;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +22,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top:-65px;
     }
 </style>
 </head>
@@ -47,10 +50,9 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>序号</th>
-                                    <th>ID</th>
                                     <th>订单号</th>
-                                    <th>客户</th>
+                                    <th>账号</th>
+                                    <th>所属客户</th>
                                     <th>返佣金额</th>
                                     <th>返佣时间</th>
                                 </tr>
@@ -58,17 +60,18 @@
                                 <tbody>
                                 <?php foreach($rebate_list as $key=>$value) {?>
                                 <tr class="gradeX">
-                                    <td><?php echo ++$key; ?></td>
-                                    <td><?=$value['id']?></td>
                                     <td><?=$value['oid']?></td>
-                                    <td><?=$value['name']?></td>
+                                    <td><?=$value['account']?></td>
+                                    <td><?=$value['username']?></td>
                                     <td><?=$value['rebate_price']?></td>
                                     <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
                                 </tr>
                                 <?php }?>
                                 </tbody>
                             </table>
-
+                            <div class="text-right page_css">
+                                <?php echo $rebate_list->render(); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +101,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            'paging':false
         });
     });
 

@@ -35,7 +35,7 @@ class Commission extends Common{
             ->join('user','r.uid=user.id')
             ->field($fields)
             ->where($where)
-            ->paginate(10000);
+            ->paginate(10);
         $res = Db::name('rebate')
             ->alias('r')
             //->join('trading_account trading','r.uid=trading.id')

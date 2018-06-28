@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:77:"F:\gitcrm\admin\public/../app/admin\view\user_info_audit\traderInfo-edit.html";i:1529663760;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:77:"F:\gitcrm\admin\public/../app/admin\view\user_info_audit\traderInfo-edit.html";i:1530089598;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -25,6 +25,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top: -65px;
     }
 </style>
     <style>
@@ -68,7 +71,6 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>用户名</th>
                                     <th>姓名</th>
                                     <th>性别</th>
@@ -89,7 +91,6 @@
                                 <tbody>
                                 <?php foreach($traderInfo_list as $account){?>
                                 <tr class="gradeX">
-                                    <td><?=$account['id']?></td>
                                     <td><?=$account['username']?></td>
                                     <td><?=$account['name']?></td>
                                     <td>

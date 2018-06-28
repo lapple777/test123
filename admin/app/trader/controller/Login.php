@@ -14,7 +14,8 @@ class Login extends Controller{
                 $this->error($validate->getError());
             }
             $where = [
-                'phone'=>$input['phone']
+                'phone'=>$input['phone'],
+                'user_status'=>['neq',3]
             ];
             $fields = [
                 'phone','password','user_status','username','id','wallet'

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"F:\gitcrm\admin\public/../app/admin\view\rebate\rebate-list.html";i:1530000739;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"F:\gitcrm\admin\public/../app/admin\view\rebate\rebate-list.html";i:1530167756;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> 佣金列表</title>
+    <title> 返佣列表</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -25,6 +25,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top: -65px;
     }
 </style>
 
@@ -59,8 +62,7 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>序号</th>
-                                        <th>订单号</th>
+                                        <th>订单ID</th>
                                         <th>账号</th>
                                         <th>所属客户</th>
                                         <th>所属IB</th>
@@ -71,7 +73,6 @@
                                     <tbody>
                                     <?php foreach($rebate_list as $key => $value){?>
                                     <tr class="gradeX">
-                                        <td><?php echo ++$key; ?></td>
                                         <td><?=$value['oid']?></td>
                                         <td><?=$value['account']?></td>
                                         <td><?=$value['uusername']?></td>
@@ -83,7 +84,9 @@
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    <?php echo $rebate_list->render(); ?>
+                                </div>
                             </div>
                         </div>
 
@@ -119,7 +122,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "paging":false
         });
 
 

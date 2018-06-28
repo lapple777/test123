@@ -81,8 +81,12 @@
                                             <?=$statusText?>
                                             </td>
                                             <td class="center">
+                                                <?php if($status == 0){?>
                                                 <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',1)">通过</a>
                                                 <a href="javascript:void(0)" class="text-danger" onclick="checkUserStatus('<?=$account['id']?>',0)">不通过</a>
+                                                <?php }else{ ?>
+                                                <span>已审核</span>
+                                                <?php }?>
                                             </td>
                                         </tr>
                                     <?php }?>
@@ -91,7 +95,9 @@
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    {$account_list->render()}
+                                </div>
                             </div>
                         </div>
 
@@ -122,7 +128,7 @@
 <script>
 $(document).ready(function () {
     $('.dataTables-example').dataTable({
-
+        "paging":false
     });
 
 });

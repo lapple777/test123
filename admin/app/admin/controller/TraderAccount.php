@@ -25,7 +25,7 @@ class TraderAccount extends Common{
             ->field($fields)
             ->where('user_status = 1')
             ->whereOr('user_status = 2')
-            ->select();
+            ->paginate(10);
 
         foreach($result as $key => $value){
             $where = [

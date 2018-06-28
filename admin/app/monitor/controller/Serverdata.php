@@ -1,9 +1,13 @@
 <?php
 namespace app\monitor\controller;
 use think\worker\Server;
+use app\monitor\controller\Monitor;
 
-class ServerData extends Server
-{
+class ServerData extends Server{
+    private $ipurl = 'http://127.0.0.1:2121/';//本地
+    //private $ipurl = 'http://210.209.85.65:2121/';//线上正式环境
+    //private $ipurl = 'http://210.209.85.65:2167/';//线上测试环境
+
     protected $socket = 'tcp://0.0.0.0:9100';
 
     /**
@@ -12,7 +16,9 @@ class ServerData extends Server
      * @param $data
      */
     public function onMessage($connection, $data){
-        echo "onMessage\n";
+        //数据存入日志文件
+        $this->logs($data,1);
+        $filename = date('Ymd');
         $res = $this->checkData($data);
         if($res){
             $data = trim($res);
@@ -26,25 +32,26 @@ class ServerData extends Server
                     if(in_array($value['Symbol'],$pars)){
                         $info = $datas['Rsp_Info']['Quote'][$key];
 
-                        $params = $info['ticktime'].'|'.$info['bid'].'|'.$info['ask'];
+                        $ask = $info['bid']+0.0002;
+                        $params = $info['ticktime'].'|'.$info['bid'].'|'.$ask;
                         var_dump($params);
-                        $datas = [date('Y-m-d H:i:s',$info['ticktime']),$info['bid'],$info['ask']];
-                        //推送数据到前端
+                        $datas = [date('Y-m-d H:i:s',$info['ticktime']),$info['bid'],$ask];
+                        //================推送数据到前端============
                         $data = [
                             'content'=>$params,
                         ];
-
-                        pushGet($data);
+                        $this->pushGet($data);
+                        //==========================================
                         $pushDada = [
                             'type'=>'closeOrder',
-                            'ask'=>$info['ask'],//买价
+                            'ask'=>$ask,//买价
                             'bid'=>$info['bid'],//卖价
                         ];
 
                         //实时监控价格，进行平仓
-
-                        monitorGet($pushDada);
-                        file_put_contents('../../public/static/quotes/'.$filename.$value['Symbol'].'.txt',json_encode($datas).'|',FILE_APPEND);
+                        $monitor = new Monitor();
+                        $monitor->index($pushDada);
+                        file_put_contents('./public/static/quotes/'.$filename.$value['Symbol'].'.txt',json_encode($datas).'|',FILE_APPEND);
                     }
                 }
             }
@@ -57,8 +64,10 @@ class ServerData extends Server
      * @param $connection
      */
     public function onConnect($connection) {
-        echo "onConnect\n";
-        var_dump($connection);
+        echo $connection->getRemoteIp()."\n";
+        $msg = '【连接成功】'.date('Y-m-d H:i:s').' [IP]:'.$connection->getRemoteIp();
+        $this->logs($msg);
+
     }
 
     /**
@@ -66,7 +75,9 @@ class ServerData extends Server
      * @param $connection
      */
     public function onClose($connection){
-        echo "onClose\n";
+        //echo "onClose\n";
+        $msg = '【连接断开】'.date('Y-m-d H:i:s').' [IP]:'.$connection->getRemoteIp();
+        $this->logs($msg);
     }
 
     /**
@@ -76,7 +87,9 @@ class ServerData extends Server
      * @param $msg
      */
     public function onError($connection, $code, $msg){
-        echo "error $code $msg\n";
+        //echo "error $code $msg\n";
+        $msg = '【连接出错】'.date('Y-m-d H:i:s').' [IP]:'.$connection->getRemoteIp()."error: code=> $code,message=> $msg";
+        $this->logs($msg);
     }
 
     /**
@@ -103,9 +116,35 @@ class ServerData extends Server
             return false;
         }
     }
+    //推送数据到前端
+    public function pushGet($params = []){
+//    print_r($params);
+        //向前台推送数据
+        $data = [
+            'type' => 'publish',
+            'content' => $params['content'],
+            'to' => '',
+        ];
+        $url = $this->ipurl.'?type='.$data['type'].'&content='.$data['content'].'&to='.$data['to'];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        $file_contents = curl_exec($ch);
+        curl_close($ch);
+
+        return $file_contents;
+
+    }
     //记录日志
-    public function logs($msg){
-        $filename = date('Ymd');
-        file_put_contents('./logs/workerman_logs/'.$filename.'log.txt',$msg,FILE_APPEND);
+    public function logs($msg,$type = 0){
+        if($type == 1){
+            $filename = date('Ymd').'data';
+        }else{
+            $filename = date('Ymd');
+        }
+
+        file_put_contents('./logs/workerman_logs/'.$filename.'log.txt',$msg.PHP_EOL,FILE_APPEND);
     }
 }

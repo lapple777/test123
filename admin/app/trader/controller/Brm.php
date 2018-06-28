@@ -32,7 +32,7 @@ class Brm extends Common{
             'id','order_id','inmoney','money',
             'add_time','success_time','order_status'
         ];
-        $res = $this->inmoney->field($fields)->where($where)->select();
+        $res = $this->inmoney->field($fields)->where($where)->paginate(10);
         $data = [
             'inmoney_list'=>$res
         ];
@@ -78,12 +78,14 @@ class Brm extends Common{
                 $mail = new \app\api\controller\SendMail();
 
                 //向客户发送邮件入金通知
-                $title = '账户权利金转入申请';
+                $title = '系统权利金转入申请';
                 $email = $userResult['email'];
                 $emailTime = date('Y-m-d H:i:s',$time);
                 $name = $userResult['name'];
                 $msg = '尊敬的'.$userResult['name'].'，您好！<br/><br/>
-                    您于'.$emailTime.'提交入金申请，入金金额为'.$input['inmoney'].'（美金），人民币'.$money.'元，请及时将资金汇入银行卡账号：4402006909100024969。成都莫里斯网络科技有限公司；开户行：中国工商银行股份有限公司成都万年场支行。<br/><br/><br/><br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交入金申请，转入金额＄'.$input['inmoney'].'美元，兑换人民币为¥'.$money.'元，汇率：'.$configRes['rate'].'，请及时将权利金汇入指定银行卡账户！汇款需使用申请人本人银行卡。<br/><br/>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; 汇款成功后，请将权利金转入账户的姓名、电话号码、转入金额（美元）、兑换人民币、汇率，以及银行汇款回执单，回复至此邮箱，谢谢！<br/><br/><br/><br/>
 
 
                     此为系统邮件请勿回复';
@@ -117,7 +119,7 @@ class Brm extends Common{
             'add_time','success_time','order_status','money'
         ];
 
-        $res = $this->outmoney->field($fields)->where($where)->select();
+        $res = $this->outmoney->field($fields)->where($where)->paginate(10);
         $data = [
             'outmoney_list'=>$res,
         ];
@@ -139,10 +141,10 @@ class Brm extends Common{
             ];
             $res = Common::checkUserStatus('user',$where);
             if(!$res){
-                $this->error('账户暂时不能入金');
+                $this->error('账户暂时不能出金');
             }
             //检查账户余额
-            $fields = ['wallet','name'];
+            $fields = ['wallet','name','email'];
             $result = $this->user->field($fields)->where($where)->find();
             if($result){
                 if($result['wallet'] < $input['outmoney']){
@@ -154,6 +156,7 @@ class Brm extends Common{
             //读取配置信息
             $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
             $money = $input['outmoney']*$configRes['out_rate'];//人民币
+            $time = time();
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],
@@ -161,7 +164,7 @@ class Brm extends Common{
                 'rate'=>$configRes['out_rate'],
                 'money'=>$money,
                 'user_type'=>'1',
-                'add_time'=>time(),
+                'add_time'=>$time,
             ];
             Db::startTrans();
             try{
@@ -173,11 +176,25 @@ class Brm extends Common{
                 Db::rollback();
                 $this->error('出金申请提交失败');
             }
-            //向admin发送出金通知邮件
+            //========向admin发送出金通知邮件===============================
             $title = '提示管理员审核';
             $msg = $result['name'].'提交提交权利金转出申请，请及时审核。';
             $mail = new \app\api\controller\SendMail();
             $mail->send($title,$msg,0);
+            //========向admin发送出金通知邮件===============================
+
+            //========================向客户发送邮件通知====================
+            $title = '系统权利金转出申请';
+            $name = $result['name'];
+            $email = $result['email'];
+            $emailTime = date('Y-m-d H:i:s',$time);
+            $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请，转出金额＄'.$input['outmoney'].'美元，兑换人民币¥'.$money.'元，汇率：'.$configRes['out_rate'].'，我们将第一时间为您审核。在通过审核后，我们将在1-2个工作日内，将资金转入到您本人银行卡账户上！<br/><br/><br/><br/>
+
+
+                此为系统邮件请勿回复！';
+            $mail->send($title,$msg,1,$email,$name);
+            //========================向客户发送邮件通知====================
 
             $this->success('出金申请已提交');
 

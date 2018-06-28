@@ -108,7 +108,9 @@
                                 </tbody>
 
                             </table>
-
+                            <div class="text-right page_css">
+                                {$trader_fundIn_list->render()}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,7 +139,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "paging":false
         });
 
 

@@ -88,18 +88,18 @@ $sender_io->on('workerStart', function(){
     $inner_http_worker->listen();
 
     // 一个定时器，定时向所有uid推送当前uid在线数及在线页面数
-    Timer::add(1, function(){
-        global $uidConnectionMap, $sender_io, $last_online_count, $last_online_page_count;
-        $online_count_now = count($uidConnectionMap);
-        $online_page_count_now = array_sum($uidConnectionMap);
-        // 只有在客户端在线数变化了才广播，减少不必要的客户端通讯
-        if($last_online_count != $online_count_now || $last_online_page_count != $online_page_count_now)
-        {
-//            $sender_io->emit('update_online_count', "当前<b>{$online_count_now}</b>人在线，共打开<b>{$online_page_count_now}</b>个页面");
-            $last_online_count = $online_count_now;
-            $last_online_page_count = $online_page_count_now;
-        }
-    });
+//    Timer::add(1, function(){
+//        global $uidConnectionMap, $sender_io, $last_online_count, $last_online_page_count;
+//        $online_count_now = count($uidConnectionMap);
+//        $online_page_count_now = array_sum($uidConnectionMap);
+//        // 只有在客户端在线数变化了才广播，减少不必要的客户端通讯
+//        if($last_online_count != $online_count_now || $last_online_page_count != $online_page_count_now)
+//        {
+////            $sender_io->emit('update_online_count', "当前<b>{$online_count_now}</b>人在线，共打开<b>{$online_page_count_now}</b>个页面");
+//            $last_online_count = $online_count_now;
+//            $last_online_page_count = $online_page_count_now;
+//        }
+//    });
 });
 
 if(!defined('GLOBAL_START'))

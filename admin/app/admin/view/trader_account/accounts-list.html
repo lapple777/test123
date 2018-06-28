@@ -115,7 +115,9 @@
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    {$account_list->render()}
+                                </div>
                             </div>
                         </div>
 
@@ -146,7 +148,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "paging":false
         });
     });
 function account_edit(title,url,w,h){

@@ -70,7 +70,7 @@ class Withdraw extends Common {
                 $this->error('IB暂不能出金');
             }
             //检查用户余额
-            $fields = ['wallet','name'];
+            $fields = ['wallet','name','email'];
             $result = $this->ib->field($fields)->where($where)->find();
             if($result){
                 if($result['wallet']<$input['outmoney']){
@@ -82,6 +82,7 @@ class Withdraw extends Common {
             //读取配置信息
             $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
             $money = $input['outmoney']*$configRes['out_rate'];
+            $time = time();
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],
@@ -89,7 +90,7 @@ class Withdraw extends Common {
                 'user_type'=>'2',
                 'rate'=>$configRes['out_rate'],
                 'money'=>$money,
-                'add_time'=>time()
+                'add_time'=>$time
             ];
             Db::startTrans();
             try{
@@ -101,13 +102,24 @@ class Withdraw extends Common {
                 Db::rollback();
                 $this->error('出金申请提交失败');
             }
-            session('IBWallet',$result['wallet']-$input['outmoney']);
             //==============给管理员发送出金申请=============
             $title = '提示管理员审核';
             $msg = $result['name'].'提交权利金转出申请，请及时审核。';
             $mail = new \app\api\controller\SendMail();
             $mail->send($title,$msg,1);
             //==============给管理员发送出金申请=============
+            //==================给ib发送邮件===============
+            $title = '系统权利金转出申请';
+            $name = $result['name'];
+            $email = $result['email'];
+            $emailTime  = date('Y-m-d H:i:s',$time);
+            $msg = '尊敬的'.$name.'，您好！<br/><br/>
+                    &nbsp; &nbsp; &nbsp; 您于'.$emailTime.'提交权利金转出申请，转出金额＄'.$input['outmoney'].'美元，兑换人民币¥'.$money.'元，汇率：'.$configRes['out_rate'].'，我们将第一时间为您审核。在通过审核后，我们将在1-2个工作日内，将资金转入到您本人银行卡账户上！<br/><br/><br/><br/><br/>
+
+    此为系统邮件请勿回复！';
+            $mail->send($title,$msg,1,$email,$name);
+
+            //===================================================
             $this->success('出金申请已提交');
         }
         return $this->fetch('withdraw-manage');

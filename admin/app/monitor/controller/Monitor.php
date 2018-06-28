@@ -22,6 +22,7 @@ class Monitor extends Controller{
             'username'    => 'root',
             // 数据库密码
             'password'    => 'root',
+            //'password'    => 'ihCANTjpEePEwZ44',
             // 数据库连接端口
             'hostport'    => '3306',
             // 数据库连接参数
@@ -49,7 +50,7 @@ class Monitor extends Controller{
         $redis = new Redis();
         $handler = $redis->handler();
         //做多订单
-        $longOrderList = $handler->lRange('longOrderList',0,-1);
+        $longOrderList = $handler->lRange('longOrderListDemo',0,-1);
 
         if($longOrderList){
             //echo 111;
@@ -73,7 +74,7 @@ class Monitor extends Controller{
         }
 
         //做空订单
-        $shortOrderList = $handler->lRange('shortOrderList',0,-1);
+        $shortOrderList = $handler->lRange('shortOrderListDemo',0,-1);
         if($shortOrderList){
             //echo 222;
             foreach($shortOrderList as $key=>$order){
@@ -132,7 +133,7 @@ class Monitor extends Controller{
                 //止盈
                 //账户余额
                 $account_price = ($price + $data['lot_num'] * $data['award']) - $commission;
-                $order_data['profit'] = $data['lot_num'] * $data['award']- $commission;
+                $order_data['profit'] = $data['lot_num'] * $data['award'];
 
                 break;
             case 2:
@@ -176,10 +177,10 @@ class Monitor extends Controller{
         $handler = $redis->handler();
         switch($data['order_type']){
             case 1:
-                $handler->lRemove('longOrderList',json_encode($data),1);
+                $handler->lRemove('longOrderListDemo',json_encode($data),1);
                 break;
             case 2:
-                $handler->lRemove('shortOrderList',json_encode($data),1);
+                $handler->lRemove('shortOrderListDemo',json_encode($data),1);
                 break;
         }
 

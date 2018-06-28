@@ -20,13 +20,16 @@ class FundRecord extends Common {
     //资金划入记录
     public function fund_in_record(){
         $fields = [
-            'order_id','transfer_price','trader_user','transfer_status','add_time','success_time','id','user_id'
+            'order_id','transfer_price',
+            'trader_user','transfer_status',
+            'add_time','success_time',
+            'id','user_id'
         ];
         $where = [
             'user_id'=>session('traderId'),
             'order_type'=>'1'
         ];
-        $res = $this->transfer->field($fields)->where($where)->select();
+        $res = $this->transfer->field($fields)->where($where)->paginate(10);
         $data = [
             'fundIn_list'=>$res
         ];
@@ -36,13 +39,16 @@ class FundRecord extends Common {
     //资金划出记录
     public function fund_out_record(){
         $fields = [
-            'order_id','transfer_price','trader_user','transfer_status','add_time','success_time','id','user_id'
+            'order_id','transfer_price',
+            'trader_user','transfer_status',
+            'add_time','success_time',
+            'id','user_id'
         ];
         $where = [
             'user_id'=>session('traderId'),
             'order_type'=>'2'
         ];
-        $res = $this->transfer->field($fields)->where($where)->select();
+        $res = $this->transfer->field($fields)->where($where)->paginate(10);
         $data = [
             'fundOut_list'=>$res
         ];

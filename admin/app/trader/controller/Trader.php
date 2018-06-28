@@ -17,7 +17,7 @@ class Trader extends Common{
         $where = [
             'user_id'=>session('traderId')
         ];
-        $result = $this->TraderUser->where($where)->select();
+        $result = $this->TraderUser->where($where)->paginate(10);
         $data = [
             'trader_list'=>$result
         ];

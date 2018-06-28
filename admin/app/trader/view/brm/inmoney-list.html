@@ -109,7 +109,9 @@
                                 </tbody>
 
                             </table>
-
+                            <div class="text-right page_css">
+                                {$inmoney_list->render()}
+                            </div>
                         </div>
                     </div>
 
@@ -140,7 +142,7 @@
 <script>
 $(document).ready(function () {
     $('.dataTables-example').dataTable({
-
+        'paging':false
     });
 });
     function inmoney(title,url,w,h){

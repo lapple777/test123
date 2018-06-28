@@ -83,7 +83,9 @@
                                 <?php }?>
                                 </tbody>
                             </table>
-
+                            <div class="text-right page_css">
+                                {$online_order->render()}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +114,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            'paging':false
         });
 
 

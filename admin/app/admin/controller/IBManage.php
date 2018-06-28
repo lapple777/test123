@@ -20,7 +20,9 @@ class IBManage extends Common{
             'orange_key','add_time',
             'ib_status','id_card','bank_card'
         ];
-        $result = $this->ib->field($fields)->select();
+        $result = $this->ib
+                    ->field($fields)
+                    ->paginate(10);
         $data = [
             'ib_list'=>$result
         ];
@@ -128,7 +130,9 @@ class IBManage extends Common{
                         'password'=>md5(trim($input['password']))
                     ];
                 }
-                $result = $this->ib->where(['id'=>$input['ib_id']])->update($data);
+                $result = $this->ib
+                            ->where(['id'=>$input['ib_id']])
+                            ->update($data);
                 if($result){
                     $this->success('修改成功');
                 }else{
@@ -144,7 +148,10 @@ class IBManage extends Common{
             'id','username','name','phone',
             'email','wallet','ib_status','id_card','bank_card'
         ];
-        $result = $this->ib->field($fields)->where($where)->find();
+        $result = $this->ib
+                    ->field($fields)
+                    ->where($where)
+                    ->find();
         $data = [
             'ib'=>$result
         ];

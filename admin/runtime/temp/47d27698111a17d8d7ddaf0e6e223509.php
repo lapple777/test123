@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"F:\gitcrm\admin\public/../app/ib\view\user\user-info.html";i:1530000739;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1529054880;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"F:\gitcrm\admin\public/../app/ib\view\user\user-info.html";i:1530089598;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +22,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top:-65px;
     }
 </style>
 </head>
@@ -58,6 +61,14 @@
                    <td class="text-right">身份证号</td>
                    <td><input id="id_card" name="id_card" type="text" class="form-control" value="<?=$user_info['id_card']?>"></td>
                </tr>
+               <tr>
+                   <td class="text-right">注册链接</td>
+                   <td>
+                       <input type="text" class="form-control"  value="<?='http://'.$_SERVER['HTTP_HOST'].'/index/Register/index?orangeKey='.$user_info['orange_key']?>" disabled="">
+                   </td>
+               </tr>
+               <td ></td>
+
                <tr>
                    <td></td>
                    <td></td>

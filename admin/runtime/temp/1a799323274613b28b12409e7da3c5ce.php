@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"F:\gitcrm\admin\public/../app/trader\view\brm\outmoney-list.html";i:1529054880;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"F:\gitcrm\admin\public/../app/trader\view\brm\outmoney-list.html";i:1530169801;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1530169408;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -25,6 +25,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top:-65px;
     }
 </style>
     <style>
@@ -65,26 +68,39 @@
                         <div class="panel-body">
                             <ul class="todo-list m-t small-list ui-sortable">
                                 <li>
-                                    <a class="btn btn-primary" onclick="outmoney('出金申请','<?php echo url('Brm/outmoney'); ?>','350','250')">出金</a>
+                                    <a class="btn btn-primary" onclick="outmoney('出金申请','<?php echo url('Brm/outmoney'); ?>','400','350')">出金</a>
                                 </li>
                             </ul>
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>账单号</th>
-                                    <th>出金金额</th>
+                                    <th>出金金额(美元)</th>
+                                    <th>人民币</th>
                                     <th>出金时间</th>
+                                    <th>完成时间</th>
                                     <th>状态</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php foreach($outmoney_list as $value){?>
                                 <tr>
-                                    <td><?=$value['id']?></td>
                                     <td><?=$value['order_id']?></td>
                                     <td><?=$value['outmoney']?></td>
+                                    <td><?=$value['money']?></td>
                                     <td><?=date('Y-m-d H:i:s',$value['add_time'])?></td>
+                                    <td>
+
+                                        <?php
+                                        if($value['success_time']==0){
+                                        ?>
+                                        <span></span>
+                                        <?php }
+                                        else {
+                                        ?>
+                                        <span><?=date('Y-m-d H:i:s',$value['success_time'])?></span>
+                                        <?php }?>
+                                    </td>
                                     <td>
                                         <?php
                                             $status = $value['order_status'];
@@ -108,7 +124,9 @@
                                 </tbody>
 
                             </table>
-
+                            <div class="text-right page_css">
+                                <?php echo $outmoney_list->render(); ?>
+                            </div>
                         </div>
                     </div>
 
@@ -144,7 +162,7 @@
 <script>
 $(document).ready(function () {
     $('.dataTables-example').dataTable({
-
+        'paging':false
     });
 
 

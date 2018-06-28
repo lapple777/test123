@@ -21,7 +21,7 @@ class TraderFundVerify extends Common{
         $this->transfer = new TraderLog();
         $this->user = new User();
     }
-    //交易者资金划入
+    //交易者资金划入列表
     public function trader_fundIn(){
         $fields = [
             'transfer.add_time','transfer.success_time',
@@ -29,20 +29,18 @@ class TraderFundVerify extends Common{
             'transfer_price','transfer_status','user_id'
         ];
         $res  = Db::name('transfer_log')
-            ->alias('transfer')
-            ->field($fields)
-            ->join('user','transfer.user_id=user.id')
-            ->where(['order_type'=>'1'])
-            ->paginate(10000);
+                ->alias('transfer')
+                ->field($fields)
+                ->join('user','transfer.user_id=user.id')
+                ->where(['order_type'=>'1'])
+                ->paginate(10);
         $data = [
             'trader_fundIn_list'=>$res
         ];
-//        echo "<pre>";
-//        print_r($res);
         $this->assign($data);
         return $this->fetch('trader-in-verify');
     }
-  //交易者资金划出
+  //交易者资金划出列表
     public function trader_fundOut(){
         $fields = [
             'transfer.add_time','transfer.success_time',
@@ -50,11 +48,11 @@ class TraderFundVerify extends Common{
             'transfer_price','transfer_status','user_id'
         ];
         $res  = Db::name('transfer_log')
-            ->alias('transfer')
-            ->join('user','transfer.user_id=user.id')
-            ->field($fields)
-            ->where(['order_type'=>'2'])
-            ->paginate(10000);
+                ->alias('transfer')
+                ->join('user','transfer.user_id=user.id')
+                ->field($fields)
+                ->where(['order_type'=>'2'])
+                ->paginate(10);
         $data = [
             'trader_fundOut_list'=>$res
         ];

@@ -24,17 +24,17 @@ class FundsManagement extends Common{
     public function funds_list(){
         $fields = [
             'out.id','order_id','name',
-            'outmoney','out.add_time','id_card',
+            'outmoney','out.add_time','bank_card',
             'out.success_time','order_status',
             'out.user_id','user.user_status','rate','money'
         ];
         //客户出金记录
         $res = Db::name('outmoney_log')
-            ->alias('out')
-            ->field($fields)
-            ->join('user','out.user_id=user.id')
-            ->where(['user_type'=>'1'])
-            ->paginate(10000);
+                ->alias('out')
+                ->field($fields)
+                ->join('user','out.user_id=user.id')
+                ->where(['user_type'=>'1'])
+                ->paginate(10);
         $data = [
             'user_outmoney_list'=>$res
         ];
@@ -45,10 +45,10 @@ class FundsManagement extends Common{
     public function fundsIB_list(){
         //IB出金记录
         $result = Db::name('outmoney_log')
-            ->alias('out')
-            ->join('ib','out.user_id=ib.id')
-            ->where(['user_type'=>'2'])
-            ->paginate(10000);
+                    ->alias('out')
+                    ->join('ib','out.user_id=ib.id')
+                    ->where(['user_type'=>'2'])
+                    ->paginate(10);
         $data = [
             'ib_outmoney_list'=>$result,
 
@@ -56,7 +56,7 @@ class FundsManagement extends Common{
         $this->assign($data);
         return $this->fetch('fundsIB-list');
     }
-    //入金列表
+    //客户入金列表
     public function deposit_list(){
         $fields = [
             'in.id','order_id','name',
@@ -65,16 +65,14 @@ class FundsManagement extends Common{
             'in.user_id','rate'
         ];
         $result = Db::name('inmoney_log')
-            ->alias('in')
-            ->field($fields)
-            ->join('user','in.user_id=user.id')
-            ->where(['user_type'=>'1'])
-            ->paginate(10000);
+                    ->alias('in')
+                    ->field($fields)
+                    ->join('user','in.user_id=user.id')
+                    ->where(['user_type'=>'1'])
+                    ->paginate(10);
         $data = [
             'deposit_list'=>$result
         ];
-//        echo '<pre>';
-//        print_r($result);
         $this->assign($data);
         return $this->fetch('deposit-list');
     }

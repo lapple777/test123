@@ -129,9 +129,11 @@ class Register extends Controller{
     //检查手机号是否存在
     public function checkPhone($phone){
         $where = [
-            'phone'=>$phone
+            'phone'=>$phone,
+            'user_status'=>['neq',3]
         ];
         $res = $this->user->where($where)->find();
+
         if($res){
             return true;
         }else{

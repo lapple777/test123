@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"F:\gitcrm\admin\public/../app/admin\view\trade\history-order.html";i:1529922324;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"F:\gitcrm\admin\public/../app/admin\view\trade\history-order.html";i:1530169184;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +24,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top: -65px;
     }
 </style>
             <style>
@@ -59,7 +62,6 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>订单号</th>
                                     <th>订单类型</th>
                                     <th>交易账号</th>
@@ -74,7 +76,6 @@
                                 <tbody>
                                 <?php foreach($history_success as $value) {?>
                                 <tr class="gradeX">
-                                    <td><?=$value['oid']?></td>
                                     <td><?=$value['order_id']?></td>
                                     <td>
                                         <?php
@@ -187,7 +188,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+//            'paging':false
         });
 
 

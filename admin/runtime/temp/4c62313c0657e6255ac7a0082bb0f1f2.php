@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:77:"F:\gitcrm\admin\public/../app/admin\view\trader_account\accounts-sq-list.html";i:1529033709;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1529054880;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:77:"F:\gitcrm\admin\public/../app/admin\view\trader_account\accounts-sq-list.html";i:1530166750;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -26,6 +26,9 @@
     .dataTables_filter{
         text-align:right;
     }
+    .page_css{
+        margin-top: -65px;
+    }
 </style>
     <style>
         .dataTables_paginate{
@@ -34,7 +37,6 @@
         .dataTables_filter{
             text-align:right;
         }
-
     </style>
 
 </head>
@@ -67,7 +69,6 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>用户名</th>
                                         <th>姓名</th>
                                         <th>手机号</th>
@@ -82,7 +83,6 @@
                                     <tbody>
                                     <?php foreach($account_list as $account){?>
                                         <tr class="gradeX">
-                                            <td><?=$account['id']?></td>
                                             <td><?=$account['username']?></td>
                                             <td><?=$account['name']?></td>
                                             <td><?=$account['phone']?></td>
@@ -105,17 +105,26 @@
                                             <?=$statusText?>
                                             </td>
                                             <td class="center">
+                                                <?php if($status == 0){?>
                                                 <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',1)">通过</a>
                                                 <a href="javascript:void(0)" class="text-danger" onclick="checkUserStatus('<?=$account['id']?>',0)">不通过</a>
+                                                <?php }else{?>
+
+                                                <span>已审核</span>
+                                                <?php }?>
                                             </td>
                                         </tr>
                                     <?php }?>
 
 
+
+
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    <?php echo $account_list->render(); ?>
+                                </div>
                             </div>
                         </div>
 
@@ -151,7 +160,7 @@
 <script>
 $(document).ready(function () {
     $('.dataTables-example').dataTable({
-
+        "paging": false,
     });
 
 });

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"F:\gitcrm\admin\public/../app/trader\view\index\index.html";i:1530005075;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1529054880;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"F:\gitcrm\admin\public/../app/trader\view\index\index.html";i:1530005075;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1530169408;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -29,6 +29,9 @@
     }
     .dataTables_filter{
         text-align:right;
+    }
+    .page_css{
+        margin-top:-65px;
     }
 </style>
     <style>

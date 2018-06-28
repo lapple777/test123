@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IB中心</title>
+    <title>客户入金管理</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="">
@@ -96,7 +96,9 @@
                                 </tbody>
 
                             </table>
-
+                            <div class="text-right page_css">
+                                {$deposit_list->render()}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,7 +123,7 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "paging":false
         });
     });
 
