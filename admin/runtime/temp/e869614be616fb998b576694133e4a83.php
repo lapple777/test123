@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"F:\gitcrm\admin\public/../app/trader\view\trader\trader-list.html";i:1530169483;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1530169408;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"F:\gitcrm\admin\public/../app/trader\view\trader\trader-list.html";i:1530173355;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1530169408;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -74,7 +74,6 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>交易账号</th>
                                     <th>账户余额</th>
                                     <th>添加时间</th>
@@ -85,7 +84,6 @@
                                 <tbody>
                                 <?php foreach($trader_list as $trader){?>
                                     <tr class="gradeX">
-                                        <td><?=$trader['id']?></td>
                                         <td><?=$trader['account']?></td>
                                         <td><?=$trader['wallet']?></td>
                                         <td class="center"><?=date('Y-m-d H:i:s',$trader['add_time'])?></td>
@@ -104,6 +102,8 @@
                                         <td class="center">
                                             <a href="javascript:void(0)" class="btn btn-xs btn-primary" onclick="changePwd('<?php echo url("Trader/changePwd",['account'=>$trader['account']]); ?>')">修改密码</a>
                                             <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="fundAllot('资金分配','<?php echo url("FundAllot/fundAllot",['account'=>$trader['account']]); ?>','500','300')">分配资金</a>
+
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="delAccount(this,'<?php echo $trader['account']; ?>','<?php echo url("Trader/del_account",['id'=>$trader['id']]); ?>','500','300')">删除账号</a>
 
                                         </td>
                                     </tr>
@@ -156,16 +156,34 @@ $(document).ready(function () {
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
             //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable":false,"aTargets":[5]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[4]}// 制定列不参与排序
         ]
 
     });
 
 });
 //删除交易账号
-function delAllot() {
-    layer.confirm(function () {
-
+function delAccount(that,name,url) {
+    layer.confirm('确认删除交易账号:'+name+'吗?',function () {
+        $.ajax({
+            url:url,
+            type:'GET',
+            timeout:5000,
+            success:function (data) {
+                console.log(data);
+                if(data.code==0){
+                    layer.msg(data.msg);
+                }else if(data.code==1){
+                    $(that).parents('tr').remove();
+                    layer.msg('已删除',{icon:1,time:1000});
+                    return false;
+                }
+            },
+            error:function () {
+                layer.msg('网络超时,请稍后再试!');
+                return false;
+            }
+        })
     })
 }
 //修改密码

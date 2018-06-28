@@ -158,12 +158,10 @@ class Brm extends Common{
             }
             //读取配置信息
             $configRes = $this->config->field('out_rate')->where(['id'=>1])->find();
-<<<<<<< HEAD
-            $money = $input['outmoney']*$configRes['out_rate'];//人民币
             $time = time();
-=======
+
             $money = round($input['outmoney']*$configRes['out_rate'],2);//人民币
->>>>>>> e1760ee0ff37fda67ed55d49266c9ae2a17e380f
+
             $data = [
                 'order_id'=>$orderId,
                 'outmoney'=>$input['outmoney'],

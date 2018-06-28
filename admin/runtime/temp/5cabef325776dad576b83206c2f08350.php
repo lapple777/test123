@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"F:\gitcrm\admin\public/../app/trader\view\index\index.html";i:1530005075;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1530169408;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"F:\gitcrm\admin\public/../app/trader\view\index\index.html";i:1530171791;s:47:"F:\gitcrm\admin\app\trader\view\common\css.html";i:1530169408;s:50:"F:\gitcrm\admin\app\trader\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -154,8 +154,11 @@
                 <li class="line dk"></li>
                 <li class="line dk"></li>
                 <li>
-                  <p class="workday">  工作时间：周一至周五 9：00-17：00<br/>
-                    法定节假日除外
+                  <p class="workday">  工作时间：<br/>
+                      <label style="width: 28px;"></label>       周一至周五<br>
+                      <label style="width: 28px;"></label>      上午 09：00-12：00<br/>
+                      <label style="width: 28px;"></label>       下午 14：00-17：00<br/>
+                      <label style="width: 28px;"></label>        法定节假日除外
                   </p>
                 </li>
             </ul>

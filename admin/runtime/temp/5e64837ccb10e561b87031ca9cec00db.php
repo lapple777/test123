@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:54:"F:\gitcrm\admin\public/../app/ib\view\index\index.html";i:1530000739;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:54:"F:\gitcrm\admin\public/../app/ib\view\index\index.html";i:1530171791;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -60,7 +60,6 @@
                 <li class="header_box">
                     <p class="text-center">
                         <img src="/static/index/images/logo2.png" alt="" width="65" height="65"><br/><br/>
-                       账户余额:$ <?=session('IBWallet')?><br/>
                     </p>
 
                 </li>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\gitcrm\admin\public/../app/ib\view\withdraw\withdraw-manage.html";i:1530089598;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\gitcrm\admin\public/../app/ib\view\withdraw\withdraw-manage.html";i:1530171791;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +46,8 @@
                             <form class="form-horizontal m-t" method="post" id="withdrawFrom">
                                 <table class="table">
                                     <tr>
-                                        <td class="text-right">账户余额</td>
+                                        <td class="text-right">账户余额
+                                            <input type="hidden" name="__token__" value="<?php echo \think\Request::instance()->token(); ?>"></td>
                                         <td><input id="wallet" name="wallet" type="text" class="form-control" value="<?=$user_config['wallet']?>" disabled></td>
                                     </tr>
                                     <tr>
@@ -160,7 +161,7 @@
     $('#outmoney').blur(function(){
         var outmoney = $('#outmoney').val();
         var out_rate = $('#out_rate').val();
-        var money = outmoney*out_rate
+        var money = (outmoney*out_rate).toFixed(2);
         $('#money').val(money)
     })
     $().ready(function() {
@@ -198,11 +199,14 @@
             onkeyup:false,
             focusCleanup:true,
             submitHandler: function(form){
+                var index = '';
+                index = layer.load();
                 $.ajax({
                     url: '<?php echo url("/ib/Withdraw/ib_withdraw"); ?>',
                     type: 'POST',
                     data: $(form).serialize(),
                     success: function (data) {
+                        layer.close(index);
                         console.log('出金申请')
                         console.log(data);
                         if(data.code==1){
@@ -216,6 +220,7 @@
                         }
                     },
                     error:function (err) {
+                        layer.close(index);
                         console.log('失败');
                         console.log(err);
                         layer.msg('网络错误,请稍后再试!');
@@ -223,7 +228,8 @@
                     }
                 })
             }
-        })
+        });
+
     })
 </script>
 

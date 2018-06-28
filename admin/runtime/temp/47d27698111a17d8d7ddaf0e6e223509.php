@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"F:\gitcrm\admin\public/../app/ib\view\user\user-info.html";i:1530089598;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"F:\gitcrm\admin\public/../app/ib\view\user\user-info.html";i:1530171791;s:43:"F:\gitcrm\admin\app\ib\view\common\css.html";i:1530170161;s:46:"F:\gitcrm\admin\app\ib\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +40,10 @@
                <tr>
                    <td class="text-right">姓名</td>
                    <td><input id="name" name="name" type="text" class="form-control" value="<?=$user_info['name']?>"></td>
+               </tr>
+               <tr>
+                   <td class="text-right">账户余额</td>
+                   <td><input id="wallet" name="wallet" type="text" class="form-control" value="<?=$user_info['wallet']?>" disabled=""></td>
                </tr>
                <tr>
                    <td class="text-right">手机号</td>

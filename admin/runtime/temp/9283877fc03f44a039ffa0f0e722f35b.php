@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"F:\gitcrm\admin\public/../app/admin\view\transaction_accounts\accounts-list.html";i:1530166792;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"F:\gitcrm\admin\public/../app/admin\view\transaction_accounts\accounts-list.html";i:1530171791;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -69,9 +69,8 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                     <tr>
-
-                                        <th>所属客户</th>
                                         <th>交易账号</th>
+                                        <th>所属客户</th>
                                         <th>账户余额</th>
                                         <th>注册时间</th>
                                         <th>审核时间</th>
@@ -82,8 +81,8 @@
                                     <tbody>
                                     <?php foreach($account_list as $account){ ?>
                                         <tr class="gradeX">
-                                            <td><?=$account['name']?></td>
                                             <td><?=$account['account']?></td>
+                                            <td><?=$account['name']?></td>
                                             <td class="center"><?=$account['wallet']?></td>
                                             <td class="center"><?=date('Y-m-d H:i:s',$account['add_time'])?></td>
                                             <td class="center"><?=$account['success_time']?date('Y-m-d H:i:s',$account['success_time']):''; ?></td>
@@ -105,7 +104,7 @@
 
                                             <td class="center">
                                                 <a href="javascript:void(0)" onclick="account_edit('编辑','<?php echo url('admin/TransactionAccounts/account_edit',['id'=>$account['id']]); ?>','','550')">编辑</a>
-                                                <!--<a href="">删除</a>-->
+                                                <a href="javascript:void (0)" onclick="account_del(this,'<?php echo url('admin/TransactionAccounts/account_del',['id'=>$account['id']]); ?>')">删除</a>
 
                                             </td>
                                         </tr>
@@ -156,11 +155,34 @@
             "paging":false
         });
     });
+    //编辑交易账户
     function account_edit(title,url,w,h){
         layer_show(title,url,w,h);
     }
-
-
+    //删除交易账户
+    function account_del(that,url) {
+        layer.confirm('确认删除改交易账户吗?',function () {
+            $.ajax({
+                url:url,
+                type:'GET',
+                timeout:5000,
+                success:function (data) {
+                    if(data.code==0){
+                        layer.msg(data.msg);
+                        return false;
+                    }else if(data.code==1){
+                        $(that).parents('tr').remove();
+                        layer.msg('已删除',{icon:1,time:1000})
+                        return false;
+                    }
+                },
+                error:function () {
+                    layer.msg('网络错误,请稍后重试!')
+                    return false;
+                }
+            })
+        })
+    }
 </script>
 
 </body>
