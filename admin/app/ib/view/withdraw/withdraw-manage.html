@@ -27,7 +27,8 @@
                             <form class="form-horizontal m-t" method="post" id="withdrawFrom">
                                 <table class="table">
                                     <tr>
-                                        <td class="text-right">账户余额</td>
+                                        <td class="text-right">账户余额
+                                            <input type="hidden" name="__token__" value="{$Request.token}"></td>
                                         <td><input id="wallet" name="wallet" type="text" class="form-control" value="<?=$user_config['wallet']?>" disabled></td>
                                     </tr>
                                     <tr>
@@ -174,11 +175,14 @@
             onkeyup:false,
             focusCleanup:true,
             submitHandler: function(form){
+                var index = '';
+                index = layer.load();
                 $.ajax({
                     url: '{:url("/ib/Withdraw/ib_withdraw")}',
                     type: 'POST',
                     data: $(form).serialize(),
                     success: function (data) {
+                        layer.close(index);
                         console.log('出金申请')
                         console.log(data);
                         if(data.code==1){
@@ -192,6 +196,7 @@
                         }
                     },
                     error:function (err) {
+                        layer.close(index);
                         console.log('失败');
                         console.log(err);
                         layer.msg('网络错误,请稍后再试!');
@@ -199,7 +204,8 @@
                     }
                 })
             }
-        })
+        });
+
     })
 </script>
 

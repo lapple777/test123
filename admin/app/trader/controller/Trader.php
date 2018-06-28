@@ -2,14 +2,17 @@
 namespace app\trader\controller;
 use app\trader\model\TraderUser;
 use app\trader\model\User;
+use app\trader\model\Order;
 class Trader extends Common{
     private $TraderUser;
     private $user;
+    private $order;
     public function __construct()
     {
         parent::__construct();
         $this->TraderUser = new TraderUser();
         $this->user = new User();
+        $this->order = new Order();
     }
 
     //交易员列表
@@ -86,5 +89,31 @@ class Trader extends Common{
             $this->getAccount();
         }
         return $account;
+    }
+    //删除交易账号
+    public function del_account(){
+        $input  = input();
+        //该交易账户下有未平仓无法删除
+        $where = [
+            'order_status'=>'0',
+            'ta_id'=>$input['id']
+        ];
+        $res = $this->order->field('ta_id')->where($where)->count();
+        if($res){
+            $this->error('该交易账户下还有订单未平仓');
+        }
+        $where = [
+            'id'=>$input['id']
+        ];
+        $res = $this->TraderUser->field('wallet')->where($where)->find();
+        if($res['wallet']>0){
+            $this->error('该交易账户还有余额,请进行划转');
+        }
+        $res = $this->TraderUser->where($where)->delete();
+        if($res){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
     }
 }

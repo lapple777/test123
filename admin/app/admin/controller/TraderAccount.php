@@ -3,15 +3,18 @@ namespace app\admin\controller;
 use app\admin\model\User;
 use app\common\validate\AdminTraderAccount;
 use app\admin\model\LeaveMessage;
+use app\admin\model\TraderUser;
 //交易者账号管理
 class TraderAccount extends Common{
     private $user;
     private $message;
+    private $traderUser;
     public function __construct()
     {
         parent::__construct();
         $this->user = new User();
         $this->message = new LeaveMessage();
+        $this->traderUser = new TraderUser();
     }
     //交易者账号列表
     public function accounts_list(){
@@ -250,5 +253,28 @@ class TraderAccount extends Common{
         $this->message->where($where)->update($data);
         return $this->fetch('account-message');
     }
-
+    //交易者账户删除
+    public function account_del(){
+        $input = input();
+        $where = [
+            'user_id'=>$input['id']
+        ];
+        $res = $this->traderUser->field('user_id')->where($where)->count();
+        if($res){
+            $this->error('该交易者账户下还有交易账号,无法删除');
+        }
+        $where = [
+            'id'=>$input['id']
+        ];
+        $res = $this->user->field('wallet')->where($where)->find();
+        if($res['wallet']>0){
+            $this->error('该交易者账户还有余额,无法删除');
+        }
+        $res = $this->user->where($where)->delete();
+        if ($res){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
+    }
 }

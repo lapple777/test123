@@ -84,7 +84,7 @@
                                         <td class="center">
                                             <a href="javascript:void(0)" class="btn btn-xs btn-primary" onclick="changePwd('{:url("Trader/changePwd",['account'=>$trader['account']])}')">修改密码</a>
                                             <a href="javascript:void(0)" class="btn btn-xs btn-info" onclick="fundAllot('资金分配','{:url("FundAllot/fundAllot",['account'=>$trader['account']])}','500','300')">分配资金</a>
-                                            <!--<a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="delAllot('资金分配','{:url("FundAllot/delAllot",['account'=>$trader['account']])}','500','300')">删除账号</a>-->
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="delAccount(this,'{$trader['account']}','{:url("Trader/del_account",['id'=>$trader['id']])}','500','300')">删除账号</a>
 
                                             <!--<a href="javascript:void(0)" class="btn btn-xs btn-success" onclick="account_login('{:url("FundAllot/login",['accountId'=>$trader['id']])}')">登录此交易账号</a>-->
                                         </td>
@@ -137,9 +137,27 @@ $(document).ready(function () {
 
 });
 //删除交易账号
-function delAllot() {
-    layer.confirm('确认删除',function () {
-
+function delAccount(that,name,url) {
+    layer.confirm('确认删除交易账号:'+name+'吗?',function () {
+        $.ajax({
+            url:url,
+            type:'GET',
+            timeout:5000,
+            success:function (data) {
+                console.log(data);
+                if(data.code==0){
+                    layer.msg(data.msg);
+                }else if(data.code==1){
+                    $(that).parents('tr').remove();
+                    layer.msg('已删除',{icon:1,time:1000});
+                    return false;
+                }
+            },
+            error:function () {
+                layer.msg('网络超时,请稍后再试!');
+                return false;
+            }
+        })
     })
 }
 //修改密码

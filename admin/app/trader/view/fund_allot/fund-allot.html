@@ -75,7 +75,9 @@
                                     <form class="form-horizontal m-t" method="post" id="inForm">
                                         <table class="table">
                                             <tr>
-                                                <td class="text-right">划入金额</td>
+                                                <td class="text-right">划入金额
+                                                    <input name="__token__" type="hidden" value="{$Request.token}">
+                                                </td>
                                                 <td><input id="inmoney" name="inmoney" type="text" class="form-control"></td>
                                                 <td><input id="account" name="account" type="hidden" class="form-control" value="<?=$fund_TranderId?>"></td>
                                             </tr>
@@ -95,7 +97,9 @@
                                     <form class="form-horizontal m-t" method="post" id="outForm">
                                         <table class="table">
                                             <tr>
-                                                <td class="text-right">划出金额</td>
+                                                <td class="text-right">划出金额
+                                                    <input name="__token__" type="hidden" value="{$Request.token}">
+                                                </td>
                                                 <td><input id="outmoney" name="outmoney" type="text" class="form-control"></td>
                                                 <td><input  name="account" type="hidden" class="form-control" value="<?=$fund_TranderId?>"></td>
 
@@ -164,11 +168,14 @@
             focusCleanup:true,
             submitHandler: function(form)
             {
+                var index ='';
+                index = layer.load();
                 $.ajax({
                     url:'{:url("FundAllot/fund_in")}',
                     type:'POST',
                     data:$(form).serialize(),
                     success:function(data){
+                        layer.close(index);
                         console.log(data);
                         if(data.code == 1){
 //                            var index = parent.layer.getFrameIndex(window.name);
@@ -183,6 +190,7 @@
                         }
                     },
                     error:function(){
+                        layer.close(index);
                         layer.msg('网络错误，请稍后再试');
                         return false;
                     }
@@ -210,11 +218,14 @@
             focusCleanup:true,
             submitHandler: function(form)
             {
+                var index ='';
+                index = layer.load();
                 $.ajax({
                     url:'{:url("FundAllot/fund_out")}',
                     type:'POST',
                     data:$(form).serialize(),
                     success:function(data){
+                        layer.close(index);
                         console.log(data);
                         if(data.code == 1){
 //                            var index = parent.layer.getFrameIndex(window.name);
@@ -229,6 +240,7 @@
                         }
                     },
                     error:function(){
+                        layer.close(index);
                         layer.msg('网络错误，请稍后再试');
                         return false;
                     }

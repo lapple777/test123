@@ -59,6 +59,11 @@ class Withdraw extends Common {
             if(empty($input['outmoney'])){
                 $this->error('出金金额不能不空');
             }
+            $validate  = new \app\common\validate\IBWithdrawVerify();
+            $result = $validate->scene('outmoney')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
+            }
             //订单号
             $orderId = Common::getIbOrderId('outmoney_log','order_id');
             //检查IB用户状态
@@ -101,7 +106,6 @@ class Withdraw extends Common {
                 Db::rollback();
                 $this->error('出金申请提交失败');
             }
-            session('IBWallet',$result['wallet']-$input['outmoney']);
             //==============给管理员发送出金申请=============
             $title = '提示管理员审核';
             $msg = $result['name'].'提交权利金转出申请，请及时审核。';

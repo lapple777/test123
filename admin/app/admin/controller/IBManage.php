@@ -2,14 +2,17 @@
 namespace app\admin\controller;
 use think\Validate;
 use app\admin\model\IB;
+use app\admin\model\User;
 use app\api\controller\Common;
 //IB管理
 class IBManage extends Common{
     private $ib;
+    private $user;
     public function __construct()
     {
         parent::__construct();
         $this->ib = new IB();
+        $this->user = new User();
     }
 
     //IB列表
@@ -154,17 +157,28 @@ class IBManage extends Common{
     //删除IB
     public function ib_del(){
         $input = input();
-
         $ib_id = $input['ib_id'];
+        $where = [
+            'ib_id'=>$ib_id
+        ];
+        $result = $this->user->field('id')->where($where)->count();
+        if($result){
+            $this->error('当前Ib下有客户,无法删除');
+        }
         $where = [
             'id'=>$ib_id
         ];
+        $result = $this->ib->field('wallet')->where($where)->find();
+        if($result['wallet']>0){
+            $this->error('该IB还有账户余额,无法删除');
+        }
         $result = $this->ib->where($where)->delete();
         if($result){
             $this->success('删除成功');
         }else{
             $this->error('删除失败');
         }
+
     }
 
 }

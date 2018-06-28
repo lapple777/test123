@@ -42,10 +42,11 @@ class Brm extends Common{
     //客户入金申请
     public function inmoney(){
         if(request()->isPost()){
-
             $input = input();
-            if(empty($input['inmoney'])){
-                $this->error('入金金额不能为空');
+            $validate  = new \app\common\validate\BrmVerify();
+            $result = $validate->scene('inmoney')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
             }
             //账单号
             $orderId = Common::getOrderId('inmoney_log','order_id');
@@ -128,8 +129,10 @@ class Brm extends Common{
     public function outmoney(){
         if(request()->isPost()){
             $input = input();
-            if(empty($input['outmoney'])){
-                $this->error('入金金额不能为空');
+            $validate  = new \app\common\validate\BrmVerify();
+            $result  = $validate->scene('outmoney')->check($input);
+            if(!$result){
+                $this->error($validate->getError());
             }
             //账单号
             $orderId = Common::getOrderId('outmoney_log','order_id');
