@@ -27,8 +27,8 @@ class UserInfoAudit extends Common{
                 case 1:
                     $status = 1;
                     break;
-                case 3:
-                    $status = 3;
+                case 5:
+                    $status = 5; //信息审核不通过
                     break;
             }
             $data = [
@@ -47,12 +47,17 @@ class UserInfoAudit extends Common{
         $where  = [
             'user_status'=>'4'
         ];
+        $whereOr = [
+            'user_status' => '5'
+        ];
         $fields = [
             'username','name','bank_card','phone','email','id',
             'id_card','add_time','id_card_zm','id_card_fm',
-            'bank_card_zm','bank_card_fm','open_bank','address','male','birthday'
+            'bank_card_zm','bank_card_fm','open_bank','address','male','birthday','user_status'
         ];
-        $res = $this->user->field($fields)->where($where)->select();
+        $res = $this->user->field($fields)->where($where)->whereOr($whereOr)->select();
+//        echo '<pre>';
+//        dump($res);die;
         $data = [
             'traderInfo_list'=>$res
         ];

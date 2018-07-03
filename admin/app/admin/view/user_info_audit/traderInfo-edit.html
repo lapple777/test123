@@ -67,6 +67,7 @@
                                     <th>银行卡反面</th>
                                     <th>开户行</th>
                                     <th width="180px">地址</th>
+                                    <th width="180px">信息审核状态</th>
                                     <th width="120px">操作</th>
                                 </tr>
                                 </thead>
@@ -101,8 +102,26 @@
                                     <td class="center"><?=$account['open_bank']?></td>
                                     <td class="center"><?=$account['address']?></td>
                                     <td class="center">
+
+                                        <?php
+                                            $status = $account['user_status'];
+                                            switch($status){
+                                                case 4:
+                                                    $statu = '信息修改';
+                                                    break;
+                                                case 5:
+                                                    $statu = '审核不通过';
+                                                     break;
+                                                default:
+                                                    $statu = '';
+                                                    break;
+                                            }
+                                            ?>
+                                        <?=$statu?>
+                                    </td>
+                                    <td class="center">
                                         <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',1)">通过</a>
-                                        <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',3)">不通过</a>
+                                        <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',5)">不通过</a>
 
                                     </td>
                                 </tr>
