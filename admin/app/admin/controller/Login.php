@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace app\admin\controller;
 
 use think\Controller;
@@ -17,7 +17,7 @@ class Login extends Controller{
                 'username'=>$input['username']
             ];
             $fields = [
-                'username','password','status','id'
+                'username','password','status'
             ];
             $result = Db::name('admin')->field($fields)->where($where)->find();
             if(!$result){
@@ -29,7 +29,6 @@ class Login extends Controller{
                     $this->error('密码错误');
                 }else{
                     session('adminUser',$input['username']);
-                    session('adminUserId',$result['id']);
                     $this->success('登陆成功','/admin');
                 }
             }
@@ -42,4 +41,35 @@ class Login extends Controller{
         $url = url('/admin/Login/index');
         $this->redirect($url);
     }
+    //修改密码
+    public function modify_pwd(){
+        if(request()->isPost()){
+            $input = input();
+            if(empty($input['oldPwd'])){
+                $this->error('请输入密码');
+            }
+            $where = [
+                'username'=>session('adminUser')
+            ];
+
+            $res = Db::name('admin')->field('password')->where($where)->find();
+            if($res['password']!=md5(trim($input['oldPwd']))){
+                $this->error('密码错误');
+            }else{
+                $data = [
+                    'password'=>md5(trim($input['password']))
+                ];
+                $res = Db::name('admin')->where($where)->update($data);
+                if(!$res){
+                    $this->error('修改密码失败');
+                }else{
+                    session('adminUser',null);
+                    $url = url('admin/Login/index');
+                    $this->success('修改密码成功',$url);
+                }
+            }
+        }
+        return $this->fetch('modify-pwd');
+    }
+
 }
