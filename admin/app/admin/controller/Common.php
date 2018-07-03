@@ -17,9 +17,9 @@ class Common extends Controller{
         $action = $request->action();//方法
         $auth = new Auth();
         // 第一个参数是规则名称,第二个参数是用户UID
-//        if (!$auth->check($model.'/'.$controller.'/'.$action, session('adminUserId')) && $action != 'index') {
-//            $this->error('你没有权限');
-//        }
+        if (!$auth->check($model.'/'.$controller.'/'.$action, session('adminUserId')) && $action != 'index') {
+            $this->error('你没有权限');
+        }
         // 分配菜单数据
         $data = Db::name('admin_nav')->order('id asc')->select();
         $data= Data::channelLevel($data,0,'&nbsp;','id');

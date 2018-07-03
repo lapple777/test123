@@ -17,7 +17,7 @@ class Login extends Controller{
                 'username'=>$input['username']
             ];
             $fields = [
-                'username','password','status'
+                'username','password','status','id'
             ];
             $result = Db::name('admin')->field($fields)->where($where)->find();
             if(!$result){
@@ -29,6 +29,7 @@ class Login extends Controller{
                     $this->error('密码错误');
                 }else{
                     session('adminUser',$input['username']);
+                    session('adminUserId',$result['id']);
                     $this->success('登陆成功','/admin');
                 }
             }
@@ -38,6 +39,7 @@ class Login extends Controller{
     //退出登录
     public function logout(){
         session('adminUser',null);
+        session('adminUserId',null);
         $url = url('/admin/Login/index');
         $this->redirect($url);
     }
