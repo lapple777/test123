@@ -28,7 +28,7 @@ class TraderAccount extends Common{
             ->field($fields)
             ->where(['user_status'=>['neq',0]])
             ->paginate(10);
-       
+
         $count = '';
         foreach($result as $key => $value){
             $where = [
