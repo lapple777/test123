@@ -100,18 +100,19 @@ class Index extends Common{
             $result[date('Y-m-d',$info['add_time'])][] = $info;
         }
         $dateList = array();
-        $total = '';
+        $total = 0;
         $i=0;
         foreach ($result as $k=>$value){
             foreach ($value as $v){
-                $total +=$v['profit'];
+
+                $total += $v['profit'];
 
             }
 
             $dateList[$i]['time']  = $k;
             $dateList[$i]['total']  = $total;
             $i ++;
-            $total = '';
+            $total = 0;
         }
         $this->success($dateList);
     }

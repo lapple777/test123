@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:60:"F:\gitcrm\admin\public/../app/admin\view\menu\menu-list.html";i:1529054880;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:60:"F:\gitcrm\admin\public/../app/admin\view\menu\menu-list.html";i:1530524314;s:46:"F:\gitcrm\admin\app\admin\view\common\css.html";i:1530166755;s:49:"F:\gitcrm\admin\app\admin\view\common\script.html";i:1529054880;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -63,7 +63,7 @@
                             <div class="panel-body">
                                 <ul class="todo-list m-t small-list ui-sortable">
                                     <li>
-                                        <a class="btn btn-primary" onclick="admin_add('添加菜单','<?php echo url('admin/Admin/admin_add'); ?>','','','550')">添加菜单</a>
+                                        <a class="btn btn-primary" onclick="add_menu('添加菜单','<?php echo url('admin/Menu/add_menu'); ?>','500','300')">添加菜单</a>
 
 
                                     </li>
@@ -73,54 +73,28 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>工号</th>
-                                        <th>姓名</th>
-                                        <th>本月奖励</th>
-                                        <th>累计奖励</th>
-                                        <th>本月奖励数</th>
+                                        <th>ID</th>
+                                        <th>名称</th>
+                                        <th>标识</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-                                        <td class="center">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
+                                    <?php foreach($menuList as $menu){?>
+                                        <tr class="gradeX">
+                                            <td><?=$menu['id']?></td>
+                                            <td><?=$menu['_name']?></td>
+                                            <td class="center"><?=$menu['navUrl']?></td>
+                                            <td class="center">
+                                                <a href="javascript:void(0)" class="btn btn-success btn-xs" onclick="edit_menu('添加子菜单','<?php echo url('admin/Menu/add_child_menu',['id'=>$menu['id']]); ?>','500','300')">添加子菜单</a>
+                                                <a href="javascript:void(0)" class="btn btn-info btn-xs" onclick="edit_menu('编辑菜单','<?php echo url('admin/Menu/edit_menu',['id'=>$menu['id']]); ?>','500','300')">编辑</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-xs" onclick="del_menu('<?php echo url('admin/Menu/del_menu',['id'=>$menu['id']]); ?>','<?=$menu['name']?>')">删除</a>
 
-                                        </td>
-                                    </tr>
-                                    <tr class="gradeC">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">5</td>
-                                        <td class="center">C</td>
-                                        <td class="center">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
+                                            </td>
+                                        </tr>
+                                    <?php }?>
 
-                                        </td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.5
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">5.5</td>
-                                        <td class="center">A</td>
-                                        <td class="center">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
 
-                                        </td>
-                                    </tr>
 
                                     </tbody>
 
@@ -161,15 +135,51 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            "ordering": false,
         });
 
 
     });
 
-function admin_add(title,url,id,w,h){
+function add_menu(title,url,w,h){
     layer_show(title,url,w,h);
 }
+function edit_menu(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+    function del_menu(url,name){
+        var index;
+        layer.confirm('确定删除菜单 "<span class="text-danger">'+name+'</span>"',function(){
+            $.ajax({
+                type:'GET',
+                url:url,
+                beforeSend:function(){
+                    index = layer.msg('正在删除...', {
+                        icon: 16
+                        ,shade: 0.5
+                        ,time:false
+                    });
+                },
+                success:function(data){
+                    layer.close(index)
+                    if(data.code == 1){
+                        layer.msg(data.msg,function(){
+                            location.reload();
+                        });
+                        return false;
+                    }else if(data.code == 0){
+                        layer.msg(data.msg);
+                        return false;
+                    }
+                },
+                error:function(){
+                    layer.close(index)
+                    layer.msg('网络错误，请稍后再试');
+                    return false;
+                }
+            })
+        })
+    }
 </script>
 
 </body>

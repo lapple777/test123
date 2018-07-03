@@ -18,6 +18,7 @@ class TransactionAccounts extends Common{
 
     //交易账号列表
     public function accounts_list(){
+
         $fields = [
             'tu.id','user_id','account','tu.wallet',
             'tu.add_time', 'ta_status','tu.success_time',

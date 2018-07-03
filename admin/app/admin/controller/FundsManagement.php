@@ -2,7 +2,6 @@
 namespace app\admin\controller;
 use app\admin\model\OutMoneyLog;
 use app\admin\model\InMoneyLog;
-use app\admin\common\Common;
 use app\admin\model\IB;
 use app\admin\model\User;
 use think\Db;

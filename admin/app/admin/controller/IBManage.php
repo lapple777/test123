@@ -3,7 +3,7 @@ namespace app\admin\controller;
 use think\Validate;
 use app\admin\model\IB;
 use app\admin\model\User;
-use app\api\controller\Common;
+use app\api\controller\Common as commons;
 //IB管理
 class IBManage extends Common{
     private $ib;
@@ -54,7 +54,7 @@ class IBManage extends Common{
                     $this->error('手机号已注册');
                 }
                 //推荐码
-                $orange_key = Common::getSort();
+                $orange_key = commons::getSort();
                 $data = [
                     'username'=>trim($input['username']),
                     'name'=>trim($input['name']),

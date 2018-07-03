@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>编辑菜单</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    {include file="common/css"}
+    <style>
+
+
+    </style>
+
+</head>
+
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+
+        <div class="row">
+
+
+            <form action="" method="post"  id="form-group-conf">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>权限名：</td>
+                        <td>
+                            <input type="text" class="form-control" value="<?=$auth['title']?>" placeholder="" id="authname" name="authname">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>权限标识：</td>
+                        <td>
+                            <input type="text" class="form-control" value="<?=$auth['name']?>" placeholder="" id="auth" name="auth"><br/>
+                            <span class="f-12">输入模块/控制器/方法即可 例如 admin/ShowNav/index</span>
+                        </td>
+                        <input type="hidden" name="aid" value="<?=$auth['id']?>">
+                    </tr>
+                </table>
+
+
+
+                <div class="row cl">
+                    <div class="col-xs-3 col-sm-3 col-xs-offset-3 col-sm-offset-3">
+                        <input class="btn btn-primary radius sub_btn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+</div>
+
+<!-- 全局js -->
+{include file="common/script"}
+<!-- 自定义js -->
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+<script src="__ADMIN__/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+<!-- Data Tables -->
+<script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="__ADMIN__/js/from_validate/jquery.validate.min.js"></script>
+<script src="__ADMIN__/js/from_validate/messages_zh.min.js"></script>
+
+<script src="__ADMIN__/js/from_validate/validate-methods.js"></script>
+
+
+<script>
+
+    $().ready(function() {
+        $("#form-group-conf").validate({
+            rules:{
+                authname:{
+                    required:true,
+                },
+                auth:{
+                    required:true,
+                }
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            submitHandler: function(form)
+            {
+                $.ajax({
+                    url:'',
+                    type:'POST',
+                    data:$(form).serialize(),
+                    success:function(data){
+                        if(data.code == 1){
+                            layer.msg(data.msg,function(){
+                                parent.location.reload();
+                            });
+                            return false;
+                        }else if(data.code == 0){
+                            layer.msg(data.msg);
+                            return false;
+                        }
+                    },
+                    error:function(){
+                        layer.msg('网络错误，请稍后再试');
+                        return false;
+                    }
+                })
+
+            }
+        });
+
+    });
+
+
+</script>
+
+</body>
+
+</html>
+
+
+
