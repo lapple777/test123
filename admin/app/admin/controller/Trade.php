@@ -24,7 +24,7 @@ class Trade extends Common{
            ->join('trading_account t','o.ta_id=t.id')
            ->field($fields)
            ->where($where)
-           ->paginate(10);
+           ->paginate(50);
 //        $res = $this->order->field($fields)->where($where)->select();
         $data = [
             'online_order'=>$res

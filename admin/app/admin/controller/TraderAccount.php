@@ -4,17 +4,23 @@ use app\admin\model\User;
 use app\common\validate\AdminTraderAccount;
 use app\admin\model\LeaveMessage;
 use app\admin\model\TraderUser;
+use app\admin\model\Config;
+use app\admin\model\Order;
 //交易者账号管理
 class TraderAccount extends Common{
     private $user;
     private $message;
     private $traderUser;
+    private $config;
+    private $order;
     public function __construct()
     {
         parent::__construct();
         $this->user = new User();
         $this->message = new LeaveMessage();
         $this->traderUser = new TraderUser();
+        $this->config = new Config();
+        $this->order = new Order();
     }
     //交易者账号列表
     public function accounts_list(){
@@ -23,28 +29,28 @@ class TraderAccount extends Common{
             'email','id_card','add_time','id',
             'user_status','wallet'
         ];
-
         $result = $this->user
             ->field($fields)
             ->where(['user_status'=>['neq',0]])
             ->paginate(10);
 
-        $count = '';
+        $count = null;
+        $priceInfo = null;
         foreach($result as $key => $value){
             $where = [
                 'from_userid'=>$value['id'],
                 'status'=>0
             ];
+            //获取客户下交易账号在场订单余额和交易账号账户总余额
+            $priceInfo[$value['id']] = self::getUserBlance($value['id']);
             $count[$value['id']] = $this->message->field('id')->where($where)->count();
 
         }
-//        print_r($count);
-//        die;
-//        echo '<pre>';
-//        dump($result);die;
+
         $data = [
             'account_list'=>$result,
-            'count_list'=>$count
+            'count_list'=>$count,
+            'priceInfo'=>$priceInfo
         ];
 
         $this->assign($data);
@@ -276,5 +282,37 @@ class TraderAccount extends Common{
         }else{
             $this->error('删除失败');
         }
+    }
+    //获取客户账户总资产、在场订单总额
+    static public function getUserBlance($uid){
+        $that = new TraderAccount();
+        $configRes = $that->config->field('hand_price')->find();
+        //获取当前客户下所有交易账号id
+        $ids = $that->traderUser->field('id')->where(['user_id'=>$uid])->select();
+        $arr = [];
+        foreach($ids as $id){
+
+            $arr[]=$id['id'];
+        }
+        $in = implode(',',$arr);
+
+        $orderWhere = [
+            'order_status'=>0,
+            'ta_id'=>['in',$in]
+        ];
+        //获取所有交易账号在场订单总手数
+        $totalHand = $that->order->where($orderWhere)->sum('lot_num');
+
+        //在场订单总资产
+        $onlinePrice = $totalHand * $configRes['hand_price'];
+        //所有交易账号余额总和
+        $accountPrice = $that->traderUser->where(['user_id'=>$uid])->sum('wallet');
+
+        $array = [
+            'onlinePrice'=>$onlinePrice,
+            'accountPrice'=> $accountPrice
+        ];
+
+        return $array;
     }
 }

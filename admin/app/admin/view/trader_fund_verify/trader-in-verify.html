@@ -95,8 +95,8 @@
                                         <?php
                                                 if($value['transfer_status']==0){
                                                 ?>
-                                        <a href="javascript:void(0)" onclick="fund_in_success(this,'{:url('admin/TraderFundVerify/fund_in_success',['order_id'=>$value['order_id'],'transfer_price'=>$value['transfer_price'],'trader_user'=>$value['trader_user']])}')">成功</a>
-                                        <a href="javascript:void(0)" onclick="fund_in_fail(this,'{:url('admin/TraderFundVerify/fund_in_fail',['order_id'=>$value['order_id'],'user_id'=>$value['user_id'],'transfer_price'=>$value['transfer_price']])}')">失败</a>
+                                        <a href="javascript:void(0)" class="btn btn-info btn-xs" onclick="fund_in_success(this,'{:url('admin/TraderFundVerify/fund_in_success',['order_id'=>$value['order_id'],'transfer_price'=>$value['transfer_price'],'trader_user'=>$value['trader_user']])}')">成功</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" onclick="fund_in_fail(this,'{:url('admin/TraderFundVerify/fund_in_fail',['order_id'=>$value['order_id'],'user_id'=>$value['user_id'],'transfer_price'=>$value['transfer_price']])}')">失败</a>
                                         <?php }
                                                else {
                                                ?>

@@ -147,11 +147,11 @@ class Order extends Common{
                     switch($type){
                         case 1:
                             //做多
-                            $handler->rPush('longOrderListDemo',json_encode($data));
+                            $handler->rPush('longOrderList',json_encode($data));
                             break;
                         case 2:
                             //做空
-                            $handler->rPush('shortOrderListDemo',json_encode($data));
+                            $handler->rPush('shortOrderList',json_encode($data));
                             break;
                     }
 

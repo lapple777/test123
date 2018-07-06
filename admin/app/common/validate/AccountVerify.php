@@ -22,9 +22,10 @@ class AccountVerify extends Validate{
         ['birthday','require','生日必填'],
         ['male','require','性别必填'],
         ['address','require','地址必填'],
+        ['open_bank','require','开户行必填'],
     ];
     protected $scene = [
-        'accountEdit'=>['username','name','phone','email','id_card','bank_card'],
+        'accountEdit'=>['username','name','phone','email','id_card','bank_card','open_bank'],
     ];
 
 }

@@ -2,13 +2,18 @@
 namespace app\trader\controller;
 
 use app\trader\model\User;
+use app\trader\model\UserInfoChange;
 use think\Validate;
+use think\Db;
+
 class Account extends Common{
     private $user;
+    private $userInfoChange;
     public function __construct()
     {
         parent::__construct();
         $this->user = new User();
+        $this->userInfoChange = new UserInfoChange();
     }
 
     //账户信息
@@ -20,7 +25,7 @@ class Account extends Common{
             'id','wallet','username','name','phone','email',
             'id_card','bank_card','add_time','open_bank',
             'address','birthday','male','id_card_zm','id_card_fm',
-            'bank_card_zm','bank_card_fm'
+            'bank_card_zm','bank_card_fm','user_status'
         ];
         $res = $this->user->field($fields)->where($where)->find();
         $data = [
@@ -41,6 +46,37 @@ class Account extends Common{
             if(!$result){
                 $this->error($validate->getError());
             }
+            $fields = [
+                'username','name','phone',
+                'email','id_card','bank_card',
+                'address','birthday','male',
+                'open_bank','id_card_zm',
+                'id_card_fm','bank_card_zm',
+                'bank_card_fm','user_status'
+            ];
+            $res = $this->user->field($fields)->where(['id'=>$input['id']])->find();
+            if($res['user_status'] == 4){
+                $this->error('信息修改正在审核中,请不要重复提交');
+            }
+            $params = [
+                'username'      => $res['username'],
+                'name'          => $res['name'],
+                'phone'         => $res['phone'],
+                'email'         => $res['email'],
+                'id_card'       => $res['id_card'],
+                'bank_card'     => $res['bank_card'],
+                'address'       => $res['address'],
+                'birthday'      => $res['birthday'],
+                'male'          => $res['male'],
+                'open_bank'     => $res['open_bank'],
+                'id_card_zm'    => $res['id_card_zm'],
+                'id_card_fm'    => $res['id_card_fm'],
+                'bank_card_zm'  => $res['bank_card_zm'],
+                'bank_card_fm'  => $res['bank_card_fm'],
+            ];
+            $ll = json_encode($params);
+
+            $md5 = md5($ll);
             //检查用户名是否注册
             if($this->checkUser($input['username'],$input['id'])){
                 $this->error('用户名已存在');
@@ -58,28 +94,11 @@ class Account extends Common{
             $id_card_fm = '';
             $bank_card_zm = '';
             $bank_card_fm = '';
-            if($idCardFm){
-                $infoIdFm  = $idCardFm->move(ROOT_PATH.'public'.DS.'uploads');
-                if($infoIdFm){
-//                    echo $infoIdFm->getSaveName();
-                    $id_card_zm = $infoIdFm->getSaveName();
-                }else{
-//                    echo $idCardFm->getError();
-                    $this->error('上传身份证反面失败');
-                }
-            }else{
-                if($input['idZm']){
-
-                }else{
-                    $this->error('请上传身份证反面');
-                }
-
-            }
             if($idCardZm){
                 $infoIdZm= $idCardZm->move(ROOT_PATH.'public'.DS.'uploads');
                 if($infoIdZm){
 //                    echo $infoIdZm->getSaveName();
-                    $id_card_fm = $infoIdZm->getSaveName();
+                    $id_card_zm = $infoIdZm->getSaveName();
                 }else{
 //                    echo $infoIdZm->getError();
                     $this->error('上传银身份证正面失败');
@@ -92,6 +111,24 @@ class Account extends Common{
                 }
 
             }
+            if($idCardFm){
+                $infoIdFm  = $idCardFm->move(ROOT_PATH.'public'.DS.'uploads');
+                if($infoIdFm){
+//                    echo $infoIdFm->getSaveName();
+                    $id_card_fm = $infoIdFm->getSaveName();
+                }else{
+//                    echo $idCardFm->getError();
+                    $this->error('上传身份证反面失败');
+                }
+            }else{
+                if($input['idZm']){
+
+                }else{
+                    $this->error('请上传身份证反面');
+                }
+
+            }
+
             if($bankCardZm){
                 $infoBarkZm = $bankCardZm->move(ROOT_PATH.'public'.DS.'uploads');
                 if($infoBarkZm){
@@ -137,29 +174,71 @@ class Account extends Common{
                 'birthday'=>trim($input['birthday']),
                 'male'=>trim($input['male']),
                 'open_bank'=>trim($input['open_bank']),
-                'user_status' =>'4'
+                'add_time'=>time(),
+                'user_id'=>$input['id']
             ];
+            //身份证正面
             if($idCardZm){
-                $data['id_card_zm'] = $id_card_zm;
-            }
-            if($idCardFm){
-                $data['id_card_fm']=$id_card_fm;
-            }
-            if($bankCardZm){
-                $data['bank_card_zm']=$bank_card_zm;
-            }
-            if($bankCardFm){
-                $data['bank_card_fm']=$bank_card_fm;
-            }
-            $where = [
-                'id'=> $input['id']
-            ];
-            $result = $this->user->where($where)->update($data);
-            if ($result){
-                $this->success('提交成功,请等待审核');
+                $data['id_card_zm'] = str_replace("\\","/",$id_card_zm);
             }else{
+                $data['id_card_zm'] = str_replace("\\","/",$input['idZm']);
+            }
+            //身份证反面
+            if($idCardFm){
+                $data['id_card_fm'] = str_replace("\\","/",$id_card_fm);
+            }else{
+                $data['id_card_fm'] = str_replace("\\","/",$input['idFm']);
+            }
+            //银行卡正面
+            if($bankCardZm){
+                $data['bank_card_zm'] = str_replace("\\","/",$bank_card_zm);
+            }else{
+                $data['bank_card_zm'] = str_replace("\\","/",$input['barkZm']);
+            }
+            //银行卡反面
+            if($bankCardFm){
+                $data['bank_card_fm'] = str_replace("\\","/",$bank_card_fm);
+            }else{
+                $data['bank_card_fm'] = str_replace("\\","/",$input['barkFm']);
+            }
+
+            //判断用户信息是否存在修改
+
+
+            $info = [
+                'username'=>trim($input['username']),
+                'name'=>trim($input['name']),
+                'phone'=>trim($input['phone']),
+                'email'=>trim($input['email']),
+                'id_card'=>trim($input['id_card']),
+                'bank_card'=>trim($input['bank_card']),
+                'address'=>trim($input['address']),
+                'birthday'=>trim($input['birthday']),
+                'male'=>trim($input['male']),
+                'open_bank'=>trim($input['open_bank']),
+                'id_card_zm'=>$data['id_card_zm'],
+                'id_card_fm'=>$data['id_card_fm'],
+                'bank_card_zm'=>$data['bank_card_zm'],
+                'bank_card_fm'=>$data['bank_card_fm'],
+
+            ];
+            if($md5 == md5(json_encode($info))){
+                $this->error('信息未修改请不要提交');
+            }
+            Db::startTrans();
+            try{
+                $this->userInfoChange->insert($data);
+                $params = [
+                    'user_status'=>4
+                ];
+                $this->user->where(['id'=>$input['id']])->update($params);
+                Db::commit();
+            }catch(\Exception $e){
+                Db::rollback();
                 $this->error('提交失败');
             }
+            $this->success('提交成功,请等待审核');
+
         }
     }
     //检查用户是否存在

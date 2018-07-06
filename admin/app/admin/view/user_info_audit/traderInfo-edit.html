@@ -12,6 +12,7 @@
     <meta name="description" content="">
 
     {include file="common/css"}
+    <link href="__ADMIN__/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
     <style>
         .dataTables_paginate{
             text-align:right;
@@ -94,22 +95,35 @@
                                     <td class="center"><?=$account['phone']?></td>
                                     <td class="center"><?=$account['email']?></td>
                                     <td class="center"><?=$account['id_card']?></td>
-                                    <td class="center"><img src="/uploads/<?=$account['id_card_zm']?>"></td>
-                                    <td class="center"><img src="/uploads/<?=$account['id_card_fm']?>"></td>
+                                    <td class="center">
+                                        <a href="/uploads/<?=$account['id_card_zm']?>" title="身份证正面" data-gallery=""> <img src="/uploads/<?=$account['id_card_zm']?>"></a>
+
+                                    </td>
+                                    <td class="center">
+                                        <a href="/uploads/<?=$account['id_card_fm']?>" title="身份证背面" data-gallery=""> <img src="/uploads/<?=$account['id_card_fm']?>"></a>
+                                    </td>
                                     <td class="center"><?=$account['bank_card']?></td>
-                                    <td class="center"><img src="/uploads/<?=$account['bank_card_zm']?>"></td>
-                                    <td class="center"><img src="/uploads/<?=$account['bank_card_fm']?>"></td>
+                                    <td class="center">
+                                        <a href="/uploads/<?=$account['bank_card_zm']?>" title="银行卡正面" data-gallery=""> <img src="/uploads/<?=$account['bank_card_zm']?>"></a>
+
+                                    </td>
+                                    <td class="center">
+                                        <a href="/uploads/<?=$account['bank_card_fm']?>" title="银行卡背面" data-gallery=""> <img src="/uploads/<?=$account['bank_card_fm']?>"></a>
+                                    </td>
                                     <td class="center"><?=$account['open_bank']?></td>
                                     <td class="center"><?=$account['address']?></td>
                                     <td class="center">
 
                                         <?php
-                                            $status = $account['user_status'];
+                                            $status = $account['status'];
                                             switch($status){
-                                                case 4:
-                                                    $statu = '信息修改';
+                                                case 0:
+                                                    $statu = '信息修改申请';
                                                     break;
-                                                case 5:
+                                                case 1:
+                                                    $statu = '审核通过';
+                                                    break;
+                                                case 2:
                                                     $statu = '审核不通过';
                                                      break;
                                                 default:
@@ -120,8 +134,12 @@
                                         <?=$statu?>
                                     </td>
                                     <td class="center">
-                                        <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',1)">通过</a>
-                                        <a href="javascript:void(0)" onclick="checkUserStatus('<?=$account['id']?>',5)">不通过</a>
+                                        <?php if($status == 0){?>
+                                        <a href="javascript:void(0)" class="btn btn-info btn-xs" onclick="checkUserStatus('<?=$account['id']?>',1)">通过</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" onclick="checkUserStatus('<?=$account['id']?>',5)">不通过</a>
+                                        <?php }else{ ?>
+                                        <span>已审核</span>
+                                        <?php }?>
 
                                     </td>
                                 </tr>
@@ -131,7 +149,9 @@
                                 </tbody>
 
                             </table>
-
+                            <div class="text-right page_css">
+                                {$traderInfo_list->render()}
+                            </div>
                         </div>
                     </div>
 
@@ -147,7 +167,15 @@
 
 
 </div>
-
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 <!-- 全局js -->
 {include file="common/script"}
 <!-- 自定义js -->
@@ -158,11 +186,14 @@
 <script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
 <script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
+<script src="__ADMIN__/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+
 
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            'paging':false
         });
     });
     function checkUserStatus(id,status){

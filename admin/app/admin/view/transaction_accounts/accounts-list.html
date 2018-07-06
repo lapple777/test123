@@ -53,7 +53,9 @@
                                     <tr>
                                         <th>交易账号</th>
                                         <th>所属客户</th>
+                                        <th>账户总资金</th>
                                         <th>账户余额</th>
+                                        <th>在场订单总额</th>
                                         <th>注册时间</th>
                                         <th>审核时间</th>
                                         <th>状态</th>
@@ -65,7 +67,9 @@
                                         <tr class="gradeX">
                                             <td><?=$account['account']?></td>
                                             <td><?=$account['name']?></td>
+                                            <td class="center"><?=$account['wallet']+$onlinePrice[$account['id']]?></td>
                                             <td class="center"><?=$account['wallet']?></td>
+                                            <td class="center"><?=$onlinePrice[$account['id']]?></td>
                                             <td class="center"><?=date('Y-m-d H:i:s',$account['add_time'])?></td>
                                             <td class="center"><?=$account['success_time']?date('Y-m-d H:i:s',$account['success_time']):''; ?></td>
 
@@ -85,8 +89,8 @@
                                             </td>
 
                                             <td class="center">
-                                                <a href="javascript:void(0)" onclick="account_edit('编辑','{:url('admin/TransactionAccounts/account_edit',['id'=>$account['id']])}','','550')">编辑</a>
-                                                <a href="javascript:void (0)" onclick="account_del(this,'{:url('admin/TransactionAccounts/account_del',['id'=>$account['id']])}')">删除</a>
+                                                <a href="javascript:void(0)" class="btn btn-info btn-xs" onclick="account_edit('编辑','{:url('admin/TransactionAccounts/account_edit',['id'=>$account['id']])}','','550')">编辑</a>
+                                                <a href="javascript:void (0)" class="btn btn-danger btn-xs" onclick="account_del(this,'{:url('admin/TransactionAccounts/account_del',['id'=>$account['id']])}')">删除</a>
 
                                             </td>
                                         </tr>

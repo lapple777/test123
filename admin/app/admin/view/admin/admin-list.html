@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>管理员管理</title>
+    <title>管理员列表</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -45,9 +45,7 @@
                             <div class="panel-body">
                                 <ul class="todo-list m-t small-list ui-sortable">
                                     <li>
-                                        <a class="btn btn-primary" onclick="admin_add('添加管理员','{:url('admin/Admin/admin_add')}','','','550')">添加管理员</a>
-
-
+                                        <a class="btn btn-primary" onclick="admin('添加管理员','{:url('admin/Admin/admin_add')}','','350')">添加管理员</a>
                                     </li>
 
 
@@ -55,59 +53,39 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>工号</th>
-                                        <th>姓名</th>
-                                        <th>本月奖励</th>
-                                        <th>累计奖励</th>
-                                        <th>本月奖励数</th>
+                                        <th>ID</th>
+                                        <th>用户名</th>
+                                        <th>手机号</th>
+                                        <th>邮箱</th>
+                                        <th>状态</th>
+                                        <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-                                        <td class="center">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
-
-                                        </td>
-                                    </tr>
-                                    <tr class="gradeC">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">5</td>
-                                        <td class="center">C</td>
-                                        <td class="center">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
-
-                                        </td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.5
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">5.5</td>
-                                        <td class="center">A</td>
-                                        <td class="center">
-                                            <a href="">编辑</a>
-                                            <a href="">删除</a>
-
-                                        </td>
-                                    </tr>
+                                    <?php foreach($userList as $user){?>
+                                        <tr class="gradeX">
+                                            <td><?=$user['id']?></td>
+                                            <td><?=$user['username']?></td>
+                                            <td><?=$user['phone']?></td>
+                                            <td><?=$user['email']?></td>
+                                            <td><?=$user['status'] == 1?'正常':'禁用'?></td>
+                                            <td><?=date('Y-m-d H:i:s',$user['add_time'])?></td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="admin('编辑管理员','{:url('admin/Admin/admin_edit',['id'=>$user['id']])}','','350')" class="btn btn-info btn-xs">编辑</a>
+                                                <?php if($user['id'] != 1){?>
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-xs" onclick="admin_del(this,'{:url('admin/Admin/admin_del',['id'=>$user['id']])}','<?=$user['username']?>')">删除</a>
+                                                <?php }?>
+                                            </td>
+                                        </tr>
+                                    <?php }?>
 
                                     </tbody>
 
                                 </table>
-
+                                <div class="text-right page_css">
+                                    {$userList->render()}
+                                </div>
                             </div>
                         </div>
 
@@ -138,15 +116,41 @@
 <script>
     $(document).ready(function () {
         $('.dataTables-example').dataTable({
-
+            'paging':false
         });
 
 
     });
 
-function admin_add(title,url,id,w,h){
-    layer_show(title,url,w,h);
-}
+    function admin(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function admin_del(that,url,name){
+        layer.confirm('确认删除管理员 <span class="text-danger">'+name+'</span>？',function(){
+            $.ajax({
+                url:url,
+                timeout:5000,
+                type:'GET',
+                success:function(data){
+                    if(data.code == 0){
+                        layer.msg(data.msg);
+                        return false;
+                    }else if(data.code == 1){
+                        $(that).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                        return false;
+                    }
+                    console.log(data);
+                },
+                error:function(){
+                    layer.msg('网络超时，请稍后再试');
+                    return false;
+                }
+
+
+            })
+        })
+    }
 </script>
 
 </body>

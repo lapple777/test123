@@ -50,7 +50,7 @@ class Monitor extends Controller{
         $redis = new Redis();
         $handler = $redis->handler();
         //做多订单
-        $longOrderList = $handler->lRange('longOrderListDemo',0,-1);
+        $longOrderList = $handler->lRange('longOrderList',0,-1);
 
         if($longOrderList){
             //echo 111;
@@ -74,7 +74,7 @@ class Monitor extends Controller{
         }
 
         //做空订单
-        $shortOrderList = $handler->lRange('shortOrderListDemo',0,-1);
+        $shortOrderList = $handler->lRange('shortOrderList',0,-1);
         if($shortOrderList){
             //echo 222;
             foreach($shortOrderList as $key=>$order){
@@ -177,10 +177,10 @@ class Monitor extends Controller{
         $handler = $redis->handler();
         switch($data['order_type']){
             case 1:
-                $handler->lRemove('longOrderListDemo',json_encode($data),1);
+                $handler->lRemove('longOrderList',json_encode($data),1);
                 break;
             case 2:
-                $handler->lRemove('shortOrderListDemo',json_encode($data),1);
+                $handler->lRemove('shortOrderList',json_encode($data),1);
                 break;
         }
 

@@ -103,7 +103,7 @@ class Data
             $str = "";
             if ($v['_level'] > 2) {
                 for ($i = 1; $i < $v['_level'] - 1; $i++) {
-                    $str .= "&emsp;│";
+                    $str .= "&emsp;&emsp;";
                 }
             }
             if ($v['_level'] != 1) {

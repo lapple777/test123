@@ -29,19 +29,19 @@
 
                  <div class="my_account_bottom">
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Account ID:</div>
+                         <div class="col-md-3 col-xs-3 account_left">ID:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['tid']?></div>
                     </div>
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Account:</div>
+                         <div class="col-md-3 col-xs-3 account_left">交易账号:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['account']?></div>
                     </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Fullname:</div>
+                         <div class="col-md-3 col-xs-3 account_left">用户名:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['username']?></div>
                      </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Gender:</div>
+                         <div class="col-md-3 col-xs-3 account_left">性别:</div>
                          <div class="col-md-9 col-xs-9 account_right">
                          <?php
                          $sex = $user['male'];
@@ -61,36 +61,36 @@
                          </div>
                      </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Date of birth:</div>
+                         <div class="col-md-3 col-xs-3 account_left">生日:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['birthday']?></div>
                      </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Address:</div>
+                         <div class="col-md-3 col-xs-3 account_left">联系地址:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['address']?></div>
                      </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Email:</div>
+                         <div class="col-md-3 col-xs-3 account_left">邮箱:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['email']?></div>
                      </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">IC:</div>
+                         <div class="col-md-3 col-xs-3 account_left">身份证号:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['id_card']?></div>
                      </div>
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Created:</div>
+                         <div class="col-md-3 col-xs-3 account_left">注册时间:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=date('Y-m-d H:i:s',$user['add_time'])?></div>
                     </div>
-                    <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Balance:</div>
-                         <div class="col-md-9 col-xs-9 account_right"><?=$user['wallet']?></div>
-                    </div>
                      <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">AgentID:</div>
+                         <div class="col-md-3 col-xs-3 account_left">账户资金:</div>
+                         <div class="col-md-9 col-xs-9 account_right">$ <?=$user['wallet']+$onlinePrice?></div>
+                     </div>
+                     <div class="row account">
+                         <div class="col-md-3 col-xs-3 account_left">所属客户ID:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['user_id']?></div>
                      </div>
 
                     <div class="row account">
-                         <div class="col-md-3 col-xs-3 account_left">Account Status:</div>
+                         <div class="col-md-3 col-xs-3 account_left">状态:</div>
                          <div class="col-md-9 col-xs-9 account_right"><?=$user['ta_status']?></div>
                     </div>
               </div>

@@ -3,17 +3,20 @@ namespace app\admin\controller;
 use app\admin\model\TraderUser;
 use app\admin\model\User;
 use app\admin\model\Order;
+use app\admin\model\Config;
 //交易账号管理
 class TransactionAccounts extends Common{
     private $traderUser;
     private $user;
     private $order;
+    private $config;
     public function __construct()
     {
         parent::__construct();
         $this->traderUser = new TraderUser();
         $this->user = new User();
         $this->order = new Order();
+        $this->config = new Config();
     }
 
     //交易账号列表
@@ -37,9 +40,14 @@ class TransactionAccounts extends Common{
                     ->where($where)
                     ->whereOr($whereor)
                     ->paginate(10);
+        $onlinePrice = null;
+        foreach($result as $value){
+            $onlinePrice[$value['id']] = self::getUserBlance($value['id']);
+        }
 
         $data = [
-            'account_list'=>$result
+            'account_list'=>$result,
+            'onlinePrice'=>$onlinePrice
         ];
         $this->assign($data);
         return $this->fetch('accounts-list');
@@ -223,5 +231,14 @@ class TransactionAccounts extends Common{
         }else{
             $this->error('删除失败');
         }
+    }
+    //获取交易账号在场订单总额
+    static public function getUserBlance($ta_id){
+        $that = new TransactionAccounts();
+        $configRes = $that->config->field('hand_price')->find();
+        //获取当前交易账号在场订单总手数
+        $totalHand = $that->order->where(['ta_id'=>$ta_id,'order_status'=>0])->sum('lot_num');
+        $totalPrice = $totalHand * $configRes['hand_price'];
+        return $totalPrice;
     }
 }

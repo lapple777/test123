@@ -62,9 +62,10 @@
                                         <th>姓名</th>
                                         <th>手机号</th>
                                         <th>邮箱</th>
+                                        <th>账户总资金</th>
                                         <th>账户余额</th>
-                                        <th>身份证号</th>
-                                        <th>银行卡号</th>
+                                        <th>在场订单总额</th>
+                                        <th>交易账号余额</th>
                                         <th>申请时间</th>
                                         <th>用户状态</th>
                                         <th>操作</th>
@@ -77,9 +78,10 @@
                                         <td><?=$account['name']?></td>
                                         <td class="center"><?=$account['phone']?></td>
                                         <td class="center"><?=$account['email']?></td>
+                                        <td class="center"><?=$account['wallet']+$priceInfo[$account['id']]['onlinePrice']+$priceInfo[$account['id']]['accountPrice']?></td>
                                         <td class="center"><?=$account['wallet']?></td>
-                                        <td class="center"><?=$account['id_card']?></td>
-                                        <td class="center"><?=$account['bank_card']?></td>
+                                        <td class="center"><?=$priceInfo[$account['id']]['onlinePrice']?></td>
+                                        <td class="center"><?=$priceInfo[$account['id']]['accountPrice']?></td>
                                         <td class="center"><?=date('Y-m-d H:i:s',$account['add_time'])?></td>
 
                                         <td class="center">

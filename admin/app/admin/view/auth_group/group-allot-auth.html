@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>用户组分配权限</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    {include file="common/css"}
+    <style>
+        table td{
+            padding:10px;
+        }
+        table{
+            margin-bottom:10px;
+        }
+
+
+    </style>
+
+</head>
+
+<body >
+
+<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+            <form action="" method="post" class="form form-horizontal" id="form-group-conf">
+                <table class="table table-border table-bordered">
+                    <?php foreach ($authList as $auth){ ?>
+                    <?php if(empty($auth['_data'])){ ?>
+                    <tr class="b-group">
+                        <td>
+                            <label>
+                                <?=$auth['title']; ?>
+                                <input type="checkbox" name="rule_ids[]" value="<?=$auth['id']?>" <?php if(!empty($groupAuth)){ if(in_array($auth['id'], $groupAuth)){ echo 'checked'; } } ?> onclick="checkAll(this)" >
+                            </label>
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <?php }else{ ?>
+                    <tr class="b-group">
+                        <td>
+                            <label>
+                                <?=$auth['title']?>
+                                <input type="checkbox" name="rule_ids[]" value="<?=$auth['id']?>" <?php if(!empty($groupAuth)){ if(in_array($auth['id'], $groupAuth)){ echo 'checked'; } } ?> onclick="checkAll(this)">
+                            </label>
+                        </td>
+                        <td>
+                            <?php foreach ($auth['_data'] as $n) { ?>
+                            <table class="table-border table-bordered">
+                                <tr class="b-group">
+                                    <td>
+                                        <label>
+                                            <?=$n['title']?> <input type="checkbox" name="rule_ids[]" value="<?=$n['id']?>" <?php if(!empty($groupAuth)){ if(in_array($n['id'], $groupAuth)){ echo 'checked'; } } ?> onclick="checkAll(this)">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <?php if(!empty($n['_data'])) {?>
+                                        <?php foreach ($n['_data'] as $c) { ?>
+                                        <label>
+                                            &emsp;<?=$c['title']?>
+                                            <input type="checkbox" name="rule_ids[]" <?php if(!empty($groupAuth)){ if(in_array($c['id'], $groupAuth)){ echo 'checked'; } } ?> value="<?=$c['id']?>">
+                                        </label>
+                                        <?php } ?>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    <?php } ?>
+                </table>
+                <input type="hidden" name="id" value="<?=$id?>">
+
+
+                <div class="row cl">
+                    <div class="col-xs-3 col-sm-3 col-xs-offset-3 col-sm-offset-3">
+                        <input class="btn btn-primary" onclick="sub_from()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+<!-- 全局js -->
+{include file="common/script"}
+<!-- 自定义js -->
+<script src="__ADMIN__/js/content.js?v=1.0.0"></script>
+<script src="__ADMIN__/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+<!-- Data Tables -->
+<script src="__ADMIN__/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__ADMIN__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.dataTables-example').dataTable({
+            'paging':false
+        });
+
+
+    });
+    function add_group(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function edit_group(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function group_allot_auth(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function del_group(that,url){
+        layer.confirm('确认删除用户组？',function(){
+            $.ajax({
+                url:url,
+                timeout:5000,
+                type:'GET',
+                success:function(data){
+                    if(data.code == 0){
+                        layer.msg(data.msg);
+                        return false;
+                    }else if(data.code == 1){
+                        $(that).parents("tr").remove();
+                        layer.msg('已删除!',{icon:1,time:1000});
+                        return false;
+                    }
+                },
+                error:function(){
+                    layer.msg('网络超时，请稍后再试');
+                    return false;
+                }
+
+
+            })
+        })
+    }
+    function checkAll(obj){
+        $(obj).parents('.b-group').eq(0).find("input[type='checkbox']").prop('checked', $(obj).prop('checked'));
+    }
+    function sub_from(){
+        $.ajax({
+            type:'POST',
+            url:'{:url("admin/AuthGroup/group_allot_auth")}',
+            data:$('#form-group-conf').serialize(),
+            success:function(data){
+                if(data.code == 0){
+                    layer.msg(data.msg);
+                    return false;
+                }else if(data.code == 1){
+                    layer.msg(data.msg,function(){
+                        parent.location.reload();
+                    });
+                    return false;
+                }
+            },error:function(){
+                layer.msg('网络超时，请稍后再试');
+                return false;
+            }
+        })
+    }
+</script>
+
+</body>
+
+</html>

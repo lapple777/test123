@@ -3,14 +3,20 @@ namespace app\index\controller;
 use app\index\model\TraderUser;
 use app\index\model\User;
 use think\Db;
+use app\index\model\TraderOrder;
+use app\index\model\Config;
 class Index extends Common
 {
     private $user;
     private $trader;
+    private $order;
+    private $config;
     public function __construct(){
         parent::__construct();
         $this->trader = new TraderUser();
         $this->user = new User();
+        $this->order = new TraderOrder();
+        $this->config = new Config();
     }
 
     public function index(){
@@ -26,9 +32,17 @@ class Index extends Common
             ->field($fields)
             ->where($where)
             ->find();
+        $orderWhere = [
+            'ta_id'=>$result['tid'],
+            'order_status'=>0
+        ];
+        $total_hand = $this->order->where($orderWhere)->sum('lot_num');
+        $configRes = $this->config->field('hand_price')->find();
+        $price = $total_hand * $configRes['hand_price'];
  //dump($result);die;
         $data = [
-            'user'=>$result
+            'user'=>$result,
+            'onlinePrice'=>$price
         ];
 
         $this->assign($data);

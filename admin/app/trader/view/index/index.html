@@ -30,15 +30,9 @@
         .header_box table{
             margin:0 auto;
         }
-        .text_inde{
-            text-indent: 1em;
-        }
-        .padd_top{
-            padding-top:10px;
-        }
-        .workday{
-            font-size: 15px;
-            color: #869fb1
+
+        .worker:hover{
+            color:#869fb1 !important;
         }
     </style>
 </head>
@@ -129,20 +123,23 @@
                         <?php }?>
                     </a>
                 </li>
-                <li class="line dk"></li>
-                <li class="line dk"></li>
-                <li class="line dk"></li>
-                <li class="line dk"></li>
+                <li ></li>
+                <li ></li>
+                <li ></li>
+                <li ></li>
                 <li class="line dk"></li>
                 <li class="line dk"></li>
                 <li>
-                  <p class="workday">  工作时间：<br/>
-                      <label style="width: 28px;"></label>       周一至周五<br>
-                      <label style="width: 28px;"></label>      上午 09：00-12：00<br/>
-                      <label style="width: 28px;"></label>       下午 14：00-17：00<br/>
-                      <label style="width: 28px;"></label>        法定节假日除外
-                  </p>
+                    <a class="J_menuItem worker">
+                        <i class="fa fa-calendar-times-o"></i>
+                        <span class="nav-label">工作时间：</span><br>
+                        <label style="width: 28px;"></label>       周一至周五<br>
+                        <label style="width: 28px;"></label>      上午 09：00-12：00<br/>
+                        <label style="width: 28px;"></label>       下午 14：00-17：00<br/>
+                        <label style="width: 28px;"></label>        法定节假日除外
+                    </a>
                 </li>
+
             </ul>
         </div>
 
